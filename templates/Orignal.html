@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+
+    <head>
+        <meta charset="UTF-8">
+
+        <title>BolsaITESZ</title>
+        <style>
+            
+            li{
+                display: inline;
+                margin: 0px;
+                padding: 0px;
+            }
+            ul{
+                background-color:olivedrab;
+                overflow: hidden;
+                list-style-type: none;
+                padding: 12px 14px;
+            }
+            li a{
+                text-decoration: none;
+                padding: 12px 14px; 
+            }
+            li{
+                float: left;
+            }
+            li a:hover{
+                overflow: hidden;
+                background-color:darkmagenta;
+                color:black;
+            }
+        </style>
+    </head>
+    <body>
+        <div align="center"> <img src="{{url_for('static',filename='Imagenes/Encabezado.png')}}"></div>
+
+        <nav>
+            <ul>
+                <li><a href="/Usuario">Usuarios</a></li>
+                <li><a href="/Alumnos">Alumnos Egresados</a></li>
+                <li><a href="/Reclutores">Reclutores</a></li>
+                <li><a href="/Empresas">Empresas</a></li>
+                <li><a href="/Contratos">Contratos</a></li>
+                <li><a href="/Categorias">Categorias</a></li>
+                <li><a href="/Carreras">Carreras</a></li>
+                <li><a href="/Ofertas">Ofertas</a></li>
+                <li><a href="/Postulaciones">Postulaciones</a></li>
+                <li><a href="/Personal">PersonalVinculacion</a></li>
+                <li><a href="/Entrevista">Entrevista</a></li>
+                <li style="float: right;"><a href="#">7B</a></li>
+            </ul>
+        </nav>
+        
+    </body>
+</html>

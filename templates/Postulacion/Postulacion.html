@@ -1,0 +1,39 @@
+<html lang="es">
+    <head>
+        <title>BolsaITESZ</title>
+        <link rel="stylesheet" href="{{url_for('static',filename='CSS/EstiloUsuario.css')}}">
+        <script src = "postulacion.js"></script>
+        <script>src = "postulacionGUI.js"</script>
+    </head>
+    <h1>Postulaciones</h1>
+    <body onload="InicioDivs()">
+        <div id="listadopostulaciones">
+            <fieldset id="datos">
+                <legend>Informacion postulaciones</legend>
+                <th>Id Oferta:</th><br>
+                <th>Fecha Postulacion:</th><br>
+                <th>Estatus:</th><br>
+                <button onclick = "EliminarPostulante()">Eliminar</button>
+                <button onclick = "ModificarPostulante()" id="modificar">Modificar</button>
+            </fliedset>
+            <br>
+        </div>  
+        <fieldset>
+        <legend>Datos de postulacion</legend>
+        <div id = "DatosGuardado"></div>
+            <div id="Titulo"></div>
+            <label>Id Oferta:</label>
+            <input type="text" id="idoferta" name="idoferta" required> 
+            <br>
+            <label>Fecha postulacion:</label>
+            <input type="text" id="fecha" name="fecha" required> 
+            <br>
+            <label>Estatus:</label>
+            <input type="text" id="estatus" name="estatus" required> 
+            <br>
+            <button onclick = "CrearPostulacion()" id="crear">Crear</button>
+            <button onclick="CancelaPostulacion()">Cancelar</button>
+        </fieldset>    
+        </div>
+    </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BolsaITESZ</title>
+    <link href="{{url_for('static',filename='CSS/estilo.css')}}" rel="stylesheet">
+</head>
+
+<body>
+    <h1>LISTA DE RECLUTADORES</h1>
+    <a href="/altaReclutores"><img src="{{url_for('static',filename='Imagenes/add.gif')}}">Registrar Reclutor</a>
+    <table class="table table-border table-sm table-hover">
+        <thead>
+            <th>ID</th>
+            <th>CARGO</th>
+        </thead>
+        <tr>
+            <td>1</td>
+            <td>Director</td>
+            <td><a href="/editarReclutores"><img src="{{url_for('static',filename='Imagenes/editar.png')}}"></a></td>
+            <td><a href="/eliminarReclutores" dta-togggle=" modal" data-target="#myModal">
+                <img src="{{url_for('static',filename='Imagenes/eliminar.png')}}">
+            </a></td>
+        </tr>
+        <tr>
+             <td>2</td>
+            <td>Jefe de Investigacion</td>
+            <td><a href="/editarReclutores"><img src="{{url_for('static',filename='Imagenes/editar.png')}}"></a></td>
+            <td><a href="/eliminarReclutores" dta-togggle=" modal" data-target="#myModal">
+                <img src="{{url_for('static',filename='Imagenes/eliminar.png')}}">
+            </a></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>administrativo</td>
+            <td><a href="/editarReclutores"><img src="{{url_for('static',filename='Imagenes/editar.png')}}"></a></td>
+            <td><a href="/eliminarReclutores" dta-togggle=" modal" data-target="#myModal">
+                <img src="{{url_for('static',filename='Imagenes/eliminar.png')}}">
+            </a></td>
+        </tr>
+        <tr>
+             <td>1</td>
+            <td>Jefe</td>
+            <td><a href="/editarReclutores"><img src="{{url_for('static',filename='Imagenes/editar.png')}}"></a></td>
+            <td><a href="/eliminarReclutores" dta-togggle=" modal" data-target="#myModal">
+                <img src="{{url_for('static',filename='Imagenes/eliminar.png')}}">
+            </a></td>
+        </tr>
+    </table>
+
+
+
+
+
+<a href="/Reclutadores" class="linkButton">Regresar</a>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html lang="es">
+    <head>
+        <meta charet="UTF-8">
+        <title>BolsaITESZ</title>
+
+        <script src="{{url_for('static',filename='JS/AlumnosEgresadosGUI.js')}}"></script>
+        <script src="{{url_for('static',filename='JS/AlumnosEgresados.js')}}"></script>
+        <script src="{{url_for('static',filename='JS/AJAX.js')}}"></script>
+    </head>
+
+    <header>
+        <h1 align="center" style="color:dodgerblue;" id="textoEncabezado">INSTITUTO TECNOLOGICO DE ESTUDIOS SUPERIORES DE ZAMORA</h1>
+    </header>
+
+    <body onload="inicializarDivs()">
+        <div id="listadoGeneral">
+            <table border="2" id="datos">
+                <th>NoControl</th>
+                <th>IdCarrera</th>
+                <th>Fecha Nacimiento</th>
+                <th>Promedio</th>
+                <th>Año Egreso</th>
+                <th>Curriculo</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </table>
+            <br>
+            <button onclick="nuevo()">Nuevo</button>
+        </div>
+
+        <div id="datosInviduales">
+            <div id="titulo"></div>
+            <label>NoControl</label>
+            <input type="number" id="id" name="id" required>
+            <br>
+            <label>IdCarrera</label>
+            <input type="number" id="idCarrera" name="idCarrera" required>
+            <br>
+            <label>Fecha de Nacimiento</label>
+            <input type="date" name="fechanacimiento" value="aaaa-mm-dd" min="1990-01-01" max="2020-12-31">
+            <br>
+            <label>Promedio:</label>
+            <input type="text" name="promedio" placeholder="##.##" maxlength="5" required>
+            <br>
+            <label>Año Egreso:</label>
+            <input type="number" name="anioegreso" min="1990" max="2020" value="" required>
+            <br>
+            <label>Curriculo Vitae</label>
+            <input type="text" name="curriculo" placeholder="" maxlength="1000" required>
+            <br>
+            <button onclick="realizarOperacion()" id="insercion">Guardar</button>
+            <button onclick="cancelar()">Cancelar</button>
+             <button onclick="cargarOpcion()" id="guardar">AJAX</button>
+        </div>
+
+    </body>
+</html>

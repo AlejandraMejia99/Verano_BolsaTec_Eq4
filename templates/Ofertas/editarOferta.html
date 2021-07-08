@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>BolsaITESZ</title>
+    </head>
+    <body>
+       <header id="miEstilo">
+            <h1 align="center" style="color:dodgerblue;" id="textoEncabezado">
+                INSTITUTO TECNOLOGICO DE ESTUDIOS SUPERIORES DE ZAMORA</h1>
+        </header>
+        <main>
+            <section>
+                <h1>Editar Datos de  la Oferta</h1>
+                 <form action="/editarOferta" method="post">
+                    <div id="datosEstructurales">
+                    <fieldset>
+                        <legend>Datos de la Oferta</legend>
+                           <label>Id:</label>
+                           <input type="text" name="Id" placeholder=" " maxlength="8" required>
+                          <br>
+                         <label>IdContrato:</label>
+             <input type="text" name="IdContrato" placeholder=" " maxlength="8" required>
+             <br>
+              <label>IdEmpresa:</label>
+             <input type="text" name="IdEmpresa" placeholder=" " maxlength="8" required>
+             <br>
+             <label>IdReclutor:</label>
+             <input type="text" name="IdReclutor" placeholder=" " maxlength="8" required>
+             <br>
+             <label>Nombre :</label>
+             <input type="text" name="nombre" placeholder="Nombre Oferta" maxlength="100" required>
+             <br>
+             <label>Descripcion:</label>
+             <input type="text" name="descripcion" placeholder="Descripcion" maxlength="100" required>
+             <br>
+             <label>Fecha de Publicacion</label>
+             <input type="date" name="fechapublicacions" value="aaaa-mm-dd" min="1990-01-01" max="2020-12-31">
+             <br>
+             <label>Salario:</label>
+             <input type="number" name="salario" placeholder="" maxlength="100" required>
+             <br>
+             <label>Vacantes:</label>
+             <input type="number" name="numVacantes" placeholder="" maxlength="100" required>
+             <br>
+             <label>Status:</label>
+             <input type="radio" name="status" value="A">Activo
+             <input type="radio" name="status" value="I">Inactivo
+             <br>
+
+                       <button onclick="realizarOperacion()" id="insercion">Guardar</button>
+                    </fieldset>
+                </div>
+                </form>
+                <a href="/Reclutadores">Regresar</a>
+            </section>
+        </main>
+    </body>
+</html>
+

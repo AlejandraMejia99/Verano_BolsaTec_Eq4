@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+    <head>
+         <meta charset="UTF-8">
+        <title>BOLSAITESZ</title>
+
+    </head>
+    <body>
+        <header id="miEstilo">
+            <h1 align="center" style="color:dodgerblue;" id="textoEncabezado">
+                INSTITUTO TECNOLOGICO DE ESTUDIOS SUPERIORES DE ZAMORA</h1>
+        </header>
+        <main>
+            <Section>
+                <h2> EDICION DE DATOS DE ALUMNOS EGRESADOS</h2>
+
+                <form action="/editarAlumnos">
+                    <div id="DatosPersonales">
+                        <fieldset>
+                            <legend>Datos Personales</legend>
+                            <label>IdUsuario</label>
+                            <input type="number" id="idUsuario" name="idUsuario" required>
+                            <br>
+                            <label>Nombre :</label>
+                            <input type="text" name="nombre"
+                                placeholder="Nombrecompleto" maxlength="100"
+                                required>
+                            <br>
+                            <label>Telefono:</label>
+                            <input type="tel" name="telefono"
+                                placeholder="###-###-##-##" maxlength="13"
+                                required>
+                            <br>
+                            <label>Correo Electronico:</label>
+                            <input type="email" name="email"
+                                placeholder="algo@algo.algo" maxlength="100"
+                                required>
+                            <br>
+                             <label>Contraseña:</label>
+                            <input type="password" name="password" placeholder="password" maxlength="20" required>
+                            <br>
+                            <label>Sexo:</label>
+                            <input type="radio" name="sexo" value="F">Femenino
+                            <input type="radio" name="sexo" value="M">Masculino
+                            <br>
+                            <label>Fecha de Nacimiento</label>
+                            <input type="date" name="fechanacimiento"
+                                value="aaaa-mm-dd" min="1990-01-01"
+                                max="2020-12-31">
+                            <br>
+                            <label>Estatus:</label>
+                            <input type="text" name="Estatus"  placeholder="Estatus" maxlength="100" required>
+                        </fieldset>
+                    </div>
+
+                    <div id="datosEscolares">
+                        <fieldset>
+                            <legend>Datos del personal</legend>
+                            <label>No. Empleado:</label>
+                            <input type="text" name="noempleado" placeholder="########" maxlength="8" required>
+                            <br>
+                            <label>Cargo</label>
+                            <input type="text" name="cargo" placeholder="" maxlength="1000" required>
+                            <br>
+                            <button onclick="realizarOperacion()" id="insercion">Guardar</button>
+                            <button><a href="/PersonalVinculacion"</a>Cancelar</button>
+
+                        </fieldset>
+                    </div>
+                </form>
+                <a href="/PersonalVinculacion">Regresar</a>
+            </Section>
+        </main>
+    </body>
+</html>

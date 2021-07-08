@@ -1,0 +1,51 @@
+<html lang="es">
+    <head>
+        <title>BolsaITESZ</title>
+        <link rel="stylesheet" href="{{url_for('static',filename='CSS/EstiloUsuario.css')}}">
+        <script src = "categoria.js"></script>
+        <script>src = "categoriaGUI.js"</script>
+    </head>
+    <h1>Categoria</h1>
+    <body onload="InicioDivs()">
+        <div id="listadoCategoria">
+            <fieldset id="datos">
+                <legend>Informacion de Categoria</legend>
+                <th>ID Reclutador:</th><br>
+                <th>Nombre:</th><br>
+                <th>Apellido paterno:</th><br>
+                <th>Apellido materno:</th><br>
+                <th>Empresa:</th><br>
+                <th>Aria trabajo:</th><br>
+                <button onclick = "EliminarCategoria()">Eliminar</button>
+                <button onclick = "ModificarCategoria()" id="modificar">Modificar</button>
+            </fliedset>
+            <br>
+        </div>  
+        <fieldset>
+        <legend>Datos Categoria</legend>
+        <div id = "DatosGuardado"></div>
+            <div id="Titulo"></div>
+            <label>Id Reclutador:</label>
+            <input type="text" id="reclutador" name="reclutador" required> 
+            <br>
+            <label>Nombre:</label>
+            <input type="text"  id="nombre" name="nombre" required>
+            <br>
+            <label>Apellido padre:</label>
+            <input type="text" id="padre" name="padre" required> 
+            <br>
+            <label>Apellido madre:</label>
+            <input type="text" id="madre" name="madre" required> 
+            <br>
+            <label>Nom.Empreza:</label>
+            <input type="text" id="empresa" name="empresa" required>
+            <br>
+            <label>Aria trabajo:</label>
+            <input type="text" id="trabajo" name="trabajo" required>
+            <br>
+            <button onclick = "CrearCategoria()" id="crear">Crear</button>
+            <button onclick="CancelaCategoria()">Cancelar</button>
+        </fieldset>    
+        </div>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+<!Doctype HTML>
+<HTML LANG="ES">
+    <HEAD>
+        <meta charset="utf-8">
+        <title>Primer Ejemplo</title>
+        <link rel="stylesheet" href="{{url_for('static',filename='CSS/EstiloUsuario.css')}}">
+    </HEAD>
+    <body>
+        <div>
+            <fieldset>
+                <p>Acceso al Sistema BolsaITESZ</p>
+            </fieldset>
+        </div>
+        <div>
+            <fieldset>
+                <form action="/login" method="post">
+                    <label>Email:</label>
+                    <input type="email" name="email" required>
+                    <br>
+                    <label>Contraseña:</label>
+                    <input type="password" name="password" required>
+                    <br>
+                    <button type="submit">Validar</button>
+                    <button><a href="/RegistrarUsuario" style="text-decoration:none;color:black">Registrar Cuenta</a></button>
+                </form>
+            </fieldset>
+        </div>
+    </body>
+</HTML>

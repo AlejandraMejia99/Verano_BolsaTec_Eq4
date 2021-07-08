@@ -1,0 +1,47 @@
+<html lang="es">
+    <head>
+        <title>BolsaITESZ</title>
+        <link rel="stylesheet" href="{{url_for('static',filename='CSS/EstiloUsuario.css')}}">
+        <script src = "empresa.js"></script>
+        <script>src = "empresaGUI.js"</script>
+    </head>
+    <h1>Empresa</h1>
+    <body onload="InicioDivs()">
+        <div id="listadoempresa">
+            <fieldset id="datos">
+                <legend>Informacion empresa</legend>
+                <th>ID Empresa:</th><br>
+                <th>RFC:</th><br>
+                <th>Direccion:</th><br>
+                <th>Giro:</th><br>
+                <th>Pagina Web:</th><br>
+                <button onclick = "EliminarEmpresa()">Eliminar</button>
+                <button onclick = "ModificarEmpresa()" id="modificar">Modificar</button>
+            </fliedset>
+            <br>
+        </div>  
+        <fieldset>
+        <legend>Datos Empresa</legend>
+        <div id = "DatosGuardado"></div>
+            <div id="Titulo"></div>
+            <label>Id Empresa:</label>
+            <input type="text" id="idempresa" name="idempresa" required> 
+            <br>
+            <label>RFC:</label>
+            <input type="text" id="rfc" name="rfc" required> 
+            <br>
+            <label>Direccion:</label>
+            <input type="text" id="direccion" name="direccion" required> 
+            <br>
+            <label>Giro:</label>
+            <input type="text" id="giro" name="giro" required> 
+            <br>
+            <label>Pagina Web:</label>
+            <input type="text" id="web" name="web" required> 
+            <br>
+            <button onclick = "CrearEmpresa()" id="crear">Crear</button>
+            <button onclick="CancelaEmpresa()">Cancelar</button>
+        </fieldset>    
+        </div>
+    </body>
+</html>

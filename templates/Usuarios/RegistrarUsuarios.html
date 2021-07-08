@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <title>BolsaITESZ</title>
+        <link rel="stylesheet" href="{{url_for('static',filename='CSS/EstiloUsuario.css')}}">
+        <script src="usuarios_ajax.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1 id="textoEncabezado">USUARIOS</h1>
+        </header>
+        <main>
+            <section>
+                <h1 class="a">REGISTRAR</h1>
+                <form>
+                    <div id="datosPersonales">
+                        <fieldset>
+                            <form action="/guardarUsuario" method="post">
+                                <legend>Datos</legend>
+                                    <label>Nombre completo:</label>
+                                    <input type="text" name="nombre" placeholder="Nombre completo" maxlength="100" required>
+                                    <br>
+                                    <label>IdUsuario:</label>
+                                    <input type="text" name="IdUsuario" placeholder="IdUsuario" required>
+                                    <br>
+                                    <label>Sexo:</label>
+                                    <input type="radio" name="sexo" value="F" checked>Femenino
+                                    <input type="radio" name="sexo" value="M">Masculino
+                                    <br>
+                                    <label>Telefono:</label>
+                                    <input type="tel" name="telefono" placeholder="###-###-####" maxlength="12" required>
+                                    <br>
+                                    <label>Email:</label>
+                                    <input type="email" name="email" placeholder="algo@algo" maxlength="100" required>
+                                    <br>
+                                    <label>Contraseña:</label>
+                                    <input type="password" name="password" placeholder="password" maxlength="20" required>
+                                    <br>
+                                    <button type="submit">Registrar</button>
+                                    <button><a href="/" style="text-decoration:none;color:black">Regresar</a></button>
+                                </legend>
+                            </form>
+                        </fieldset>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <title>BolsaITESZ</title>
+        <link rel="stylesheet" href="{{url_for('static',filename='CSS/EstiloUsuario.css')}}">
+        <script src="contrato.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1 id="textoEncabezado">
+                CONTRATO
+            </h1>
+        </header>
+        <main>
+            <section>
+                <h1>CONSULTA</h1>
+                <fieldset>
+                    <label>IdContrato:</label>
+                    <input type="text" name="IdContrato" placeholder="IdContrato"> 
+                    <button onclick="ConsultarContrato()">Consultar</button>
+                </fieldset>
+                <form>
+                    <div id="datosPersonales">
+                        <fieldset>
+                            <legend>Datos</legend>
+                                <label>IdContrato:</label>
+                                <input type="text" name="IdContrato" placeholder="IdContrato" required> 
+                                <br>
+                                <label>Nombre:</label>
+                                <input type="text" name="Nombre" placeholder="Nombre" required>
+                                <br>
+                                <button onclick="Agregar()">Crear</button>
+                                <button onclick="eliminar()">Eliminar</button>
+                            </legend>
+                        </fieldset>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </body>
+</html>

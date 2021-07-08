@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BolsaITESZ</title>
+
+     <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link href="{{url_for('static',filename='CSS/estilo.css')}}" rel="stylesheet">
+</head>
+
+<body>
+    <h1>LISTA DE ALUMNOS EGRESADOS</h1>
+    <a href="/altaAlumnos"><img src="{{url_for('static',filename='Imagenes/add.gif')}}">Registrar Alumno</a>
+    <table class="table table-border table-sm table-hover">
+        <thead class="table-info">
+            <th>No.Control</th>
+            <th>Nombre</th>
+        </thead>
+        <tr>
+            <td>15010325</td>
+            <td>Roman Flores R</td>
+            <td><a href="/editarAlumnos"><img src="{{url_for('static',filename='Imagenes/editar.png')}}"></a></td>
+            <td><a href="/eliminarAlumnos" dta-togggle=" modal" data-target="#myModal">
+                <img src="{{url_for('static',filename='Imagenes/eliminar.png')}}">
+            </a></td>
+        </tr>
+        <tr>
+            <td>16010500</td>
+            <td>Pedro Alvarado</td>
+            <td><a href="/editarAlumnos"><img src="{{url_for('static',filename='Imagenes/editar.png')}}"></a></td>
+            <td><a href="/eliminarAlumnos"><img src="{{url_for('static',filename='Imagenes/eliminar.png')}}"></a></td>
+        </tr>
+        <tr>
+            <td>14010950</td>
+            <td>Ricardo Garcia</td>
+            <td><a href="/editarAlumnos"><img src="{{url_for('static',filename='Imagenes/editar.png')}}"></a></td>
+            <td><a href="/eliminarAlumnos"><img src="{{url_for('static',filename='Imagenes/eliminar.png')}}"></a></td>
+        </tr>
+        <tr>
+            <td>17010030</td>
+            <td>Felix Felix</td>
+            <td><a href="/editarAlumnos"><img src="{{url_for('static',filename='Imagenes/editar.png')}}"></a></td>
+            <td><a href="/eliminarAlumnos"><img src="{{url_for('static',filename='Imagenes/eliminar.png')}}"></a></td>
+        </tr>
+    </table>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+        Eliminar
+      </button>
+<a href="/Alumnos" class="linkButton">Regresar</a>
+</body>
+
+</html>

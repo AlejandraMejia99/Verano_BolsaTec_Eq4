@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BolsaITESZ</title>
+    <link href="{{url_for('static',filename='CSS/estilo.css')}}" rel="stylesheet">
+</head>
+
+<body>
+    <h1>LISTA DEL PERSONAL DE VINCULACION</h1>
+    <a href="/altaPersonalVinculacion"><img src="{{url_for('static',filename='Imagenes/add.gif')}}">Registrar Personal de Vinuclacion</a>
+    <table class="table table-border table-sm table-hover">
+        <thead>
+            <th>ID</th>
+            <th>CARGO</th>
+        </thead>
+        <tr>
+            <td>15010325</td>
+            <td>Roman Flores R</td>
+            <td><a href="/editarPersonalVinculacion"><img src="{{url_for('static',filename='Imagenes/editar.png')}}"></a></td>
+            <td><a href="/eliminarPersonalVinculacion" dta-togggle=" modal" data-target="#myModal">
+                <img src="{{url_for('static',filename='Imagenes/eliminar.png')}}">
+            </a></td>
+        </tr>
+
+    </table>
+
+<a href="/PersonalVinculacion" class="linkButton">Regresar</a>
+</body>
+
+</html>
