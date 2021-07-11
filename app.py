@@ -110,9 +110,11 @@ def contratos():
 def categorias():
     return render_template('Categoria/Categoria.html')
 
+#######################-------CRUD-CARRERAS----------############################
+
 @app.route('/registrarCarrera')
 def carreras():
-    return render_template('Carreras/Carreras.html')
+    return render_template('Carreras/registrarCarreras.html')
 
 ########################3------CRUD de Ofertas__________################################
 @app.route('/Ofertas')
