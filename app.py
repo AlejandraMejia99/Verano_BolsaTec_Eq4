@@ -78,6 +78,24 @@ def eliminar_Alumnos():
     return render_template('AlumnosEgresados/eliminarAlumnos.html')
 #############################################################################################################
 
+#######################-------CRUD DE PersonalVinculacion--------###################
+@app.route('/PersonalVinculacion')
+def personal():
+    return render_template('PersonalVinculacion/PersonalVinculacion.html')
+
+@app.route('/altaPersonalVinculacion')
+def alta_Reclutores():
+    return render_template('PersonalVinculacion/altaPersonalVinculacion.html')
+@app.route('/consultaPersonalVinculacion')
+def consulta_PersonalVinculacion():
+    return render_template('PersonalVinculacion/consultaPersonalVinculacion.html')
+@app.route('/editarPersonalVinculacion')
+def editar_PersonalVinculacion():
+    return render_template('PersonalVinculacion/editarPersonalVinculacion.html')
+@app.route('/eliminarPersonalVinculacion')
+def eliminar_PersonalVinculacion():
+    return render_template('PersonalVinculacion/eliminarPersonalVinculacion.html')
+
 #####################----CRUD de Reclutores--------##############
 @app.route('/Reclutadores')
 def reclutores():
@@ -96,43 +114,47 @@ def editar_Reclutador():
 def eliminar_Reclutador():
     return render_template('Reclutadores/eliminarReclutores.html')
 
-####################################################################
+###############################----Tablas de Ale-----#####################################
 
-@app.route('/Empresas')
-def empresas():
-    return render_template('Empresa/Empresa.html')
-
-@app.route('/Contratos')
-def contratos():
-    return render_template('Contratos/Contrato.html')
-
-@app.route('/Categorias')
-def categorias():
-    return render_template('Categoria/Categoria.html')
-
-#######################-------CRUD-CARRERAS----------############################
+#-------CRUD-CARRERAS----------#
 
 @app.route('/registrarCarrera')
-def carreras():
+def registrarCarreras():
     return render_template('Carreras/registrarCarreras.html')
 
-########################3------CRUD de Ofertas__________################################
-@app.route('/Ofertas')
-def ofertas():
-    return render_template('Ofertas/Ofertas.html')
+@app.route('/opcionesCarreras')
+def opcionesCarreras():
+    return render_template('Carreras/opcionesCarreras.html')
 
-@app.route('/altaOferta')
-def alta_Oferta():
-    return render_template('Ofertas/altaOferta.html')
-@app.route('/ConsultaOfertas')
-def consulta_Ofertas():
-    return render_template('Ofertas/ConsultaOfertas.html')
-@app.route('/editarOferta')
-def editar_Oferta():
-    return render_template('Ofertas/editarOferta.html')
-@app.route('/eliminarOferta')
-def eliminar_Oferta():
-    return render_template('Ofertas/eliminarOferta.html')
+#------CRUD EMPRESAS----------#
+
+@app.route('/registrarEmpresa')
+def registrarEmpresas():
+    return render_template('Empresas/registrarEmpresas.html')
+
+@app.route('/opcionesEmpresa')
+def opcionesEmpresas():
+    return render_template('Empresas/opcionesEmpresas.html')
+
+
+#------CRUD de Ofertas---------#
+@app.route('/registrarOferta')
+def registrarOfertas():
+    return render_template('Ofertas/registrarOfertas.html')
+
+@app.route('/opcionesOfertas')
+def opcionesOfertas():
+    return render_template('Ofertas/opcionesOfertas.html')
+
+#-----CRUD ENTREVISTAS-------#
+@app.route('/registrarEntrevista')
+def registrarEntrevista():
+    return render_template('Entrevistas/registrarEntrevista.html')
+
+@app.route('/opcionesEntrevista')
+def opcionesEntrevista():
+    return render_template('Entrevistas/opcionesEntrevista.html')
+
 
 ##############################################################################
 
@@ -140,28 +162,22 @@ def eliminar_Oferta():
 def postulaciones():
     return render_template('Postulacion/Postulacion.html')
 
-#######################-------CRUD DE PersonalVinculacion--------###################
-@app.route('/PersonalVinculacion')
-def personal():
-    return render_template('PersonalVinculacion/PersonalVinculacion.html')
 
-@app.route('/altaPersonalVinculacion')
-def alta_Reclutores():
-    return render_template('PersonalVinculacion/altaPersonalVinculacion.html')
-@app.route('/consultaPersonalVinculacion')
-def consulta_PersonalVinculacion():
-    return render_template('PersonalVinculacion/consultaPersonalVinculacion.html')
-@app.route('/editarPersonalVinculacion')
-def editar_PersonalVinculacion():
-    return render_template('PersonalVinculacion/editarPersonalVinculacion.html')
-@app.route('/eliminarPersonalVinculacion')
-def eliminar_PersonalVinculacion():
-    return render_template('PersonalVinculacion/eliminarPersonalVinculacion.html')
 ##############################################################################
 
 @app.route('/Entrevista')
 def entrevista():
     return render_template('Entrevista/Entrevista.html')
+
+
+###########################
+@app.route('/Contratos')
+def contratos():
+    return render_template('Contratos/Contrato.html')
+
+@app.route('/Categorias')
+def categorias():
+    return render_template('Categoria/Categoria.html')
 
 #@app.route('/registrarProducto')
 #def registrarProducto():
@@ -184,6 +200,16 @@ def entrevista():
 #@app.route('/alumnos/edit')
 #def editarAlumno():
  #   return render_template('Alumnos/editarAlumno.html')
+
+
+@app.errorhandler(404)
+def error_404(e):
+    return render_template('Comunes/error404.html'), 404
+
+
+@app.errorhandler(500)
+def error_500(e):
+    return render_template('Comunes/error500.html'), 500
 
 if  __name__ == '__main__':
     db.init_app(app)
