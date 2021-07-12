@@ -1,24 +1,171 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>AlumnosEgresados</title>
-    </head>
 
-    <header>
-            <br>
-            <h1 align="center" style="color:dodgerblue;" id="textoEncabezado">INSTITUTO TECNOLOGICO DE ESTUDIOS SUPERIORES DE ZAMORA</h1>
-        </header>
+<head>
+    <title>BolsaTEC</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="../static/Imagenes/tec.png">
+    <link rel="stylesheet" href="/static/CSS/Estilo-Principal.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
 
-        <nav>
-        <ul>
-            <li><a href="/altaAlumnos">Alta de Alumnos Egresados</a></li>
-            <li><a href="/editarAlumnos">Editar Alumnos Egresados</a></li>
-            <li><a href="/consultaAlumnos">Consulta de Alumnos Egresados</a></li>
-            <li><a href="/eliminarAlumnos">Eliminar Alumnos Egresados</a></li>
+<body>
 
-        </ul>
-        </nav>
-             <a href="/Principal">Regresar</a>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <a class="navbar-brand" href="#">Logo</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">Usuarios</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/registrarAlumno">Registrar Alumno</a>
+                            <a class="dropdown-item" href="/opcionesAlumno">Opciones Alumnos</a>
+                            <a class="dropdown-item" href="/registrarReclutador">Registrar Reclutador</a>
+                            <a class="dropdown-item" href="/opcionesReclutador">Opciones Reclutadores</a>
+                            <a class="dropdown-item" href="/registrarPersonal">Registrar Personal Vin.</a>
+                            <a class="dropdown-item" href="/opcionesPersonal">Opciones Personal</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Empresas
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/registrarEmpresa">Registrar Empresa</a>
+                            <a class="dropdown-item" href="/opcionesEmpresa">Opciones Empresas</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Contratos
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/registrarContrato">Registrar Contrato</a>
+                            <a class="dropdown-item" href="/opcionesContratos">Opciones Contratos</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Categorias
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/registrarCategoria">Registrar Categoria</a>
+                            <a class="dropdown-item" href="/opcionesCategoria">Opciones Categorias</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Carreras
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/registrarCarrera">Registrar Carrera</a>
+                            <a class="dropdown-item" href="/opcionesCarreras">Opciones Carreras</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Ofertas </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/registrarOferta">Registrar Oferta</a>
+                            <a class="dropdown-item" href="/opcionesOfertas">Opciones Ofertas</a>
+                            <a class="dropdown-item" href="/registrarCategoria">Registrar Categoria</a>
+                            <a class="dropdown-item" href="/opcionesCategoria">Opciones Categoria</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Entrevistas
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/registrarEntrevista">Registrar Entrevista</a>
+                            <a class="dropdown-item" href="">Opciones Entrevistas</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop"
+                            data-toggle="dropdown">Postulaciones </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/registrarOAlu">Registrar Oferta Alumno</a>
+                            <a class="dropdown-item" href="/opcionesOAlu">Opciones Oferta Alumno</a>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown"><span
+                                class="glyphicon glyphicon-user"></span> Tu Cuenta</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Perfil</a>
+                            <br>
+                            <a class="dropdown-item" href="#">Cerrar sesion</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <form>
+        <h2>REGISTRAR ALUMNOS</h2>
+        <div class="form-row">
+            <div class="col-md-3 mb-3">
+                <label for="validationServer01">Id Alumno: </label>
+                <input type="text" class="form-control is-valid" id="validationServer01" placeholder="Id Alumno"
+                    required>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="validationServer02">Id Usuario: </label>
+                <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Id Usuario"
+                    required>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="validationServer02">Id Carrera: </label>
+                <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Id Carrera"
+                    required>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="validationServerUsername">No. Control: </label>
+                <input type="text" class="form-control is-invalid" id="validationServerUsername"
+                    placeholder="No. Control" required>
+                <div class="valid-feedback">
+                    <br>
+                </div>
+                <div class="valid-feedback">
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-3 mb-3">
+                <label for="validationServer03">Fecha Nacimiento: </label>
+                <input type="text" class="form-control is-invalid" id="validationServer03"
+                    placeholder="Fecha Nacimiento" required>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="validationServer04">Promedio: </label>
+                <input type="text" class="form-control is-invalid" id="validationServer04" placeholder="Promedio"
+                    required>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="validationServer04">Año Egreso: </label>
+                <input type="text" class="form-control is-invalid" id="validationServer04" placeholder="Año Egreso"
+                    required>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="validationServer05">CV: </label>
+                <input type="text" class="form-control is-invalid" id="validationServer05" placeholder="CV" required>
+                <div class="valid-feedback">
+                    <br>
+                </div>
+                <div class="valid-feedback">
+                    <br>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Registrar</button>
+    </form>
+
+</body>
 
 </html>
