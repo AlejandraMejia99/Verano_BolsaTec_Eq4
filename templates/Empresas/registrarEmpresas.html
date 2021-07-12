@@ -186,42 +186,53 @@
                 </nav>
 
 
-                <div class="container">
+                <form>
                     <h2>Registrar Empresas</h2>
-                    <form>
-                        <div class="form-group">
-                            <label>Nombre:</label>
-                            <input type="text" class="form-control" id="nombre"
-                                name="nombre">
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label >Nombre </label>
+                            <input type="text" class="form-control" id="nombre" name="nombre">
                         </div>
-                        <div class="form-group">
-                            <label>RFC:</label>
-                            <input type="text" class="form-control" id="rfc"
-                                name="rfc" placeholder="XAXX010101000">
+                        <div class="col-md-4 mb-3">
+                            <label>RFC: </label>
+                            <input type="text" class="form-control" id="rfc" name="rfc" placeholder="XAXX010101000">
                         </div>
-                        <div class="form-group">
-                            <label>Direccion</label>
-                            <input type="text" class="form-control" id="nombre"
-                                name="nombre">
+                        <div class="col-md-4 mb-3">
+                            <label >Direccion: </label>
+                            <input type="text" class="form-control " id="direccion" >
                         </div>
-                        <div class="form-group">
-                            <label for="pwd">Giro</label>
-                            <select class="form-control" id="nombre"
-                                name="nombre">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label >Giro: </label>
+                            <select class="form-control" id="giro"name="giro">
                                 <option value="comercial">Giro Comercial</option>
                                 <option value="industrial">Giro Industrial</option>
                                 <option value="servicios">Giro de Servicios</option>
                             </select>
+                            
                         </div>
-                        <div class="form-group">
-                            <label>Pagina Web</label>
-                            <input type="text" class="form-control" id="web"
-                                name="web">
+                        <div class="col-md-4 mb-3">
+                            <label >Pagina Web </label>
+                            <input type="text" class="form-control" id="web" name="web">
                         </div>
-                        <button class="btn btn-success" type="submit"
-                            name="registrar" id="registrar">Registrar</button>
-                    </form>
-                </div>
+                       
+                        <div class="col-md-4 mb-3">
+                            <label for="validationServer05"> </label>
+                            
+                            <div class="valid-feedback">
+                                <br>
+                            </div>
+                            <div class="valid-feedback">
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Registrar</button>
+                </form>
+            
+            
             </div>
         </div>
     </body>

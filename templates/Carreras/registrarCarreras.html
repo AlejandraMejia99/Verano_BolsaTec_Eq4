@@ -186,31 +186,34 @@
                     </div>
                 </nav>
 
-                <div class="container">
-                    <h2>REGISTRAR CARRERAS</h2>
+            
                     <form>
-                        <div class="form-group">
-                            <label for="pwd">Nombre:</label>
-                            <select class="form-control"  id="nombre" name="nombre">
+                        <h2>Registrar Carreras</h2>
+                        <div class="form-row">
+                            <div class="col-md-5 mb-3">
+                                <label >Nombre </label>
+                                <select class="form-control"  id="nombre" name="nombre">
 
-                                <option value="Electronica">Ingenieria Electronica</option>
-                                <option value="Innovacion">Ingenieria en Innovacion Agricola Sustentable</option>
-                                <option value="Gestion">Ingenieria en Gestion Empresarial</option>
-                                <option value="Industrial">Ingenieria Industrial</option>
-                                <option value="Alimentarias">Ingenieria en Industrias Alimentarias</option>
-                                <option value="Tics">Ingenieria en Tecnologias de la Informacion y la Comunicacion</option>
-                                <option value="Sistemas" >Ingenieria en Sistemas Computacionales</option>
-                                <option value="Contador">Licenciatura en Contador Publico</option>
-                            </select>
+                                    <option value="Electronica">Ingenieria Electronica</option>
+                                    <option value="Innovacion">Ingenieria en Innovacion Agricola Sustentable</option>
+                                    <option value="Gestion">Ingenieria en Gestion Empresarial</option>
+                                    <option value="Industrial">Ingenieria Industrial</option>
+                                    <option value="Alimentarias">Ingenieria en Industrias Alimentarias</option>
+                                    <option value="Tics">Ingenieria en Tecnologias de la Informacion y la Comunicacion</option>
+                                    <option value="Sistemas" >Ingenieria en Sistemas Computacionales</option>
+                                    <option value="Contador">Licenciatura en Contador Publico</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5 mb-3">
+                                <label >Clave </label>
+                                <input type="text" class="form-control" id="clave" name="clave">
+                            </div>
+                            
                         </div>
-                        <div class="form-group">
-                            <label >Clave:</label>
-                            <input type="text" class="form-control" id="clave" name="clave">
-                        </div>
-                        
-                        <button class="btn btn-success" type="submit" name="registrar" id="registrar">Registrar</button>
-                        
+                        <button class="btn btn-primary" type="submit">Registrar</button>
                     </form>
+                
+                
                 </div>
 
             </body>

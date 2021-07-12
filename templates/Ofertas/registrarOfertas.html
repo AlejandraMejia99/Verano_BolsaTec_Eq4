@@ -186,57 +186,72 @@
                 </nav>
 
 
-                <div class="container">
+                <form>
                     <h2>Registrar Ofertas</h2>
-                    <form>
-                        <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
                             <label>Nombre:</label>
                             <input type="text" class="form-control" id="nombre" name="nombre">
                         </div>
-                        <div class="form-group">
+                        <div class="col-md-3 mb-3">
                             <label for="pwd">Empresa</label>
                             <select class="form-control" id="empresa"
                                 name="empresa">
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="col-md-3 mb-3">
                             <label for="pwd">Categoria</label>
                             <select class="form-control" id="categoria"
                                 name="categoria">
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="col-md-3 mb-3">
                             <label for="pwd">Contrato</label>
                             <select class="form-control" id="contrato"
                                 name="contrato">
                             </select>
+                            <div class="valid-feedback">
+                                <br>
+                            </div>
+                            <div class="valid-feedback">
+                                <br>
+                            </div>
                         </div>
-                        
-                        <div class="form-group">
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-2 mb-3">
                             <label>Descripcion</label>
                             <input type="text" class="form-control" id="descr" name="descr" >
                         </div>
-                        <div class="form-group">
+                        <div class="col-md-3 mb-3">
                             <label>Fecha Publicacion</label>
                             <input type="date" class="form-control" id="fecha"name="fecha">
                         </div>
-                        <div class="form-group">
+                        <div class="col-md-2 mb-3">
                             <label>Salario</label>
                             <input type="text" class="form-control" id="salario"name="salario">
                         </div>
-                        <div class="form-group">
+                        <div class="col-md-2 mb-3">
                             <label>Vacantes</label>
                             <input type="text" class="form-control" id="vacantes"name="vacantes">
                         </div>
-                        <div class="form-group">
+                        <div class="col-md-3 mb-3">
                             <label for="pwd">Reclutor</label>
                             <select class="form-control" id="reclutor"
                                 name="reclutor">
                             </select>
+                            <div class="valid-feedback">
+                                <br>
+                            </div>
+                            <div class="valid-feedback">
+                                <br>
+                            </div>
                         </div>
-                        <button class="btn btn-success" type="submit" name="registrar" id="registrar">Registrar</button>
-                    </form>
-                </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Registrar</button>
+                </form>
+            
+            
             </div>
         </div>
     </body>

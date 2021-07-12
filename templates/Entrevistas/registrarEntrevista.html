@@ -185,44 +185,63 @@
                     </div>
                 </nav>
 
-
-                <div class="container">
-                    <h2>Registrar Entrevista</h2>
-                    <form>
-                        <div class="form-group">
-                            <label for="pwd">Alumno</label>
-                            <select class="form-control" id="alumno"name="alumno">
+                <form>
+                    <h2>Registrar Entrevistas </h2>
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <label for="validationServer01"> Alumno: </label>
+                            <select class="form-control" id="alumno"
+                                name="alumno">
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="pwd">Oferta</label>
-                            <select class="form-control" id="alumno"name="alumno">
+                        <div class="col-md-3 mb-3">
+                            <label for="validationServer02">Oferta: </label>
+                            <select class="form-control" id="oferta"
+                                name="oferta">
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label>Fecha de Registro</label>
-                            <input type="date" class="form-control" id="registro" name="registro" >
+                        <div class="col-md-3 mb-3">
+                            <label for="validationServer03">Fecha de Registro </label>
+                            <input type="date" class="form-control"
+                                id="registro" name="registro">
                         </div>
-                        <div class="form-group">
-                            <label>Fecha de Entrevista</label>
+                        <div class="col-md-3 mb-3">
+                            <label for="validationServer03">Fecha de Entrevista </label>
                             <input type="date" class="form-control" id="entrevista" name="entrevista" >
                         </div>
-                        <div class="form-group">
-                            <label>Hora Inicio</label>
-                            <input type="time" class="form-control" id="hinicio" name="hinicio" >
+                    </div>
+
+                        <div class="form-row">
+
+                            <div class="col-md-4 mb-3">
+                                <label for="validationServer03">Hora Inicio </label>
+                                <input type="time" class="form-control" id="hinicio" name="hinicio" >
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationServer03">Hora Fin </label>
+                                <input type="time" class="form-control" id="hfin" name="hfin" >
+                            </div>
+                            
+                            <div class="col-md-4 mb-3">
+                                <label for="validationServer05">Resultado:</label>
+                                <select class="form-control" id="resultado"name="resultado">
+                                </select>
+                                    <br>
+                                </div>
+                                <div class="valid-feedback">
+                                    <br>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="form-group">
-                            <label>Hora Fin</label>
-                            <input type="time" class="form-control" id="hfin" name="hfin" >
-                        </div>
-                        <div class="form-group">
-                            <label for="pwd">Resultado</label>
-                            <select class="form-control" id="resultado"name="resultado">
-                            </select>
-                        </div>
-                        <button class="btn btn-success" type="submit" name="registrar" id="registrar">Registrar</button>
-                    </form>
-                </div>
+                        
+                    </div>
+                    
+                </form>
+                <button class="btn btn-primary" type="submit">Registrar</button>
+
+
+
             </div>
         </div>
     </body>
