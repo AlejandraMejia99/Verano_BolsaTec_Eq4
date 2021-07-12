@@ -155,13 +155,31 @@ def registrarEntrevista():
 def opcionesEntrevista():
     return render_template('Entrevistas/opcionesEntrevista.html')
 
+#######################--------Tablas de meny-----------#############################
+#####-----CRUD Contrato-----#####
+@app.route('/registrarContrato')
+def registrarContrato():
+    return render_template('Contratos/registrarContrato.html')
 
-##############################################################################
+@app.route('/opcionesContratos')
+def opcionesContratos():
+    return render_template('Contratos/opcionesContratos.html')
+#####-----CRUD Categoria-----#####
+@app.route('/registrarCategoria')
+def registrarCategoria():
+    return render_template('Categoria/registrarCategoria.html')
 
-@app.route('/Postulaciones')
-def postulaciones():
-    return render_template('Postulacion/Postulacion.html')
+@app.route('/opcionesCategoria')
+def oopcionesCategoria():
+    return render_template('Categoria/opcionesCategoria.html')
+#####-----CRUD Postulacion-----#####
+@app.route('/registrarOAlu')
+def registrarOAlu():
+    return render_template('Postulacion/registrarOAlu.html')
 
+@app.route('/opcionesOAlu')
+def opcionesOAlus():
+    return render_template('Postulacion/opcionesOAlu.html')
 
 ##############################################################################
 
@@ -169,15 +187,6 @@ def postulaciones():
 def entrevista():
     return render_template('Entrevista/Entrevista.html')
 
-
-###########################
-@app.route('/Contratos')
-def contratos():
-    return render_template('Contratos/Contrato.html')
-
-@app.route('/Categorias')
-def categorias():
-    return render_template('Categoria/Categoria.html')
 
 #@app.route('/registrarProducto')
 #def registrarProducto():
