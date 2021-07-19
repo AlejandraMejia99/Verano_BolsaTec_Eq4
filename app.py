@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,redirect,url_for,flash
 from flask_login import login_user, LoginManager
-from modelo.models import Usuario, db
+from modelo.models import db, Usuario, Carreras, Empresas
 
 app = Flask(__name__)
 
@@ -168,10 +168,43 @@ def opciones_Reclutador():
 def registrarCarreras():
     return render_template('Carreras/registrarCarreras.html')
 
-
 @app.route('/opcionesCarreras')
 def opcionesCarreras():
-    return render_template('Carreras/opcionesCarreras.html')
+    ca=Carreras()
+    return render_template('Carreras/opcionesCarreras.html', carrera=ca.consultaGeneral())
+
+@app.route('/editarCarrera/<int:id>')
+def ventanaEditarCarrera(id):
+    ca=Carreras()
+    ca.id_carrera=id
+    return render_template('Carreras/modificarCarreras.html',ca=ca.consultaIndividual())
+
+@app.route('/eliminarCarrera/<int:id>')
+def ventanaEliminarCarrera(id):
+    ca=Carreras()
+    ca.id_carrera=id
+    ca.estatus="Inactivo"
+    ca.actualizar()
+    return redirect(url_for('opcionesCarreras'))
+
+@app.route('/insertarCarrerasBD', methods=['POST'])
+def insertCarrerasBD():
+    ca=Carreras()
+    ca.nombre=request.form['nombre']
+    ca.clave=request.form['clave']
+    ca.estatus='Activo'
+    ca.insertar()
+    return redirect (url_for('opcionesCarreras')) 
+
+@app.route('/actualizarCarrerasBD', methods=['POST'])
+def actualzarTurnosBD():
+    ca=Carreras()
+    ca.id_carrera=request.form['idcarrera']
+    ca.nombre=request.form['nombre']
+    ca.clave=request.form['clave']
+    ca.estatus=request.form['estatus']
+    ca.actualizar()
+    return redirect(url_for('opcionesCarreras'))
 
 #------CRUD EMPRESAS----------#
 
@@ -183,7 +216,49 @@ def registrarEmpresas():
 
 @app.route('/opcionesEmpresa')
 def opcionesEmpresas():
-    return render_template('Empresas/opcionesEmpresas.html')
+    em=Empresas()
+    return render_template('Empresas/opcionesEmpresas.html', empresa=em.consultaGeneral())
+
+@app.route('/editarEmpresa/<int:id>')
+def ventanaEditarEmpresa(id):
+    em=Empresas()
+    em.id_empresa=id
+    return render_template('Empresas/modificarEmpresas.html', em=em.consultaIndividual())
+
+
+@app.route('/eliminarEmpresa/<int:id>')
+def ventanaEliminarEmpresa(id):
+    em=Empresas()
+    em.id_empresa=id
+    em.estatus="Inactivo"
+    em.actualizar()
+
+    return redirect(url_for('opcionesEmpresas'))
+
+@app.route('/insertarEmpresasBD', methods=['POST'])
+def insertEmpresasBD():
+    em=Empresas()
+    em.nombre=request.form['nombre']
+    em.rfc=request.form['rfc']
+    em.direccion=request.form['direccion']
+    em.giro=request.form['giro']
+    em.paginaweb=request.form['web']
+    em.estatus='Activo'
+    em.insertar()
+    return redirect (url_for('opcionesEmpresas')) 
+
+@app.route('/actualizarEmpresasBD', methods=['POST'])
+def actualzarEmpresaBD():
+    em=Empresas()
+    em.id_empresa=request.form['idempresa']
+    em.nombre=request.form['nombre']
+    em.rfc=request.form['rfc']
+    em.direccion=request.form['direccion']
+    em.giro=request.form['giro']
+    em.paginaweb=request.form['web']
+    em.estatus=request.form['estatus']
+    em.actualizar()
+    return redirect(url_for('opcionesEmpresas'))
 
 
 #------CRUD de Ofertas---------#

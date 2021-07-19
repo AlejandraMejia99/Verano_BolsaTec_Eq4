@@ -194,21 +194,27 @@
                                 <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Clave</th>
+                                <th>Estatus</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                             </tr>
                         </thead>
 
-                        <tbody>
+                        {% for ca in carrera%}
+                             <tr>
 
-                            <th scope="row">1</th>
-                            <td>Ingenieria en Sistemas Computacionales</td>
-                            <td>ISC07TEC</td>
-                            <td><a href=""><button type="button" class="btn
-                                        btn-warning">Modificar</button></a></td>
-                            <td><a href=""><button type="button" class="btn
-                                        btn-danger">Eliminar</button></a></td>
-                        </tbody>
+                                {% if ca.estatus == "Activo" %}
+
+                                    <th scope="row">{{ca.id_carrera}}</th>
+                                    <td>{{ca.nombre}}</td>
+                                    <td>{{ca.clave}}</td>
+                                    <td>{{ca.estatus}}</td>
+                                    <td><a href="/editarCarrera/{{ca.id_carrera}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
+                                    <td><a href="/eliminarCarrera/{{ca.id_carrera}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                                {%endif%}
+                             </tr>
+
+                        {% endfor%}
                     </table>
                 </div>
             </div>

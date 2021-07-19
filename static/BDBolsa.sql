@@ -22,7 +22,7 @@ nombre varchar(100)not null,
 rfc varchar(55) not null,
 direccion varchar(60) not null ,
 giro varchar(50) not null,
-paginaweb varchar(100) not null,
+paginaweb varchar(200) not null,
 estatus VARCHAR(20) not null,
 primary key (id_empresa));
 

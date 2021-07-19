@@ -69,3 +69,56 @@ class Usuario(UserMixin,db.Model):
                 return None
         else:
             return None
+
+
+class Carreras(db.Model):
+    __tablename__='Carreras'
+    id_carrera=Column(Integer,primary_key=True)
+    clave=Column(String,nullable=False)
+    nombre= Column(String,nullable=False)
+    estatus= Column(String,nullable=False)
+
+
+    def insertar(self):                                                                                                                                                                          
+        db.session.add(self)                                                                                                                                                                     
+        db.session.commit() 
+    def consultaGeneral(self):                                                                                                                                                                   
+        ca=self.query.all()                                                                                                                                                                   
+        return ca
+    def consultaIndividual(self):
+        ca=self.query.get(self.id_carrera)
+        return ca
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+    def eliminar(self):
+        ca=self.consultaIndividual()
+        db.session.delete(ca)
+        db.session.commit()
+
+class Empresas(db.Model):
+    __tablename__='Empresas'
+    id_empresa =Column(Integer,primary_key=True)
+    nombre= Column(String,nullable=False)
+    rfc = Column(String,nullable=False)
+    direccion = Column(String,nullable=False)
+    giro=Column(String,nullable=False)
+    paginaweb = Column(String,nullable=False)
+    estatus = Column(String,nullable=False)
+
+    def insertar(self):                                                                                                                                                                          
+        db.session.add(self)                                                                                                                                                                     
+        db.session.commit() 
+    def consultaGeneral(self):                                                                                                                                                                   
+        em=self.query.all()                                                                                                                                                                   
+        return em
+    def consultaIndividual(self):
+        em=self.query.get(self.id_empresa)
+        return em
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+    def eliminar(self):
+        em=self.consultaIndividual()
+        db.session.delete(em)
+        db.session.commit()

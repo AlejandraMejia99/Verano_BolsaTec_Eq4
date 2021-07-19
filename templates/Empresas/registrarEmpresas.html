@@ -186,7 +186,7 @@
                 </nav>
 
 
-                <form>
+                <form action="/insertarEmpresasBD" method="post">
                     <h2>Registrar Empresas</h2>
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
@@ -199,14 +199,19 @@
                         </div>
                         <div class="col-md-4 mb-3">
                             <label >Direccion: </label>
-                            <input type="text" class="form-control " id="direccion" >
+                            <input type="text" class="form-control " id="direccion" name="direccion" >
+                        </div>
+                        <div class="valid-feedback">
+                            <br>
+                        </div>
                         </div>
                     </div>
-
+                    
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label >Giro: </label>
                             <select class="form-control" id="giro"name="giro">
+                                <option value="" disabled selected>Seleccionar un opcion</option>
                                 <option value="comercial">Giro Comercial</option>
                                 <option value="industrial">Giro Industrial</option>
                                 <option value="servicios">Giro de Servicios</option>
@@ -231,8 +236,6 @@
                     </div>
                     <button class="btn btn-primary" type="submit">Registrar</button>
                 </form>
-            
-            
             </div>
         </div>
     </body>

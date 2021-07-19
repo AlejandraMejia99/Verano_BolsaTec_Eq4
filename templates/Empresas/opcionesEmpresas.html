@@ -195,6 +195,8 @@
                                 <th>Nombre</th>
                                 <th>RFC</th>
                                 <th>Giro</th>
+                                <th>Web</th>
+                                <th>Estatus</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                             </tr>
@@ -202,13 +204,24 @@
 
                         <tbody>
 
-                            <th scope="row">1</th>
-                            <td>Lego</td>
-                            <td>XAXX010101000</td>
-                            <td>Servicios</td>
-                            
-                            <td><a href=""><button type="button" class="btn btn-warning">Modificar</button></a></td>
-                            <td><a href=""><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                            {% for em in empresa%}
+                             <tr>
+
+                                {% if em.estatus == "Activo" %}
+
+                            <th scope="row">{{em.id_empresa}}</th>
+                            <td>{{em.nombre}}</td>
+                            <td>{{em.rfc}}</td>
+                            <td>{{em.giro}}</td>
+                            <td>{{em.paginaweb}}</td>
+                            <td>{{em.estatus}}</td>
+                            <td><a href="/editarEmpresa/{{em.id_empresa}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
+                            <td><a href="/eliminarEmpresa/{{em.id_empresa}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                        
+                            {%endif%}
+                             </tr>
+
+                        {% endfor%}
                         </tbody>
                     </table>
                 </div>
