@@ -1,87 +1,53 @@
 <!doctype html>
-<html lang="es">
+<html>
+
     <head>
-         <meta charset="UTF-8">
-        <title>BOLSAITESZ</title>
-
-
+        <title>BolsaTEC</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="shortcut icon" href="../static/Imagenes/tec.png">
+        <link rel="stylesheet" href="/static/CSS/Estilo-Principal.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
+
     <body>
-        <header id="miEstilo">
-            <h1 align="center" style="color:dodgerblue;" id="textoEncabezado">
-                INSTITUTO TECNOLOGICO DE ESTUDIOS SUPERIORES DE ZAMORA</h1>
-        </header>
-        <main>
-            <Section>
-                <h2> EDICION DE DATOS DE ALUMNOS EGRESADOS</h2>
-
-                <form action="/editarAlumnos">
-                    <div id="DatosPersonales">
-                        <fieldset>
-                            <legend>Datos Personales</legend>
-                            <label>IdUsuario</label>
-                            <input type="number" id="idUsuario" name="idUsuario" required>
-                            <br>
-                            <label>Nombre :</label>
-                            <input type="text" name="nombre"
-                                placeholder="Nombrecompleto" maxlength="100"
-                                required>
-                            <br>
-                            <label>Telefono:</label>
-                            <input type="tel" name="telefono"
-                                placeholder="###-###-##-##" maxlength="13"
-                                required>
-                            <br>
-                            <label>Correo Electronico:</label>
-                            <input type="email" name="email"
-                                placeholder="algo@algo.algo" maxlength="100"
-                                required>
-                            <br>
-                             <label>Contraseña:</label>
-                            <input type="password" name="password" placeholder="password" maxlength="20" required>
-                            <br>
-                            <label>Sexo:</label>
-                            <input type="radio" name="sexo" value="F">Femenino
-                            <input type="radio" name="sexo" value="M">Masculino
-                            <br>
-                            <label>Fecha de Nacimiento</label>
-                            <input type="date" name="fechanacimiento"
-                                value="dd-mm-aaaa" min="01-01-1990"
-                                max="31-12-2020">
-                            <br>
-                            <label>Estatus:</label>
-                            <input type="text" name="Estatus"  placeholder="Estatus" maxlength="100" required>
-                        </fieldset>
+        <form action="/actualizarAlumno" method="post">
+            <h2>EDITAR ALUMNO</h2>
+            <div class="form-row">
+                <div class="col-md-5 mb-3">
+                    <label for="nacimiento">Fecha Nacimiento </label>
+                    <input type="date" class="form-control is-valid" name="nacimiento" placeholder="Nacimiento" required
+                        value="{{alumnos.fecha_nacimiento}}">
+                </div>
+                <div class="col-md-5 mb-3">
+                    <label for="Promedio">Promedio: </label>
+                    <input type="number" class="form-control is-invalid" name="promedio" placeholder="Promedio" required
+                        value="{{alumnos.promedio}}">
+                    <div class="valid-feedback">
+                        <br>
                     </div>
-
-                    <div id="datosEscolares">
-                        <fieldset>
-                            <legend>Datos Escolares</legend>
-                            <label>No. Control:</label>
-                            <input type="text" name="nocontrol" placeholder="########" maxlength="8" required>
-                            <br>
-                            <label>IdCarrera</label>
-                            <input type="number" id="idCarrera" name="idCarrera" required>
-                            <br>
-                            <label>Promedio:</label>
-                            <input type="text" name="promedio"
-                                placeholder="##.##" maxlength="5" required>
-                            <br>
-                            <label>Año Egreso:</label>
-                            <input type="number" name="anioegreso" min="1990"
-                                max="2020" value="" required>
-                            <br>
-                            <label>Curriculo Vitae</label>
-                            <input type="text" name="nombre" placeholder="" maxlength="1000" required>
-                            <br>
-                            <button onclick="realizarOperacion()" id="insercion">Guardar</button>
-                            <button><a href="/Alumnos"</a>Cancelar</button>
-
-                        </fieldset>
+                    <div class="valid-feedback">
+                        <br>
                     </div>
-                </form>
-                <a href="/Alumnos">Regresar</a>
-            </Section>
-        </main>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-7 mb-3">
+                    <label for="egreso">Año egreso: </label>
+                    <input type="date" class="form-control is-invalid" name="egreso" placeholder="Año egreso" required value="{{alumnos.anioEgreso}}">
+                    <div class="valid-feedback">
+                        <br>
+                    </div>
+                    <div class="valid-feedback">
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Guardar</button>
+            <button class="btn btn-primary" href="/Principal">Cancelar</button>
+        </form>
     </body>
+
 </html>

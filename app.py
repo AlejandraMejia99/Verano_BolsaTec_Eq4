@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request,redirect,url_for,flash
-from flask_login import login_user, LoginManager
-from modelo.models import db, Usuario, Carreras, Empresas
+from flask import Flask, render_template, request,redirect,url_for,flash,abort
+from flask_login import login_user, LoginManager, current_user, logout_user
+from modelo.models import db, Usuario, Carreras, Empresas, Usuarios, Alumnos, Reclutadores, PersonalVinculacion, vVinculacion, vAlumnos, vReclutador
 
 app = Flask(__name__)
 
@@ -8,17 +8,21 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:admin@localhost/bolsa'
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key='Cl4v3'
 # Configuración de la gestion Usuarios con Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = "inicio"
+login_manager.login_view = "mostrar_login"
 # rutas para el ingreso a la aplicacion
 
 
-@login_manager.user_loader
-def load_user(id):
-    return Usuario.query.get(int(id))
+#@login_manager.user_loader
+#def load_user(id):
+#    return Usuario.query.get(int(id))
 
+@login_manager.user_loader
+def cargar_usuario(id):
+    return Usuarios.query.get(int(id))
 
 @app.route('/')
 def inicio():
@@ -35,6 +39,9 @@ def login():
     else:
         return 'Usuario invalido'
 
+@app.route('/Perfil')
+def perfil():
+    return render_template('Usuarios/EditarPerfil.html')
 
 @app.route('/guardarUsuario', methods=['post'])
 def guardarUsuario():
@@ -348,6 +355,173 @@ def entrevista():
 # def editarAlumno():
  #   return render_template('Alumnos/editarAlumno.html')
 
+###############################----Tablas de Vigo-----#####################################
+
+#-------CRUD-LOGIN----------#
+
+@app.route("/validarSesion",methods=['POST'])
+def iniciarSesion():
+    Us=Usuarios()
+    Us=Us.validar(request.form['usuario'],request.form['contraseña'])
+    if(Us!=None and Usuarios.is_active(Us)):
+        login_user(Us)
+        return render_template('Principal.html')
+    else:
+        return "El usuario o la contraseña es invalido"
+
+@app.route("/CerrarSesion")
+def cerrarSes():
+    if(current_user.is_authenticated):
+         logout_user()
+         return redirect(url_for("login"))
+    else:
+        abort(404)
+
+@app.route("/actualizarPerfil")
+def actualizarPerfil():
+    usuario=Usuarios()
+
+    usuario.nombre = request.form['nombre']
+    usuario.telefono = request.form['telefono']
+    usuario.usuario = request.form['usuario']
+    usuario.passwd = request.form['contraseña']
+    usuario.actualizar()
+
+    return redirect(url_for("principal"))
+
+#-------CRUD-ALUMNOS----------#
+
+@app.route('/registrarAlumno')
+def registrarAlumno():
+    carreras = Carreras()
+    return render_template('AlumnosEgresados/AlumnosEgresados.html',carrera=carreras.consultaGeneral())
+
+@app.route('/opcionesAlumno')
+def opcionesAlumno():
+    alumno=vAlumnos()
+    return render_template('AlumnosEgresados/opcionesAlumnos.html',alumnos=alumno.consultaGeneral())
+
+@app.route('/editarAlumnos/<int:id>')
+def editarAlumnos(id):
+    alumno=Alumnos()
+    alumno.id_alumno=id
+    return render_template('AlumnosEgresados/editarAlumnos.html',alumnos=alumno.consultaIndividual())
+
+@app.route('/eliminarAlumno/<int:id>')
+def eliminarAlumno(id):
+    us=Usuarios()
+    us.id_usuario=id
+    us.estatus="Inactivo"
+    us.actualizar()
+    return redirect(url_for('opcionesAlumno'))
+
+@app.route('/actualizarAlumno', methods=['POST'])
+def actualzarAlumno():
+    al=Alumnos()
+    al.fecha_nacimiento=request.form['nacimiento']
+    al.promedio=request.form['promedio']
+    al.anioEgreso=request.form['egreso']
+    al.actualizar()
+    return redirect(url_for('opcionesAlumno'))
+
+@app.route('/insertarAlumnosBD', methods=['POST'])
+def insertAlumnosBD():
+    alumnos = Alumnos()
+    usuarios = Usuarios()
+
+    usuarios.nombre = request.form['nombre']
+    usuarios.apellido_paterno = request.form['paterno']
+    usuarios.apellido_materno = request.form['materno']
+    usuarios.genero = request.form['genero']
+    usuarios.telefono = request.form['telefono']
+    usuarios.correo = request.form['correo']
+    alumnos.id_carrera = request.form['carrera']
+    alumnos.no_control = request.form['control']
+    alumnos.fecha_nacimiento = request.form['nacimiento']
+    alumnos.promedio = request.form['promedio']
+    alumnos.anioEgreso = request.form['egreso']
+    alumnos.cv = request.form['cv']
+    usuarios.usuario = request.form['usuario']
+    usuarios.passwd = request.form['contraseña']
+    usuarios.tipo = 'Alumno'
+    usuarios.estatus = 'Activo'
+    usuarios.insertar()
+    alumnos.id_usuario = usuarios.id_usuario
+    alumnos.insertar()
+    
+    return redirect (url_for('opcionesAlumno'))
+
+
+#-------CRUD-RECLUTADORES----------#
+
+@app.route('/registrarReclutador')
+def registrarReclutador():
+    empresas = Empresas()
+    return render_template('Reclutadores/Reclutadores.html',empresa=empresas.consultaGeneral())
+
+@app.route('/opcionesReclutador')
+def opcionesReclutador():
+    reclutor=vReclutador()
+    return render_template('Reclutadores/opcionesReclutadores.html',reclutador=reclutor.consultaGeneral())
+
+@app.route('/insertarReclutadorBD', methods=['POST'])
+def insertReclutadorBD():
+    reclutador = Reclutadores()
+    usuarios = Usuarios()
+
+    usuarios.nombre = request.form['nombre']
+    usuarios.apellido_paterno = request.form['paterno']
+    usuarios.apellido_materno = request.form['materno']
+    usuarios.genero = request.form['genero']
+    usuarios.telefono = request.form['telefono']
+    usuarios.correo = request.form['correo']
+    reclutador.id_empresa = request.form['empresa']
+    reclutador.clave = request.form['clave']
+    reclutador.cargo = request.form['cargo']
+    usuarios.usuario = request.form['usuario']
+    usuarios.passwd = request.form['contraseña']
+    usuarios.tipo = 'Reclutador'
+    usuarios.estatus = 'Activo'
+    usuarios.insertar()
+    reclutador.id_usuario = usuarios.id_usuario
+    reclutador.insertar()
+    
+    return redirect (url_for('opcionesReclutador'))
+
+
+#-------CRUD-PERSONAL-VINCULACION----------#
+
+@app.route('/registrarPersonal')
+def registrarPersonal():
+    return render_template('PersonalVinculacion/PersonalVinculacion.html')
+
+@app.route('/opcionesPersonal')
+def opcionesPersonal():
+    personal=vVinculacion()
+    return render_template('PersonalVinculacion/opcionesPersonal.html',vinculacion=personal.consultaGeneral())
+
+@app.route('/insertarPersonalBD', methods=['POST'])
+def insertPersonalBD():
+    personal = PersonalVinculacion() 
+    usuarios = Usuarios()
+
+    usuarios.nombre = request.form['nombre']
+    usuarios.apellido_paterno = request.form['paterno']
+    usuarios.apellido_materno = request.form['materno']
+    usuarios.genero = request.form['genero']
+    usuarios.telefono = request.form['telefono']
+    usuarios.correo = request.form['correo']
+    personal.clave = request.form['clave']
+    personal.cargo = request.form['cargo']
+    usuarios.usuario = request.form['usuario']
+    usuarios.passwd = request.form['contraseña']
+    usuarios.tipo = 'Administrador'
+    usuarios.estatus = 'Activo'
+    usuarios.insertar()
+    personal.id_usuario = usuarios.id_usuario
+    personal.insertar()
+    
+    return render_template('PersonalVinculacion/opcionesPersonal.html')
 
 @app.errorhandler(404)
 def error_404(e):

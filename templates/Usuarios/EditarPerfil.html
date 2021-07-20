@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>BolsaTEC</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="../static/Imagenes/tec.png">
+    <link rel="stylesheet" href="/static/CSS/Estilo-Principal.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <form action="/actualizarPerfil" method="post">
+        <h2>EDITAR PERFIL</h2>
+        <div class="form-row">
+            <div class="col-md-5 mb-3">
+                <label for="nombre">Nombre </label>
+                <input type="text" class="form-control is-valid" name="nombre" placeholder="Nombre" required value="{{current_user.nombre}}">
+            </div>
+            <div class="col-md-5 mb-3">
+                <label for="telefono">Telefono: </label>
+                <input type="tel" class="form-control is-invalid" name="telefono" placeholder="Telefono" required value="{{current_user.telefono}}">
+                <div class="valid-feedback">
+                    <br>
+                </div>
+                <div class="valid-feedback">
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="usuario">Usuario: </label>
+                <input type="text" class="form-control is-invalid" name="usuario" placeholder="Usuario" required value="{{current_user.usuario}}">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="contraseña">Contraseña: </label>
+                <input type="password" class="form-control is-invalid" name="contraseña" placeholder="Password" required value="{{current_user.passwd}}">
+                <div class="valid-feedback">
+                    <br>
+                </div>
+                <div class="valid-feedback">
+                    <br>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Guardar</button>
+        <button class="btn btn-primary" href="/Principal">Cancelar</button>
+    </form>
+</body>
+</html>

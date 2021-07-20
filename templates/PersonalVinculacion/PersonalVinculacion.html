@@ -106,18 +106,55 @@
         </div>
     </nav>
 
-    <form>
-        <h2>REGISTRAR PESONAL VINCULACION</h2>
+    <form action="/insertarPersonalBD" method="post">
+        <h2>REGISTRAR PERSONAL VINCULACION</h2>
         <div class="form-row">
-            <div class="col-md-6 mb-3">
-                <label for="validationServer01">Id P. Vinculacion: </label>
-                <input type="text" class="form-control is-valid" id="validationServer01" placeholder="Id Vinculacion"
+            <div class="col-md-3 mb-3">
+                <label for="nombre">Nombre </label>
+                <input type="text" class="form-control is-valid" id="nombre" name="nombre" placeholder="Nombre"
                     required>
             </div>
-            <div class="col-md-6 mb-3">
-                <label for="validationServer02">Id Usuario: </label>
-                <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Id Usuario"
+            <div class="col-md-3 mb-3">
+                <label for="paterno">Apellido paterno </label>
+                <input type="text" class="form-control is-valid" id="paterno" name="paterno" placeholder="Apellido Paterno"
                     required>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="materno">Apellido materno </label>
+                <input type="text" class="form-control is-valid" id="materno" name="materno" placeholder="Apellido Materno"
+                    required>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="genero">Genero: </label>
+                <select class="form-control" id="genero" name="genero">
+                    <option value="" disabled selected>Seleccionar un opcion</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                </select>
+                <div class="valid-feedback">
+                    <br>
+                </div>
+                <div class="valid-feedback">
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-3 mb-3">
+                <label for="telefono">Telefono: </label>
+                <input type="tel" class="form-control is-invalid" id="telefono" name="telefono" placeholder="Telefono" required>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="correo">Correo: </label>
+                <input type="email" class="form-control is-invalid" id="correo" name="correo" placeholder="Correo" required>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="clave">Clave: </label>
+                <input type="text" class="form-control is-invalid" id="clave" name="clave" placeholder="Clave" required>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="cargo">Cargo: </label>
+                <input type="text" class="form-control is-invalid" id="cargo" name="cargo" placeholder="Cargo" required>
                 <div class="valid-feedback">
                     <br>
                 </div>
@@ -128,12 +165,12 @@
         </div>
         <div class="form-row">
             <div class="col-md-6 mb-3">
-                <label for="validationServer03">Clave: </label>
-                <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="Clave" required>
+                <label for="usuario">Usuario: </label>
+                <input type="text" class="form-control is-invalid" id="usuario" name="usuario" placeholder="Usuario" required>
             </div>
             <div class="col-md-6 mb-3">
-                <label for="validationServer04">Cargo: </label>
-                <input type="text" class="form-control is-invalid" id="validationServer04" placeholder="Cargo" required>
+                <label for="contraseña">Contraseña: </label>
+                <input type="password" class="form-control is-invalid" id="contraseña" name="contraseña" placeholder="Password" required>
                 <div class="valid-feedback">
                     <br>
                 </div>

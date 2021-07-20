@@ -106,28 +106,31 @@
         </div>
     </nav>
 
-    <form>
+    <form action="/insertarAlumnosBD" method="post">
         <h2>REGISTRAR ALUMNOS</h2>
         <div class="form-row">
             <div class="col-md-3 mb-3">
-                <label for="validationServer01">Id Alumno: </label>
-                <input type="text" class="form-control is-valid" id="validationServer01" placeholder="Id Alumno"
+                <label for="nombre">Nombre </label>
+                <input type="text" class="form-control is-valid" id="nombre" name="nombre" placeholder="Nombre"
                     required>
             </div>
             <div class="col-md-3 mb-3">
-                <label for="validationServer02">Id Usuario: </label>
-                <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Id Usuario"
+                <label for="paterno">Apellido paterno </label>
+                <input type="text" class="form-control is-valid" id="paterno" name="paterno" placeholder="Apellido Paterno"
                     required>
             </div>
             <div class="col-md-3 mb-3">
-                <label for="validationServer02">Id Carrera: </label>
-                <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Id Carrera"
+                <label for="materno">Apellido materno </label>
+                <input type="text" class="form-control is-valid" id="materno" name="materno" placeholder="Apellido Materno"
                     required>
             </div>
             <div class="col-md-3 mb-3">
-                <label for="validationServerUsername">No. Control: </label>
-                <input type="text" class="form-control is-invalid" id="validationServerUsername"
-                    placeholder="No. Control" required>
+                <label for="genero">Genero: </label>
+                <select class="form-control" id="genero" name="genero">
+                    <option value="" disabled selected>Seleccionar un opcion</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                </select>
                 <div class="valid-feedback">
                     <br>
                 </div>
@@ -138,23 +141,65 @@
         </div>
         <div class="form-row">
             <div class="col-md-3 mb-3">
-                <label for="validationServer03">Fecha Nacimiento: </label>
-                <input type="text" class="form-control is-invalid" id="validationServer03"
-                    placeholder="Fecha Nacimiento" required>
+                <label for="telefono">Telefono: </label>
+                <input type="tel" class="form-control is-invalid" id="telefono" name="telefono" placeholder="Telefono" required>
             </div>
             <div class="col-md-3 mb-3">
-                <label for="validationServer04">Promedio: </label>
-                <input type="text" class="form-control is-invalid" id="validationServer04" placeholder="Promedio"
-                    required>
+                <label for="correo">Correo: </label>
+                <input type="email" class="form-control is-invalid" id="correo" name="correo" placeholder="Correo" required>
             </div>
             <div class="col-md-3 mb-3">
-                <label for="validationServer04">Año Egreso: </label>
-                <input type="text" class="form-control is-invalid" id="validationServer04" placeholder="Año Egreso"
-                    required>
+                <label for="control">Numero de control: </label>
+                <input type="number" class="form-control is-invalid" id="control" name="control" placeholder="Numero de Control" required>
             </div>
             <div class="col-md-3 mb-3">
-                <label for="validationServer05">CV: </label>
-                <input type="text" class="form-control is-invalid" id="validationServer05" placeholder="CV" required>
+                <label for="nacimiento">Fecha nacimiento: </label>
+                <input type="date" class="form-control is-invalid" id="nacimiento" name="nacimiento" placeholder="Fecha de Nacimiento" required>
+                <div class="valid-feedback">
+                    <br>
+                </div>
+                <div class="valid-feedback">
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-3 mb-3">
+                <label for="promedio">Promedio: </label>
+                <input type="number" class="form-control is-invalid" id="promedio" name="promedio" placeholder="Promedio" required>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="egreso">Año egreso: </label>
+                <input type="date" class="form-control is-invalid" id="egreso" name="egreso" placeholder="Año egreso" required>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="cv">CV: </label>
+                <input type="text" class="form-control" name="cv" placeholder="Curriculum" required>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="carrera">Carrera: </label>
+                <select class="form-control" id="carrera" name="carrera">
+                    <option value="" disabled selected>Seleccionar un opcion</option>
+                    {% for ca in carrera %}
+                    <option value="{{ca.id_carrera}}">{{ca.nombre}}</option>
+                    {% endfor %}
+                </select>
+                <div class="valid-feedback">
+                    <br>
+                </div>
+                <div class="valid-feedback">
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="usuario">Usuario: </label>
+                <input type="text" class="form-control is-invalid" id="usuario" name="usuario" placeholder="Usuario" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="contraseña">Contraseña: </label>
+                <input type="password" class="form-control is-invalid" id="contraseña" name="contraseña" placeholder="Password" required>
                 <div class="valid-feedback">
                     <br>
                 </div>
