@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request,redirect,url_for,flash,abort
 from flask_login import login_user, LoginManager, current_user, logout_user
-from modelo.models import db, Usuario, Carreras, Empresas, Usuarios, Alumnos, Reclutadores, PersonalVinculacion, vVinculacion, vAlumnos, vReclutador
+from modelo.models import db, Usuario, Carreras, Empresas, Usuarios, Alumnos, Reclutadores, PersonalVinculacion, vVinculacion, vAlumnos, vReclutador, OfertaCategoria, Contratos
 
 app = Flask(__name__)
 
@@ -298,21 +298,84 @@ def opcionesEntrevista():
 def registrarContrato():
     return render_template('Contratos/registrarContrato.html')
 
+@app.route('/Contratos/registrarContratoBD',methods=['post'])
+def insertContrato():
+    co =  Contratos()
+    co.nombre = request.form['nombre']
+    co.estatus = 'Activo'
+    co.insertar()
+    return render_template('Contratos/registrarContrato.html')
 
 @app.route('/opcionesContratos')
 def opcionesContratos():
-    return render_template('Contratos/opcionesContratos.html')
-#####-----CRUD Categoria-----#####
+    co=Contratos()
+    return render_template('Contratos/opcionesContratos.html', contratos=co.consultaGeneral())
 
+@app.route('/editarContrato/<int:id>')
+def ventanaEditarContratos(id):
+    co=Contratos()
+    co.id_contrato=id
+    return render_template('/Contratos/modificarContratos.html',co=co.consultaIndividual())
+
+@app.route('/eliminarContrato/<int:id>')
+def ventanaElimiarContratos(id):
+    co=Contratos()
+    co.id_contrato=id
+    co.estatus="Inactivo"
+    co.actualizar()
+    return redirect(url_for('opcionesContratos'))
+
+@app.route('/actualizarContratosBD', methods=['POST'])
+def actualizarContratoBD():
+    co=Contratos()
+    co.id_contrato=request.form['id_contrato']
+    co.nombre=request.form['nombre']
+    co.estatus=request.form['estatus']
+    co.actualizar()
+    return redirect(url_for('opcionesContratos'))
+
+#####-----CRUD Categoria-----#####
 
 @app.route('/registrarCategoria')
 def registrarCategoria():
     return render_template('Categoria/registrarCategoria.html')
 
+@app.route('/Categoria/registrarCategoriaBD',methods=['post'])
+def insertCategoria():
+    ca =  OfertaCategoria()
+    ca.nombre = request.form['nombre']
+    ca.estatus = 'Activo'
+    ca.insertar()
+    return render_template('Categoria/registrarCategoria.html')
 
 @app.route('/opcionesCategoria')
-def oopcionesCategoria():
-    return render_template('Categoria/opcionesCategoria.html')
+def opcionesCategoria():
+    ca=OfertaCategoria()
+    return render_template('Categoria/opcionesCategoria.html', ofertacategoria=ca.consultaGeneral())
+
+@app.route('/editarCategoria/<int:id>')
+def ventanaEditarCategoria(id):
+    ca=OfertaCategoria()
+    ca.idofcat=id
+    return render_template('/Categoria/modificarCategoria.html',ca=ca.consultaIndividual())
+
+@app.route('/eliminarCategoria/<int:id>')
+def ventanaElimiarCategoria(id):
+    ca=OfertaCategoria()
+    ca.idofcat=id
+    ca.estatus="Inactivo"
+    ca.actualizar()
+    return redirect(url_for('opcionesCategoria'))
+
+@app.route('/actualizarCategoriaBD', methods=['POST'])
+def actualizarCategoriaBD():
+    ca=OfertaCategoria()
+    ca.idofcat=request.form['idofcat']
+    ca.nombre=request.form['nombre']
+    ca.estatus=request.form['estatus']
+    ca.actualizar()
+    return redirect(url_for('opcionesCategoria'))
+
 #####-----CRUD Postulacion-----#####
 
 

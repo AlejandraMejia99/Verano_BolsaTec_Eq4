@@ -192,23 +192,25 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Categoria</th>
                                 <th>Nombre</th>
+                                <th>Estatus</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                             </tr>
                         </thead>
 
-                        <tbody>
+                        {% for ca in ofertacategoria%}
+                            <tr>
+                                {% if ca.estatus == "Activo"%}
 
-                            <th scope="row">1</th>
-                            <td>Programacion</td>
-                            <td>Emmanuel Alberto Zambrano Verduzco</td>
-                            <td><a href=""><button type="button" class="btn
-                                        btn-warning">Modificar</button></a></td>
-                            <td><a href=""><button type="button" class="btn
-                                        btn-danger">Eliminar</button></a></td>
-                        </tbody>
+                                    <th scope="row">{{ca.idofcat}}</th>
+                                    <td>{{ca.nombre}}</td>
+                                    <td>{{ca.estatus}}</td>
+                                    <td><a href="/editarCategoria/{{ca.idofcat}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
+                                    <td><a href="/eliminarCategoria/{{ca.idofcat}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                                {%endif%}
+                            </tr>
+                        {% endfor%}
                     </table>
                 </div>
             </div>

@@ -328,3 +328,57 @@ class vReclutador(db.Model):
     def consultaGeneral(self):
         vin = self.query.all()
         return vin
+
+class Contratos(db.Model):
+    __tablename__='Contratos'
+    id_contrato=Column(Integer,primary_key=True)
+    nombre=Column(String,nullable=False)
+    estatus=Column(String,nullable=False)
+
+    def insertar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def consultaGeneral(self):
+        co=self.query.all()
+        return co
+
+    def consultaIndividual(self):
+        co=self.query.get(self.id_contrato)
+        return co
+
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        co=self.consultaIndividual()
+        db.session.delete(co)
+        db.session.commit()
+
+class OfertaCategoria(db.Model):
+    __tablename__='OfertaCategoria'
+    idofcat=Column(Integer,primary_key=True)
+    nombre=Column(String,nullable=False)
+    estatus=Column(String,nullable=False)
+
+    def insertar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def consultaGeneral(self):
+        ca=self.query.all()
+        return ca
+
+    def consultaIndividual(self):
+        ca=self.query.get(self.idofcat)
+        return ca
+
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        ca=self.consultaIndividual()
+        db.session.delete(ca)
+        db.session.commit()
