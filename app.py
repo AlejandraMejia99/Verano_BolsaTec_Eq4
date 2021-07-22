@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request,redirect,url_for,flash,abort
-from flask_login import login_user, LoginManager, current_user, logout_user
 from modelo.models import db, Usuario, Carreras, Empresas, Usuarios, Alumnos, Reclutadores, PersonalVinculacion, vVinculacion, vAlumnos, vReclutador, OfertaCategoria, Contratos
+from flask_login import login_user, LoginManager, current_user, logout_user
 
 app = Flask(__name__)
 
@@ -28,47 +28,9 @@ def cargar_usuario(id):
 def inicio():
     return render_template('index.html')
 
-
-@app.route('/login', methods=['post'])
-def login():
-    u = Usuario()
-    usuario = u.validar(request.form['email'], request.form['password'])
-    if usuario != None:
-        login_user(u)
-        return render_template('Principal.html')
-    else:
-        return 'Usuario invalido'
-
 @app.route('/Perfil')
 def perfil():
     return render_template('Usuarios/EditarPerfil.html')
-
-@app.route('/guardarUsuario', methods=['post'])
-def guardarUsuario():
-    usuario = Usuario()
-    usuario.Nombre = request.form['nombre']
-    usuario.IdUsuario = request.form['IdUsuario']
-    usuario.Sexo = request.form['sexo']
-    usuario.Telefono = request.form['telefono']
-    usuario.Email = request.form['email']
-    usuario.Contraseña = request.form['password']
-    usuario.insertar()
-    return render_template('index.html')
-
-
-@app.route('/Principal')
-def principal():
-    return render_template('Principal.html')
-
-
-@app.route('/Usuario')
-def Usuario():
-    return render_template('Usuarios/Usuarios.html')
-
-
-@app.route('/RegistrarUsuario')
-def registrarUsuario():
-    return render_template('Usuarios/RegistrarUsuarios.html')
 
 #############---CRUD  de ALUMNOS EGRESADOS###############################################
 
@@ -98,9 +60,9 @@ def eliminar_Alumnos():
     return render_template('AlumnosEgresados/eliminarAlumnos.html')
 
 
-@app.route('/opcionesAlumno')
-def opciones_Alumnos():
-    return render_template('AlumnosEgresados/opcionesAlumnos.html')
+#@app.route('/opcionesAlumno')
+#def opciones_Alumnos():
+#    return render_template('AlumnosEgresados/opcionesAlumnos.html')
 #############################################################################################################
 
 #######################-------CRUD DE PersonalVinculacion--------###################
@@ -411,11 +373,11 @@ def iniciarSesion():
     else:
         return "El usuario o la contraseña es invalido"
 
-@app.route("/CerrarSesion")
+@app.route("/CloseSesion")
 def cerrarSes():
     if(current_user.is_authenticated):
          logout_user()
-         return redirect(url_for("login"))
+         return redirect(url_for("inicio"))
     else:
         abort(404)
 
