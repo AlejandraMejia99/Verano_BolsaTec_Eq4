@@ -6,7 +6,8 @@ create table Carreras (
 	clave VARCHAR(15) NOT NULL,
 	nombre varchar(50) not null,
 	estatus VARCHAR(20) not null,
-	primary key (id_carrera));
+	primary key (id_carrera),
+	unique (nombre));
 
 create table Contratos (
 	id_contrato int not null AUTO_INCREMENT,
