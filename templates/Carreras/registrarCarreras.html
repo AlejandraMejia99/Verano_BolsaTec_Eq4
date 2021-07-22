@@ -192,21 +192,14 @@
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label >Nombre </label>
-                                <select class="form-control"  id="nombre" name="nombre">
-                                    <option value="" disabled selected>Seleccionar un opcion</option>
-                                    <option value="Electronica">Ingenieria Electronica</option>
-                                    <option value="Innovacion">Ingenieria en Innovacion Agricola Sustentable</option>
-                                    <option value="Gestion">Ingenieria en Gestion Empresarial</option>
-                                    <option value="Industrial">Ingenieria Industrial</option>
-                                    <option value="Alimentarias">Ingenieria en Industrias Alimentarias</option>
-                                    <option value="Tics">Ingenieria en Tecnologias de la Informacion y la Comunicacion</option>
-                                    <option value="Sistemas" >Ingenieria en Sistemas Computacionales</option>
-                                    <option value="Contador">Licenciatura en Contador Publico</option>
-                                </select>
+                                <input type="text" class="form-control" name="nombre">
+                                <div class="valid-feedback">
+                                    <br>
+                                </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label >Clave </label>
-                                <input type="text" class="form-control" id="clave" name="clave">
+                                <input type="text" class="form-control"  name="clave">
                                 <div class="valid-feedback">
                                     <br>
                                 </div>
@@ -214,6 +207,7 @@
                             
                         </div>
                         <button class="btn btn-primary" type="submit">Registrar</button>
+                        <a href="/Principal" class="btn btn-danger">Cancelar</a>
                     </form>
                 
                 

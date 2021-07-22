@@ -194,9 +194,9 @@
                                 <th>Id</th>
                                 <th>Nombre</th>
                                 <th>RFC</th>
+                                <th>Direccion</th>
                                 <th>Giro</th>
-                                <th>Web</th>
-                                <th>Estatus</th>
+                                <th>Pagina Web</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                             </tr>
@@ -212,9 +212,9 @@
                             <th scope="row">{{em.id_empresa}}</th>
                             <td>{{em.nombre}}</td>
                             <td>{{em.rfc}}</td>
+                            <td>{{em.direccion}}</td>
                             <td>{{em.giro}}</td>
                             <td>{{em.paginaweb}}</td>
-                            <td>{{em.estatus}}</td>
                             <td><a href="/editarEmpresa/{{em.id_empresa}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
                             <td><a href="/eliminarEmpresa/{{em.id_empresa}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
                         

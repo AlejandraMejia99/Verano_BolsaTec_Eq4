@@ -207,23 +207,22 @@
                         </div>
                         <div class="col-md-2 mb-3">
                             <label >Giro: </label>
-                            <select class="form-control" id="giro"name="giro">
-                                <option value="" disabled selected>Seleccionar un opcion</option>
-                                <option value="comercial">Giro Comercial</option>
-                                <option value="industrial">Giro Industrial</option>
-                                <option value="servicios">Giro de Servicios</option>
+                            <select class="form-control" name="giro">
+                                <option>{{em.giro}}</option>
+                                <option value="Comercial">Giro Comercial</option>
+                                <option value="Industrial">Giro Industrial</option>
+                                <option value="Servicios">Giro de Servicios</option>
                             </select>
                             
                         </div>
-                        <div class="col-md-3 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label >Pagina Web </label>
                             <input value="{{em.paginaweb}}" type="text" class="form-control" id="web" name="web" required>
                         </div>
-                        <div class="col-md-3 mb-3">
-                            <label >Estatus </label>
-                            <select class="form-control"  id="estatus" name="estatus">
-                                <option value="{{em.estatus}}" disabled selected>Seleccionar un opcion</option>
-                                <option value="Activo">Activo</option>
+                        <div class="col-md-1 mb-3">
+                            <label>Estatus </label>
+                            <select class="form-control"  name="estatus">
+                                <option>{{em.estatus}}</option>
                                 <option value="Inactivo">Inactivo</option>
                             </select>
                         </div>

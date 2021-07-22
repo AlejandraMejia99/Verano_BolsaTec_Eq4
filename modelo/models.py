@@ -75,7 +75,7 @@ class Carreras(db.Model):
     __tablename__='Carreras'
     id_carrera=Column(Integer,primary_key=True)
     clave=Column(String,nullable=False)
-    nombre= Column(String,nullable=False)
+    nombre=Column(String,unique=True)
     estatus= Column(String,nullable=False)
 
 

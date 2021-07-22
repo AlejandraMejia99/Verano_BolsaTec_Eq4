@@ -166,7 +166,7 @@ def eliminar_Reclutador():
 def opciones_Reclutador():
     return render_template('Reclutadores/opcionesReclutadores.html')
 
-###############################----Tablas de Ale-----#####################################
+###################################################----Tablas de Ale-----#####################################
 
 #-------CRUD-CARRERAS----------#
 
@@ -196,11 +196,15 @@ def ventanaEliminarCarrera(id):
 
 @app.route('/insertarCarrerasBD', methods=['POST'])
 def insertCarrerasBD():
-    ca=Carreras()
-    ca.nombre=request.form['nombre']
-    ca.clave=request.form['clave']
-    ca.estatus='Activo'
-    ca.insertar()
+    try:
+        ca=Carreras()
+        ca.nombre=request.form['nombre']
+        ca.clave=request.form['clave']
+        ca.estatus='Activo'
+        ca.insertar()
+        flash('¡ Carrera agregada con exito !')
+    except: 
+        flash('¡ Error al agregar la Carrera !')
     return redirect (url_for('opcionesCarreras')) 
 
 @app.route('/actualizarCarrerasBD', methods=['POST'])
@@ -289,6 +293,8 @@ def registrarEntrevista():
 @app.route('/opcionesEntrevista')
 def opcionesEntrevista():
     return render_template('Entrevistas/opcionesEntrevista.html')
+
+#######################################################-- Fin de Ale--###################################################   
 
 #######################--------Tablas de meny-----------#############################
 #####-----CRUD Contrato-----#####
@@ -390,33 +396,6 @@ def opcionesOAlus():
 
 ##############################################################################
 
-
-@app.route('/Entrevista')
-def entrevista():
-    return render_template('Entrevista/Entrevista.html')
-
-
-# @app.route('/registrarProducto')
-# def registrarProducto():
- #   return '<h1>Registrando un producto</h1>'
-
-# @app.route('/eliminarDocente/<int:idDocente>')
-# def eliminarDocente(idDocente):
- #   return 'Eliminando al docente' + str(idDocente)
-
-# @app.route('/consultarDocente/<id>')
-# def eliminarDocente(id):
- #   return 'Consultando al docente' + id
-
-# inicio del CRUD de alumnos
-
-# @app.route('/alumnos/new')
-# def nuevoAlumno():
- #   return render_template('Alumnos/altaAlumno.html')
-
-# @app.route('/alumnos/edit')
-# def editarAlumno():
- #   return render_template('Alumnos/editarAlumno.html')
 
 ###############################----Tablas de Vigo-----#####################################
 
