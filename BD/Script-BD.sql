@@ -4,7 +4,7 @@ use  bolsa;
 create table Carreras (
 	id_carrera int not null AUTO_INCREMENT,
 	clave VARCHAR(15) NOT NULL,
-	nombre varchar(50) not null,
+	nombreC varchar(50) not null,
 	estatus VARCHAR(20) not null,
 	primary key (id_carrera),
 	unique (nombre));
@@ -18,7 +18,7 @@ create table Contratos (
 
 Create table Empresas(
 	id_empresa int not null AUTO_INCREMENT,
-	nombre varchar(100)not null,
+	nombreE varchar(100)not null,
 	rfc varchar(55) not null,
 	direccion varchar(60) not null ,
 	giro varchar(50) not null,
