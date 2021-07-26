@@ -161,14 +161,14 @@
             {% for re in reclutador %}
             <tbody>
                 <th scope="row">{{re.id_reclutor}}</th>
-                <td>{{re.apellido_paterno}} {{re.apellido_materno}}</td>
-                <td>{{re.nombre}}</td>
+                <td>{{re.nombre}} {{re.apellido_paterno}} {{re.apellido_materno}}</td>
+                <td>{{re.nombreE}}</td>
                 <td>{{re.telefono}}</td>
                 <td>{{re.correo}}</td>
                 <td>{{re.cargo}}</td>
                 <td>{{re.estatus}}</td>
-                <td><a href=""><button type="button" class="btn btn-warning">Editar</button></a></td>
-                <td><a href=""><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                <td><a href="/editarReclutador/{{re.id_reclutor}}"><button type="button" class="btn btn-warning">Editar</button></a></td>
+                <td><a href="/eliminarReclutador/{{re.id_usuario}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
             </tbody>
             {% endfor %}
         </table>

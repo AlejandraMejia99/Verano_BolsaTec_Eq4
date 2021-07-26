@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request,redirect,url_for,flash,abort
-from modelo.models import db, Usuario, Carreras, Empresas, Usuarios, Alumnos, Reclutadores, PersonalVinculacion, vVinculacion, vAlumnos, vReclutador, OfertaCategoria, Contratos
+from modelo.models import db, Carreras, Empresas, Usuarios, Alumnos, Reclutadores, PersonalVinculacion, vVinculacion, vAlumnos, vReclutador, OfertaCategoria, Contratos
 from flask_login import login_user, LoginManager, current_user, logout_user
 
 app = Flask(__name__)
@@ -73,12 +73,6 @@ def opcionesAlumno():
     alumno=vAlumnos()
     return render_template('AlumnosEgresados/opcionesAlumnos.html',alumnos=alumno.consultaGeneral())
 
-@app.route('/editarAlumnos/<int:id>')
-def editarAlumnos(id):
-    alumno=Alumnos()
-    alumno.id_alumno=id
-    return render_template('AlumnosEgresados/editarAlumnos.html',alumnos=alumno.consultaIndividual())
-
 @app.route('/eliminarAlumno/<int:id>')
 def eliminarAlumno(id):
     us=Usuarios()
@@ -87,13 +81,27 @@ def eliminarAlumno(id):
     us.actualizar()
     return redirect(url_for('opcionesAlumno'))
 
+@app.route('/editarAlumnos/<int:id>')
+def editarAlumnos(id):
+    alumno=vAlumnos()
+    alumno.id_alumno=id
+    return render_template('AlumnosEgresados/editarAlumnos.html',alumnos=alumno.consultaIndividual())
+
 @app.route('/actualizarAlumno', methods=['POST'])
 def actualzarAlumno():
-    al=Alumnos()
-    al.fecha_nacimiento=request.form['nacimiento']
-    al.promedio=request.form['promedio']
-    al.anioEgreso=request.form['egreso']
-    al.actualizar()
+    us=Usuarios()
+    us.id_usuario = request.form['id']
+    us.nombre = request.form['nombre']
+    us.apellido_paterno = request.form['paterno']
+    us.apellido_materno = request.form['materno']
+    us.genero = request.form['genero']
+    us.telefono = request.form['telefono']
+    us.correo = request.form['correo']
+    us.estatus = request.form['estatus']
+    us.usuario = request.form['usuario']
+    us.passwd = request.form['contraseña']
+    us.tipo = 'Alumno'
+    us.actualizar()
     return redirect(url_for('opcionesAlumno'))
 
 @app.route('/insertarAlumnosBD', methods=['POST'])
@@ -136,6 +144,37 @@ def opcionesReclutador():
     reclutor=vReclutador()
     return render_template('Reclutadores/opcionesReclutadores.html',reclutador=reclutor.consultaGeneral())
 
+@app.route('/eliminarReclutador/<int:id>')
+def eliminarReclutador(id):
+    us=Usuarios()
+    us.id_usuario=id
+    us.estatus="Inactivo"
+    us.actualizar()
+    return redirect(url_for('opcionesReclutador'))
+
+@app.route('/editarReclutador/<int:id>')
+def editarReclutador(id):
+    reclutador=vReclutador()
+    reclutador.id_reclutor=id
+    return render_template('Reclutadores/editarReclutadores.html',reclutor=reclutador.consultaIndividual())
+
+@app.route('/actualizarReclutador', methods=['POST'])
+def actualzarReclutador():
+    us=Usuarios()
+    us.id_usuario = request.form['id']
+    us.nombre = request.form['nombre']
+    us.apellido_paterno = request.form['paterno']
+    us.apellido_materno = request.form['materno']
+    us.genero = request.form['genero']
+    us.telefono = request.form['telefono']
+    us.correo = request.form['correo']
+    us.estatus = request.form['estatus']
+    us.usuario = request.form['usuario']
+    us.passwd = request.form['contraseña']
+    us.tipo = 'Reclutador'
+    us.actualizar()
+    return redirect(url_for('opcionesReclutador'))
+
 @app.route('/insertarReclutadorBD', methods=['POST'])
 def insertReclutadorBD():
     reclutador = Reclutadores()
@@ -171,6 +210,37 @@ def registrarPersonal():
 def opcionesPersonal():
     personal=vVinculacion()
     return render_template('PersonalVinculacion/opcionesPersonal.html',vinculacion=personal.consultaGeneral())
+
+@app.route('/eliminarPersonal/<int:id>')
+def eliminarPersonal(id):
+    us=Usuarios()
+    us.id_usuario=id
+    us.estatus="Inactivo"
+    us.actualizar()
+    return redirect(url_for('opcionesPersonal'))
+
+@app.route('/editarPersonal/<int:id>')
+def editarPersonal(id):
+    vinculacion=vVinculacion()
+    vinculacion.id_vinculacion=id
+    return render_template('PersonalVinculacion/editarPersonal.html',personal=vinculacion.consultaIndividual())
+
+@app.route('/actualizarPersonal', methods=['POST'])
+def actualzarPersonal():
+    us=Usuarios()
+    us.id_usuario = request.form['id']
+    us.nombre = request.form['nombre']
+    us.apellido_paterno = request.form['paterno']
+    us.apellido_materno = request.form['materno']
+    us.genero = request.form['genero']
+    us.telefono = request.form['telefono']
+    us.correo = request.form['correo']
+    us.estatus = request.form['estatus']
+    us.usuario = request.form['usuario']
+    us.passwd = request.form['contraseña']
+    us.tipo = 'Reclutador'
+    us.actualizar()
+    return redirect(url_for('opcionesPersonal'))
 
 @app.route('/insertarPersonalBD', methods=['POST'])
 def insertPersonalBD():
@@ -280,7 +350,7 @@ def ventanaEliminarEmpresa(id):
 @app.route('/insertarEmpresasBD', methods=['POST'])
 def insertEmpresasBD():
     em=Empresas()
-    em.nombre=request.form['nombre']
+    em.nombreE=request.form['nombre']
     em.rfc=request.form['rfc']
     em.direccion=request.form['direccion']
     em.giro=request.form['giro']

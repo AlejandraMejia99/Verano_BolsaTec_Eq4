@@ -99,7 +99,7 @@ class Carreras(db.Model):
 class Empresas(db.Model):
     __tablename__='Empresas'
     id_empresa =Column(Integer,primary_key=True)
-    nombre= Column(String,nullable=False)
+    nombreE= Column(String,nullable=False)
     rfc = Column(String,nullable=False)
     direccion = Column(String,nullable=False)
     giro=Column(String,nullable=False)
@@ -282,6 +282,7 @@ class PersonalVinculacion(db.Model):
 class vVinculacion(db.Model):
     __tablename__='vVinculacion'
     id_vinculacion=Column(Integer, primary_key=True)
+    id_usuario=Column(Integer, nullable=False)
     nombre=Column(String, nullable=False)
     apellido_paterno=Column(String, nullable=False)
     apellido_materno=Column(String, nullable=False)
@@ -289,11 +290,16 @@ class vVinculacion(db.Model):
     telefono=Column(String, nullable=False)
     correo=Column(String, nullable=False)
     usuario=Column(String, nullable=False)
+    passwd=Column(String, nullable=False)
     estatus=Column(String, nullable=False)
     cargo=Column(String, nullable=False)
 
     def consultaGeneral(self):
         vin = self.query.all()
+        return vin
+
+    def consultaIndividual(self):
+        vin = self.query.get(self.id_vinculacion)
         return vin
 
 class vAlumnos(db.Model):
@@ -303,31 +309,47 @@ class vAlumnos(db.Model):
     nombre=Column(String, nullable=False)
     apellido_paterno=Column(String, nullable=False)
     apellido_materno=Column(String, nullable=False)
+    genero=Column(String, nullable=False)
     telefono=Column(String, nullable=False)
     correo=Column(String, nullable=False)
+    usuario=Column(String, nullable=False)
+    passwd=Column(String, nullable=False)
     promedio=Column(Float, nullable=False)
     anioEgreso=Column(Date, nullable=False)
     cv=Column(String, nullable=False)
     estatus=Column(String, nullable=False)
 
     def consultaGeneral(self):
-        vin = self.query.all()
-        return vin
+        alu = self.query.all()
+        return alu
+
+    def consultaIndividual(self):
+        alu = self.query.get(self.id_alumno)
+        return alu
 
 class vReclutador(db.Model):
     __tablename__='vReclutador'
     id_reclutor=Column(Integer, primary_key=True)
+    id_usuario=Column(Integer, nullable=False)
     nombre=Column(String, nullable=False)
+    nombreE=Column(String, nullable=False)
     apellido_paterno=Column(String, nullable=False)
     apellido_materno=Column(String, nullable=False)
+    genero=Column(String, nullable=False)
     telefono=Column(String, nullable=False)
     correo=Column(String, nullable=False)
+    usuario=Column(String, nullable=False)
+    passwd=Column(String, nullable=False)
     cargo=Column(String, nullable=False)
     estatus=Column(String, nullable=False)
 
     def consultaGeneral(self):
-        vin = self.query.all()
-        return vin
+        rec = self.query.all()
+        return rec
+
+    def consultaIndividual(self):
+        rec = self.query.get(self.id_reclutor)
+        return rec
 
 class Contratos(db.Model):
     __tablename__='Contratos'

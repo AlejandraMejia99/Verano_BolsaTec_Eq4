@@ -160,18 +160,18 @@
             </thead>
 
             {% for vin in vinculacion %}
-                <tbody>
-                    <td scope="row">{{vin.id_vinculacion}}</td>
-                    <td>{{vin.nombre}} {{vin.apellido_paterno}} {{vin.apellido_materno}}</td>
-                    <td>{{vin.genero}}</td>
-                    <td>{{vin.telefono}}</td>
-                    <td>{{vin.correo}}</td>
-                    <td>{{vin.usuario}}</td>
-                    <td>{{vin.estatus}}</td>
-                    <td>{{vin.cargo}}</td>
-                    <td><a href=""><button type="button" class="btn btn-warning">Editar</button></a></td>
-                    <td><a href=""><button type="button" class="btn btn-danger">Eliminar</button></a></td>
-                </tbody>
+            <tbody>
+                <td scope="row">{{vin.id_vinculacion}}</td>
+                <td>{{vin.nombre}} {{vin.apellido_paterno}} {{vin.apellido_materno}}</td>
+                <td>{{vin.genero}}</td>
+                <td>{{vin.telefono}}</td>
+                <td>{{vin.correo}}</td>
+                <td>{{vin.usuario}}</td>
+                <td>{{vin.estatus}}</td>
+                <td>{{vin.cargo}}</td>
+                <td><a href="/editarPersonal/{{vin.id_vinculacion}}"><button type="button" class="btn btn-warning">Editar</button></a></td>
+                <td><a href="/eliminarPersonal/{{vin.id_usuario}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+            </tbody>
             {% endfor %}
         </table>
     </div>

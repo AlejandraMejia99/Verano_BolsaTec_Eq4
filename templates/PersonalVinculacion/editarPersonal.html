@@ -13,33 +13,33 @@
     </head>
 
     <body>
-        <form action="/actualizarAlumno" method="post">
-            <h2>EDITAR ALUMNO</h2>
+        <form action="/actualizarPersonal" method="post">
+            <h2>EDITAR PERSONAL</h2>
             <div class="form-row">
                 <div class="col-md-3 mb-5">
-                    <label for="alumno">Id Alumno </label>
-                    <input type="text" class="form-control is-valid" id="alumno" name="alumno" placeholder="Id Alumno"
-                        required value="{{alumnos.id_alumno}}" readonly>
+                    <label for="personal">Id Personal </label>
+                    <input type="text" class="form-control is-valid" id="personal" name="personal" placeholder="Id Personal"
+                        required value="{{personal.id_vinculacion}}" readonly>
                 </div>
                 <div class="col-md-3 mb-5">
                     <label for="id">Id Usuario </label>
                     <input type="text" class="form-control is-valid" id="id" name="id" placeholder="Id Usuario"
-                        required value="{{alumnos.id_usuario}}" readonly>
+                        required value="{{personal.id_usuario}}" readonly>
                 </div>
                 <div class="col-md-3 mb-5">
                     <label for="nombre">Nombre </label>
                     <input type="text" class="form-control is-valid" id="nombre" name="nombre" placeholder="Nombre"
-                        required value="{{alumnos.nombre}}">
+                        required value="{{personal.nombre}}">
                 </div>
                 <div class="col-md-3 mb-5">
                     <label for="paterno">Apellido paterno </label>
                     <input type="text" class="form-control is-valid" id="paterno" name="paterno" placeholder="Apellido Paterno"
-                        required value="{{alumnos.apellido_paterno}}">
+                        required value="{{personal.apellido_paterno}}">
                 </div>
                 <div class="col-md-3 mb-5">
                     <label for="materno">Apellido materno </label>
                     <input type="text" class="form-control is-valid" id="materno" name="materno" placeholder="Apellido Materno"
-                        required value="{{alumnos.apellido_materno}}">
+                        required value="{{personal.apellido_materno}}">
                     <div class="valid-feedback">
                         <br>
                     </div>
@@ -51,7 +51,7 @@
             <div class="form-row">
                 <div class="col-md-3 mb-3">
                     <label for="telefono">Telefono: </label>
-                    <input type="tel" class="form-control is-invalid" id="telefono" name="telefono" placeholder="Telefono" required value="{{alumnos.telefono}}">
+                    <input type="tel" class="form-control is-invalid" id="telefono" name="telefono" placeholder="Telefono" required value="{{personal.telefono}}">
                     <div class="valid-feedback">
                         <br>
                     </div>
@@ -61,7 +61,7 @@
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="correo">Correo: </label>
-                    <input type="email" class="form-control is-invalid" id="correo" name="correo" placeholder="Correo" required value="{{alumnos.correo}}">
+                    <input type="email" class="form-control is-invalid" id="correo" name="correo" placeholder="Correo" required value="{{personal.correo}}">
                     <div class="valid-feedback">
                         <br>
                     </div>
@@ -72,8 +72,8 @@
                 <div class="col-md-3 mb-3">
                     <label for="genero">Genero: </label>
                     <select class="form-control" id="genero" name="genero">
-                        <option value="{{alumnos.genero}}">{{alumnos.genero}}</option>
-                        {% if alumnos.genero=='Femenino' %}
+                        <option value="{{personal.genero}}">{{personal.genero}}</option>
+                        {% if personal.genero=='Femenino' %}
                         <option value="Masculino">Masculino</option>
                         {% else %}
                         <option value="Femenino">Femenino</option>
@@ -83,8 +83,8 @@
                 <div class="col-md-3 mb-3">
                     <label for="estatus">Estatus: </label>
                     <select class="form-control" id="estatus" name="estatus">
-                        <option value="{{alumnos.estatus}}">{{alumnos.estatus}}</option>
-                        {% if alumnos.estatus=='Inactivo' %}
+                        <option value="{{personal.estatus}}">{{personal.estatus}}</option>
+                        {% if personal.estatus=='Inactivo' %}
                         <option value="Activo">Activo</option>
                         {% else %}
                         <option value="Inactivo">Inactivo</option>
@@ -101,11 +101,11 @@
             <div class="form-row">
                 <div class="col-md-6 mb-3">
                     <label for="usuario">Usuario: </label>
-                    <input type="text" class="form-control is-invalid" id="usuario" name="usuario" placeholder="Usuario" required value="{{alumnos.usuario}}">
+                    <input type="text" class="form-control is-invalid" id="usuario" name="usuario" placeholder="Usuario" required value="{{personal.usuario}}">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="contraseña">Contraseña: </label>
-                    <input type="password" class="form-control is-invalid" id="contraseña" name="contraseña" placeholder="Password" required value="{{alumnos.passwd}}">
+                    <input type="password" class="form-control is-invalid" id="contraseña" name="contraseña" placeholder="Password" required value="{{personal.passwd}}">
                     <div class="valid-feedback">
                         <br>
                     </div>
@@ -115,7 +115,7 @@
                 </div>
             </div>
                 <button class="btn btn-primary" type="submit">Guardar</button>
-                <button class="btn btn-primary" href="/opcionesAlumno">Cancelar</button>
+                <button class="btn btn-primary" href="/opcionesPersonal">Cancelar</button>
         </form>
     </body>
 
