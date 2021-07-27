@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request,redirect,url_for,flash,abort
-from modelo.models import db, Carreras, Empresas, Usuarios, Alumnos, Reclutadores, PersonalVinculacion, vVinculacion, vAlumnos, vReclutador, OfertaCategoria, Contratos
+from modelo.models import db, Carreras, Empresas, Usuarios, Alumnos, Reclutadores, PersonalVinculacion, vVinculacion, vAlumnos, vReclutador, OfertaCategoria, Contratos, OfertasAlum
 from flask_login import login_user, LoginManager, current_user, logout_user
 
 app = Flask(__name__)
@@ -378,7 +378,6 @@ def actualzarEmpresaBD():
 def registrarOfertas():
     return render_template('Ofertas/registrarOfertas.html')
 
-
 @app.route('/opcionesOfertas')
 def opcionesOfertas():
     return render_template('Ofertas/opcionesOfertas.html')
@@ -485,20 +484,53 @@ def actualizarCategoriaBD():
 
 #####-----CRUD Postulacion-----#####
 
-
 @app.route('/registrarOAlu')
 def registrarOAlu():
-    return render_template('Postulacion/registrarOAlu.html')
-
+    alumno=Alumnos();
+    oferta=Ofertas();
+    return render_template('Postulacion/registrarOAlu.html',alumnos=alumno.consultaGeneral(),ofertas=oferta.consultaGeneral())
 
 @app.route('/opcionesOAlu')
-def opcionesOAlus():
-    return render_template('Postulacion/opcionesOAlu.html')
+def opcionesOAlu():
+    of=OfertasAlum()
+    return render_template('Postulacion/opcionesOAlu.html', ofertasalum=of.consultaGeneral())
 
+@app.route('/editarOAlu/<int:id>')
+def ventanaEditarOAlu(id):
+    of=OfertasAlum()
+    of.id_of_alum=id
+    return render_template('/Postulacion/modificarOAlu.html',of=of.consultaIndividual())
+
+@app.route('/eliminarOAlu/<int:id>')
+def ventanaElimiarOAlu(id):
+    of=OfertasAlum()
+    of.id_of_alum=id
+    of.estatus="Inactivo"
+    of.actualizar()
+    return redirect(url_for('opcionesOAlu'))
+
+@app.route('/actualizarOAluBD', methods=['POST'])
+def actualizarOAluBD():
+    of=OfertasAlum()
+    of.id_of_alum=request.form['id_of_alum']
+    of.id_alumno=request.form['id_alumno']
+    of.id_oferta=request.form['id_oferta']
+    of.fecha_postulacion=request.form['fecha_postulacion']
+    of.estatus=request.form['estatus']
+    of.actualizar()
+    return redirect(url_for('opcionesOAlu'))
+
+@app.route('/insertarOAluBD', methods=['POST'])
+def insertarOAluBD():
+    of=OfertasAlum()
+    of.id_of_alum=request.form['id_of_alum']
+    of.id_alumno=request.form['id_alumno']
+    of.id_oferta=request.form['id_oferta']
+    of.fecha_postulacion=request.form['fecha_postulacion']
+    of.estatus=request.form['estatus']
+    of.insertar()
+    return redirect(url_for('opcionesOAlu'))
 ##############################################################################
-
-
-
 
 @app.errorhandler(404)
 def error_404(e):

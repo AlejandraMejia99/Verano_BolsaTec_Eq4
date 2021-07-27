@@ -10,10 +10,11 @@
         <link rel="stylesheet" href="/static/CSS/Estilo-Principal.css">
         <script
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <script src="https://kit.fontawesome.com/23d5b02039.js"
-            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="https://kit.fontawesome.com/23d5b02039.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+        </script>
     </head>
     <body>
         <nav class="navbar navbar-inverse">
@@ -185,39 +186,63 @@
                     </div>
                 </nav>
 
-                <h2>Opciones Categoria</h2>
-
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Alumno</th>
-                                <th>Ofertas</th>
-                                <th>Fecha Postulacion</th>
-                                <th>Estatus</th>
-                                <th>Modificar</th>
-                                <th>Eliminar</th>
-                            </tr>
-                        </thead>
-
-                        {% for oa in ofertasalunos%}
-                            <tr>
-                                {% if oa.estatus == "Activo"%}
-
-                                    <th scope="row">{{oa.id_of_alum}}</th>
-                                    <td>{{oa.id_alumno}}</td>
-                                    <td>{{oa.id_oferta}}</td>
-                                    <td>{{oa.fecha_postulacion}}</td>
-                                    <td>{{oa.estatus}}</td>
-                                    <td><a href="/editarPostulaciones/{{oa.id_of_alum}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
-                                    <td><a href="/eliminarPostulaciones/{{oa.id_of_alum}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
-                                {%endif%}
-                            </tr>
-                        {% endfor%}          
-                    </table>
-                </div>
-            </div>
+            
+                    <form action="/actualizarOAluBD" method="post">
+                        <h2>Modificar Contratos</h2>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label >Id </label>
+                                <input value="{{oa.id_of_alum}}" type="text" class="form-control" id="id_of_alum" name="id_of_alum" readonly>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                             <label for="id_alumno">Alumno: </label>
+                              <select class="form-control" id="id_alumno" name="id_alumno">
+                                <option value="" disabled selected>Seleccionar un opcion</option>
+                                  {% for al in alumnos %}
+                                     <option value="{{al.id_alumno}}">{{al.nombre}}</option>
+                                         {% endfor %}
+                              </select>
+                               <div class="valid-feedback">
+                                   <br>
+                                </div>
+                                     <div class="valid-feedback">
+                                       <br>
+                                     </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                             <label for="carrera">Ofertas: </label>
+      <select class="form-control" id="oferta" name="oferta">             
+       <option value="" disabled selected>Seleccionar un opcion</option>
+          {% for of in oferta %}
+          <option value="{{of.id_oferta}}">{{of.nombre}}</option>
+           {% endfor %}
+      </select>
+        <div class="valid-feedback">
+          <br>
         </div>
-    </body>
-</html>
+                <div class="valid-feedback">
+                    <br>
+                    </div>
+                            </div>
+                                <div class="col-md-4 mb-3">
+      <label for="fecha_postulacion">Fecha de Postulacion: </label>
+      <input type="date" class="form-control is-valid" id="fecha_postulacion" placeholder="fecha_postulacion" required>
+    </div>
+                            <div class="col-md-4 mb-3">
+                                <label >Estatus </label>
+                                <select class="form-control"  id="estatus" name="estatus">
+                                    <option value="{{co.estatus}}" disabled selected>Seleccionar un opcion</option>
+                                    <option value="Activo">Activo</option>
+                                    <option value="Inactivo">Inactivo</option>
+                                </select>
+                                <br>  
+                            </div>                   
+                        </div>
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                    </form>
+                
+                
+                </div>
+
+            </body>
+        </html>

@@ -287,6 +287,7 @@ class vReclutador(db.Model):
         rec = self.query.get(self.id_reclutor)
         return rec
 
+#-------Meny--------#
 class Contratos(db.Model):
     __tablename__='Contratos'
     id_contrato=Column(Integer,primary_key=True)
@@ -339,4 +340,36 @@ class OfertaCategoria(db.Model):
     def eliminar(self):
         ca=self.consultaIndividual()
         db.session.delete(ca)
+        db.session.commit()
+
+class OfertasAlum(db.Model):
+    __tablename__ = 'OfertasAlum'
+    id_of_alum = Column(Integer, primary_key=True)
+    id_alumno = Column(Integer, ForeignKey('Alumnos.id_alumno'))
+    id_oferta = Column(Integer, ForeignKey('Ofertas.id_oferta'))
+    fecha_postulacion = Column(Date, nullable=False)
+    estatus = Column(String, nullable=False)
+
+    alumno = relationship('Alumnos', backref='OfertasAlum')
+    oferta = relationship('Ofertas', backref='OfertasAlum')
+
+    def insertar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def consultaGeneral(self):
+        of=self.query.all()
+        return of
+
+    def consultaIndividual(self):
+        of=self.query.get(self.id_of_alum)
+        return of
+
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        of=self.consultaIndividual()
+        db.session.delete(of)
         db.session.commit()

@@ -99,46 +99,44 @@
       </div>
     </nav>
 
-  <form>
+  <form action="/insertarOAluBD" method="post">
   <h2>Registrar Postulaciones</h2>
-   <div class="form-row">
+     <div class="form-row">
     <div class="col-md-4 mb-3">
-      <label for="idOFAlum">ID: </label>
-      <input type="text" class="form-control is-valid" id="idOFAlum" placeholder="idOFAlum" required>
+      <label for="fecha_postulacion">Fecha de Postulacion: </label>
+      <input type="date" class="form-control is-valid" id="fecha_postulacion" placeholder="fecha_postulacion" required>
     </div>
-    <div class="col-md-4 mb-3">
-      <label for="id_alumno">ID Alumno: </label>
-      <input type="text" class="form-control is-valid" id="id_alumno" placeholder="id_alumno" required>
-    </div>
-    <div class="col-md-4 mb-3">
-      <label for="Fecha_Postulacion">Fecha:</label>
-      <input type="date" class="form-control is-invalid" id="Fecha_Postulacion" placeholder="Fecha" required>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="col-md-4 mb-3">
-      <label for="Estatus">Estatus:</label>
-      <input type="text" class="form-control is-invalid" id="Estatus" placeholder="Estatus" required>
-    </div>
-    <div class="col-md-4 mb-3">
-      <label for="Alumno">Alumno:</label>
-      <input type="text" class="form-control is-invalid" id="Alumno" placeholder="Alumno" required>
-    </div>
-    <div>
-        <br>
-        <br>
-        <br>
-                <br>
-        <br>
-        <br>        <br>
-        <br>
-        <br>        <br>
-   
+    <div class="col-md-3 mb-3">
+        <label for="id_alumno">Alumno: </label>
+        <select class="form-control" id="id_alumno" name="id_alumno">
+            <option value="" disabled selected>Seleccionar un opcion</option>
+              {% for al in alumnos %}
+                <option value="{{al.id_alumno}}">{{al.nombre}}</option>
+                  {% endfor %}
+        </select>
+          <div class="valid-feedback">
+            <br>
+          </div>
+           <div class="valid-feedback">
+             <br>
+           </div>
+     </div>
+  <div class="col-md-3 mb-3">
+      <label for="carrera">Ofertas: </label>
+      <select class="form-control" id="oferta" name="oferta">             
+       <option value="" disabled selected>Seleccionar un opcion</option>
+          {% for of in oferta %}
+          <option value="{{of.id_oferta}}">{{of.nombre}}</option>
+           {% endfor %}
+      </select>
+        <div class="valid-feedback">
+          <br>
         </div>
-      </div>
-    </div>
-  </div>
-  <button class="btn btn-primary" type="submit">Submit form</button>
+                <div class="valid-feedback">
+                    <br>
+                </div>
+
+  <button class="btn btn-primary" type="submit">Reguistra</button>
 </form>
 
   </body>
