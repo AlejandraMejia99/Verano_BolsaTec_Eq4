@@ -1,6 +1,8 @@
 CREATE DATABASE IF NOT EXISTS bolsa;
 use  bolsa;
 
+
+
 create table Carreras (
 	id_carrera int not null AUTO_INCREMENT,
 	clave VARCHAR(15) NOT NULL,
@@ -126,6 +128,8 @@ CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin';
 GRANT ALL PRIVILEGES ON bolsa.* TO 'admin'@'localhost';
 
 SET SQL_SAFE_UPDATES = 0;
+SELECT COUNT(*) from Information_Schema.Tables where TABLE_TYPE = 'BASE TABLE' and table_schema = 'bolsa';
 
 
-
+select * from Usuarios;
+select * from  Entrevista;

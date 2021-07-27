@@ -64,7 +64,7 @@ def registrarAlumno():
         carreras = Carreras()
         return render_template('AlumnosEgresados/AlumnosEgresados.html',carrera=carreras.consultaGeneral())
     else:
-        return "No tienes permitido acceder a esta sección"
+       return render_template('Perfilamiento.html')
     
 @app.route('/opcionesAlumno')
 def opcionesAlumno():
@@ -72,7 +72,7 @@ def opcionesAlumno():
         alumno=vAlumnos()
         return render_template('AlumnosEgresados/opcionesAlumnos.html',alumnos=alumno.consultaGeneral())
     else:
-        return "No tienes permitido acceder a esta sección"
+        return render_template('Perfilamiento.html')
 
 @app.route('/eliminarAlumno/<int:id>')
 def eliminarAlumno(id):
@@ -83,7 +83,7 @@ def eliminarAlumno(id):
         us.actualizar()
         return redirect(url_for('opcionesAlumno'))
     else:
-        return "No tienes permitido acceder a esta sección"
+        return render_template('Perfilamiento.html')
 
 @app.route('/editarAlumnos/<int:id>')
 def editarAlumnos(id):
@@ -92,8 +92,7 @@ def editarAlumnos(id):
         alumno.id_alumno=id
         return render_template('AlumnosEgresados/editarAlumnos.html',alumnos=alumno.consultaIndividual())
     else:
-        return "No tienes permitido acceder a esta sección"
-
+        return render_template('Perfilamiento.html')
 @app.route('/actualizarAlumno2', methods=['POST']) #Esto es algo que se creo para poder editar un perfil ya que con otro nombre daba un problema raro
 def actualzarAlumno2():
     us=Usuarios()
@@ -129,7 +128,7 @@ def actualzarAlumno():
         us.actualizar()
         return redirect(url_for('opcionesAlumno'))
     else:
-        return "No tienes permitido acceder a esta sección"
+        return render_template('Perfilamiento.html')
 
 @app.route('/insertarAlumnosBD', methods=['POST'])
 def insertAlumnosBD():
@@ -157,7 +156,7 @@ def insertAlumnosBD():
         alumnos.insertar()
         return redirect (url_for('opcionesAlumno'))
     else:
-        return "No tienes permitido acceder a esta sección"
+        return render_template('Perfilamiento.html')
 
 
 #-------CRUD-RECLUTADORES----------#
@@ -168,7 +167,7 @@ def registrarReclutador():
         empresas = Empresas()
         return render_template('Reclutadores/Reclutadores.html',empresa=empresas.consultaGeneral())
     else:
-        return "No tienes permitido acceder a esta sección"
+       return render_template('Perfilamiento.html')
 
 @app.route('/opcionesReclutador')
 def opcionesReclutador():
@@ -176,7 +175,7 @@ def opcionesReclutador():
         reclutor=vReclutador()
         return render_template('Reclutadores/opcionesReclutadores.html',reclutador=reclutor.consultaGeneral())
     else:
-        return "No tienes permitido acceder a esta sección"
+        return render_template('Perfilamiento.html')
 
 @app.route('/eliminarReclutador/<int:id>')
 def eliminarReclutador(id):
@@ -187,7 +186,7 @@ def eliminarReclutador(id):
         us.actualizar()
         return redirect(url_for('opcionesReclutador'))
     else:
-        return "No tienes permitido acceder a esta sección"
+        return render_template('Perfilamiento.html')
 
 @app.route('/editarReclutador/<int:id>')
 def editarReclutador(id):
@@ -196,7 +195,7 @@ def editarReclutador(id):
         reclutador.id_reclutor=id
         return render_template('Reclutadores/editarReclutadores.html',reclutor=reclutador.consultaIndividual())
     else:
-        return "No tienes permitido acceder a esta sección"
+        return render_template('Perfilamiento.html')
 
 @app.route('/actualizarReclutador', methods=['POST'])
 def actualzarReclutador():
@@ -216,7 +215,7 @@ def actualzarReclutador():
         us.actualizar()
         return redirect(url_for('opcionesReclutador'))
     else:
-        return "No tienes permitido acceder a esta sección"
+       return render_template('Perfilamiento.html')
 
 @app.route('/insertarReclutadorBD', methods=['POST'])
 def insertReclutadorBD():
@@ -241,7 +240,7 @@ def insertReclutadorBD():
         reclutador.insertar()
         return redirect (url_for('opcionesReclutador'))
     else:
-        return "No tienes permitido acceder a esta sección"
+        return render_template('Perfilamiento.html')
 
 
 #-------CRUD-PERSONAL-VINCULACION----------#
@@ -251,7 +250,7 @@ def registrarPersonal():
     if current_user.is_admin():
         return render_template('PersonalVinculacion/PersonalVinculacion.html')
     else:
-        return "No tienes permitido acceder a esta sección"
+        return render_template('Perfilamiento.html')
 
 @app.route('/opcionesPersonal')
 def opcionesPersonal():
@@ -259,8 +258,7 @@ def opcionesPersonal():
         personal=vVinculacion()
         return render_template('PersonalVinculacion/opcionesPersonal.html',vinculacion=personal.consultaGeneral())
     else:
-        return "No tienes permitido acceder a esta sección"
-
+       return render_template('Perfilamiento.html')
 @app.route('/eliminarPersonal/<int:id>')
 def eliminarPersonal(id):
     if current_user.is_admin():
@@ -270,7 +268,7 @@ def eliminarPersonal(id):
         us.actualizar()
         return redirect(url_for('opcionesPersonal'))
     else:
-        return "No tienes permitido acceder a esta sección"
+       return render_template('Perfilamiento.html')
 
 @app.route('/editarPersonal/<int:id>')
 def editarPersonal(id):
@@ -279,7 +277,7 @@ def editarPersonal(id):
         vinculacion.id_vinculacion=id
         return render_template('PersonalVinculacion/editarPersonal.html',personal=vinculacion.consultaIndividual())
     else:
-        return "No tienes permitido acceder a esta sección"
+        return render_template('Perfilamiento.html')
 
 @app.route('/actualizarPersonal', methods=['POST'])
 def actualzarPersonal():
@@ -299,7 +297,7 @@ def actualzarPersonal():
         us.actualizar()
         return redirect(url_for('opcionesPersonal'))
     else:
-        return "No tienes permitido acceder a esta sección"
+       return render_template('Perfilamiento.html')
 
 @app.route('/insertarPersonalBD', methods=['POST'])
 def insertPersonalBD():
@@ -323,7 +321,7 @@ def insertPersonalBD():
         personal.insertar()
         return redirect (url_for('opcionesPersonal'))
     else:
-        return "No tienes permitido acceder a esta sección"
+       return render_template('Perfilamiento.html')
 
 #######################################################-- Fin de Vigo--###################################################
 
@@ -333,8 +331,10 @@ def insertPersonalBD():
 
 @app.route('/registrarCarrera')
 def registrarCarreras():
-    return render_template('Carreras/registrarCarreras.html')
-
+    if current_user.is_admin():
+        return render_template('Carreras/registrarCarreras.html')
+    else:
+        return render_template('Perfilamiento.html')
 @app.route('/opcionesCarreras')
 def opcionesCarreras():
     ca=Carreras()
@@ -342,17 +342,26 @@ def opcionesCarreras():
 
 @app.route('/editarCarrera/<int:id>')
 def ventanaEditarCarrera(id):
-    ca=Carreras()
-    ca.id_carrera=id
-    return render_template('Carreras/modificarCarreras.html',ca=ca.consultaIndividual())
+    if current_user.is_admin():
+        ca=Carreras()
+        ca.id_carrera=id
+        return render_template('Carreras/modificarCarreras.html',ca=ca.consultaIndividual())
+    else:
+       return render_template('Perfilamiento.html')
+    
 
 @app.route('/eliminarCarrera/<int:id>')
 def ventanaEliminarCarrera(id):
-    ca=Carreras()
-    ca.id_carrera=id
-    ca.estatus="Inactivo"
-    ca.actualizar()
-    return redirect(url_for('opcionesCarreras'))
+
+    if current_user.is_admin():
+        ca=Carreras()
+        ca.id_carrera=id
+        ca.estatus="Inactivo"
+        ca.actualizar()
+        return redirect(url_for('opcionesCarreras'))
+    else:
+        return render_template('Perfilamiento.html')
+    
 
 @app.route('/insertarCarrerasBD', methods=['POST'])
 def insertCarrerasBD():
@@ -382,7 +391,12 @@ def actualzarTurnosBD():
 
 @app.route('/registrarEmpresa')
 def registrarEmpresas():
-    return render_template('Empresas/registrarEmpresas.html')
+
+    if current_user.is_admin():
+         return render_template('Empresas/registrarEmpresas.html')
+    else:
+        return render_template('Perfilamiento.html')
+   
 
 
 @app.route('/opcionesEmpresa')
@@ -392,19 +406,27 @@ def opcionesEmpresas():
 
 @app.route('/editarEmpresa/<int:id>')
 def ventanaEditarEmpresa(id):
-    em=Empresas()
-    em.id_empresa=id
-    return render_template('Empresas/modificarEmpresas.html', em=em.consultaIndividual())
+
+    if current_user.is_admin():
+        em=Empresas()
+        em.id_empresa=id
+        return render_template('Empresas/modificarEmpresas.html', em=em.consultaIndividual())
+    else:
+       return render_template('Perfilamiento.html')
 
 
 @app.route('/eliminarEmpresa/<int:id>')
 def ventanaEliminarEmpresa(id):
-    em=Empresas()
-    em.id_empresa=id
-    em.estatus="Inactivo"
-    em.actualizar()
 
-    return redirect(url_for('opcionesEmpresas'))
+    if current_user.is_admin():
+        em=Empresas()
+        em.id_empresa=id
+        em.estatus="Inactivo"
+        em.actualizar()
+
+        return redirect(url_for('opcionesEmpresas'))
+    else: 
+       return render_template('Perfilamiento.html')
 
 @app.route('/insertarEmpresasBD', methods=['POST'])
 def insertEmpresasBD():
@@ -437,17 +459,21 @@ def actualzarEmpresaBD():
 @app.route('/registrarOferta')
 def registrarOfertas():
 
-    emp = Empresas()
-    con=Contratos()
-    re=vReclutador()
-    cat=OfertaCategoria()
+    if current_user.is_admin() or current_user.is_reclutador():
+        emp = Empresas()
+        con=Contratos()
+        re=vReclutador()
+        cat=OfertaCategoria()
 
-    empresa=emp.consultaGeneral()
-    contrato=con.consultaGeneral()
-    reclutor=re.consultaGeneral()
-    categoria=cat.consultaGeneral()
+        empresa=emp.consultaGeneral()
+        contrato=con.consultaGeneral()
+        reclutor=re.consultaGeneral()
+        categoria=cat.consultaGeneral()
 
-    return render_template('Ofertas/registrarOfertas.html',empresa=empresa,contrato=contrato, reclutor=reclutor, categoria=categoria)
+        return render_template('Ofertas/registrarOfertas.html',empresa=empresa,contrato=contrato, reclutor=reclutor, categoria=categoria)
+    else: 
+        return render_template('Perfilamiento.html')
+    
 
 @app.route('/opcionesOfertas')
 def opcionesOfertas():
@@ -484,19 +510,23 @@ def insertOfertasBD():
 
 @app.route('/editarOferta/<int:id>')
 def ventanaEditarOferta(id):
-    of=Ofertas()
-    of.id_oferta=id
-    return render_template('Ofertas/modificarOfertas.html', of=of.consultaIndividual())
-
-
+    if current_user.is_admin() or current_user.is_reclutador():
+        of=Ofertas()
+        of.id_oferta=id
+        return render_template('Ofertas/modificarOfertas.html', of=of.consultaIndividual())
+    else: 
+       return render_template('Perfilamiento.html')
 @app.route('/eliminarOferta/<int:id>')
 def ventanaEliminarOferta(id):
-    of=Ofertas()
-    of.id_oferta=id
-    of.estatus="Inactivo"
-    of.actualizar()
+    if current_user.is_admin() or current_user.is_reclutador():
+        of=Ofertas()
+        of.id_oferta=id
+        of.estatus="Inactivo"
+        of.actualizar()
 
-    return redirect(url_for('opcionesOfertas'))
+        return redirect(url_for('opcionesOfertas'))
+    else: 
+        return render_template('Perfilamiento.html')
 
     
 @app.route('/actualizarOfertasBD', methods=['POST'])
@@ -524,17 +554,18 @@ def actualzarOfertaBD():
 
 @app.route('/registrarEntrevista')
 def registrarEntrevista():
+    if current_user.is_admin() or current_user.is_reclutador():
+        
+        re=vReclutador()
+        alu=vAlumnos()
+        of=Ofertas()
 
-    re=vReclutador()
-    alu=vAlumnos()
-    of=Ofertas()
-
-    reclutor=re.consultaGeneral()
-    alumnos=alu.consultaGeneral()
-    oferta=of.consultaGeneral()
-    return render_template('Entrevistas/registrarEntrevista.html' ,reclutor=reclutor, alumnos=alumnos,oferta=oferta)
-
-
+        reclutor=re.consultaGeneral()
+        alumnos=alu.consultaGeneral()
+        oferta=of.consultaGeneral()
+        return render_template('Entrevistas/registrarEntrevista.html' ,reclutor=reclutor, alumnos=alumnos,oferta=oferta)
+    else: 
+        return render_template('Perfilamiento.html')
 @app.route('/opcionesEntrevista')
 def opcionesEntrevista():
     en=Entrevista()
@@ -571,20 +602,26 @@ def insertOEntrevistaBD():
 
 @app.route('/editarEntrevista/<int:id>')
 def ventanaEditarEntrevista(id):
-    en=Entrevista()
-    en.id_entrevista=id
-    return render_template('Entrevistas/modificarEntrevista.html', en=en.consultaIndividual())
-
-
+    if current_user.is_admin() or current_user.is_reclutador():
+        en=Entrevista()
+        en.id_entrevista=id
+        return render_template('Entrevistas/modificarEntrevista.html', en=en.consultaIndividual())
+    else: 
+        return render_template('Perfilamiento.html')
 
 @app.route('/eliminarEntrevista/<int:id>')
 def ventanaEliminarEntrevista(id):
-    en=Entrevista()
-    en.id_entrevista=id
-    en.estatus="Inactivo"
-    en.actualizar()
+    if current_user.is_admin() or current_user.is_reclutador():
+        en=Entrevista()
+        en.id_entrevista=id
+        en.estatus="Inactivo"
+        en.actualizar()
 
-    return redirect(url_for('opcionesEntrevista'))
+        return redirect(url_for('opcionesEntrevista'))
+
+    else: 
+        return render_template('Perfilamiento.html')
+
 
     
 @app.route('/actualizarEntrevistaBD', methods=['POST'])
@@ -619,7 +656,7 @@ def registrarContrato():
     if current_user.is_admin():
         return render_template('Contratos/registrarContrato.html')
     else:
-        return "No tienes permiso para registra un contrato" 
+       return render_template('Perfilamiento.html')
         
 
 @app.route('/Contratos/registrarContratoBD',methods=['post'])
@@ -642,7 +679,7 @@ def ventanaEditarContratos(id):
         co.id_contrato=id
         return render_template('/Contratos/modificarContratos.html',co=co.consultaIndividual())
     else:
-        return "No puedes editar un contracto no tienes permisos expeciales"
+        return render_template('Perfilamiento.html')
 
 @app.route('/eliminarContrato/<int:id>')
 def ventanaElimiarContratos(id):
@@ -653,7 +690,7 @@ def ventanaElimiarContratos(id):
         co.actualizar()
         return redirect(url_for('opcionesContratos'))
     else:
-        return "No puedes eliminar un contrato ocupas permisos expeciales"
+        return render_template('Perfilamiento.html')
 
 @app.route('/actualizarContratosBD', methods=['POST'])
 def actualizarContratoBD():
@@ -671,7 +708,7 @@ def registrarCategoria():
     if current_user.is_admin():
         return render_template('Categoria/registrarCategoria.html')
     else:
-        return "No tienes permisos registra una categoria"
+        return render_template('Perfilamiento.html')
 
 @app.route('/Categoria/registrarCategoriaBD',methods=['post'])
 def insertCategoria():
@@ -693,7 +730,7 @@ def ventanaEditarCategoria(id):
         ca.idofcat=id
         return render_template('/Categoria/modificarCategoria.html',ca=ca.consultaIndividual())
     else:
-        return "No puedes editar una categoria"
+       return render_template('Perfilamiento.html')
 
 @app.route('/eliminarCategoria/<int:id>')
 def ventanaElimiarCategoria(id):
@@ -704,7 +741,7 @@ def ventanaElimiarCategoria(id):
         ca.actualizar()
         return redirect(url_for('opcionesCategoria'))
     else:
-        return "No tienes permisos para elimiar la categoria"
+        return render_template('Perfilamiento.html')
 
 @app.route('/actualizarCategoriaBD', methods=['POST'])
 def actualizarCategoriaBD():
@@ -724,7 +761,7 @@ def registrarOAlu():
         ofertas=Ofertas();
         return render_template('Postulacion/registrarOAlu.html',alumnos=alumno.consultaGeneral(), oferta=ofertas.consultaGeneral())
     else:
-        return "No puedes restra una oferta alumno sin permiso expeciales"
+        return render_template('Perfilamiento.html')
 
 @app.route('/opcionesOAlu')
 def opcionesOAlu():
