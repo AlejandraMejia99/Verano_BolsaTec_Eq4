@@ -177,29 +177,41 @@
                 </nav>
 
 
-                <form>
+                <form action="/insertarOfertasBD" method="post" >
+                    
                     <h2>Registrar Ofertas</h2>
+                   
                     <div class="form-row">
                         <div class="col-md-3 mb-3">
                             <label>Nombre:</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre">
+                            <input type="text" class="form-control" name="nombre">
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="pwd">Empresa</label>
-                            <select class="form-control" id="empresa"
-                                name="empresa">
+                            <select class="form-control"  name="empresa">
+                                <option value="" disabled selected>Seleccionar un opcion</option>
+                                {% for e in empresa %}
+                                <option value="{{e.id_empresa}}">{{e.nombreE}}</option>
+                                {% endfor %}
                             </select>
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="pwd">Categoria</label>
-                            <select class="form-control" id="categoria"
-                                name="categoria">
+                            <select class="form-control"  name="categoria">
+                                <option value="" disabled selected>Seleccionar un opcion</option>
+                                {% for cat in categoria %}
+                                <option value="{{cat.idofcat}}">{{cat.nombre}}</option>
+                                {% endfor %}
                             </select>
+                            
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="pwd">Contrato</label>
-                            <select class="form-control" id="contrato"
-                                name="contrato">
+                            <select class="form-control"  name="contrato">
+                                <option value="" disabled selected>Seleccionar un opcion</option>
+                                {% for con in contrato %}
+                                <option value="{{con.id_contrato}}">{{con.nombre}}</option>
+                                {% endfor %}
                             </select>
                             <div class="valid-feedback">
                                 <br>
@@ -226,10 +238,15 @@
                             <label>Vacantes</label>
                             <input type="text" class="form-control" id="vacantes"name="vacantes">
                         </div>
+                        
                         <div class="col-md-3 mb-3">
                             <label for="pwd">Reclutor</label>
-                            <select class="form-control" id="reclutor"
-                                name="reclutor">
+                            <select class="form-control" name="reclutor">
+                                <option value="" disabled selected>Seleccionar un opcion</option>
+                                {% for re in reclutor %}
+                                <option value="{{re.id_reclutor}}">{{re.nombre}}</option>
+                                {% endfor %}
+
                             </select>
                             <div class="valid-feedback">
                                 <br>
@@ -237,12 +254,11 @@
                             <div class="valid-feedback">
                                 <br>
                             </div>
+
                         </div>
+                        <button class="btn btn-primary" type="submit">Registrar</button>
                     </div>
-                    <button class="btn btn-primary" type="submit">Registrar</button>
                 </form>
-            
-            
             </div>
         </div>
     </body>

@@ -7,7 +7,7 @@ create table Carreras (
 	nombreC varchar(50) not null,
 	estatus VARCHAR(20) not null,
 	primary key (id_carrera),
-	unique (nombre));
+	unique (nombreC));
 
 create table Contratos (
 	id_contrato int not null AUTO_INCREMENT,
@@ -127,4 +127,26 @@ GRANT ALL PRIVILEGES ON bolsa.* TO 'admin'@'localhost';
 
 SET SQL_SAFE_UPDATES = 0;
 
+create view vVinculacion
+as
+select v.id_vinculacion, u.id_usuario, u.nombre, u.apellido_paterno, u.apellido_materno, u.genero, u.telefono, u.correo, u.usuario, u.passwd, u.estatus, v.cargo
+from PersonalVinculacion v join Usuarios u on v.id_usuario=u.id_usuario;
+
+select * from vVinculacion;
+
+create view vAlumnos
+as
+select a.id_alumno,u.id_usuario, u.nombre, c.nombreC,  u.apellido_paterno, u.apellido_materno, u.genero, u.telefono, u.correo, u.usuario, u.passwd, a.promedio, a.anioEgreso, a.cv, u.estatus
+from Alumnos a join Usuarios u on a.id_usuario=u.id_usuario
+join Carreras c on c.id_carrera=a.id_carrera;
+
+select * from vAlumnos;
+
+create view vReclutador
+as
+select r.id_reclutor, u.id_usuario, u.nombre, e.nombreE, u.apellido_paterno, u.apellido_materno, u.genero, u.telefono, u.correo, u.usuario, u.passwd, r.cargo, u.estatus
+from Reclutadores r join Usuarios u on r.id_usuario=u.id_usuario
+join Empresas e on e.id_empresa=r.id_empresa;
+
+select * from vReclutador;
 

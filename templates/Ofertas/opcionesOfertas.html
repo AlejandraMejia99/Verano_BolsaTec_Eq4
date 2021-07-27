@@ -173,7 +173,7 @@
                                     <a class="dropdown-item" href="/CloseSesion">Cerrar sesion</a>
                                   </div>
                                 </li>
-                              </ul>/li>
+                              </ul>
                             </ul>
                         </div>
                     </div>
@@ -188,9 +188,13 @@
                                 <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Empresa</th>
+                                <th>Descripcion</th>
                                 <th>Categoria</th>
+                                <th>Tipo de Contratacion</th>
                                 <th>Fecha de Publicacion</th>
+                                <th>Salario</th>
                                 <th>Vacantes</th>
+                                
                                 <th>Estatus</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
@@ -198,18 +202,25 @@
                         </thead>
 
                         <tbody>
+                            {% for of in ofertas%}
 
-                            <th scope="row">1</th>
-                            <td>Desarrollador Web</td>
-                            <td>Lego</td>
-                            <td>Programador</td>
-                            <td>12-07-2021</td>
-                            <td>2</td>
-                            <td>Activo</td>
-                            <td><a href=""><button type="button" class="btn
-                                        btn-warning">Modificar</button></a></td>
-                            <td><a href=""><button type="button" class="btn
-                                        btn-danger">Eliminar</button></a></td>
+                            <th scope="row">{{of.id_oferta}}</th>
+                            <td>{{of.nombre}}</td>
+                            <td>{{of.empresas.nombreE}}</td>
+                            <td>{{of.descripcion}}</td>
+                            <td>{{of.categoria.nombre}}</td>
+                            <td>{{of.contrato.nombre}}</td>
+                            <td>{{of.fecha_publicacion}}</td>
+                            <td>${{of.salario}}</td>
+                            <td>{{of.num_vacante}}</td>
+                            <td>{{of.estatus}}</td>
+                            
+
+                            
+                            <td><a href="/editarOferta/{{of.id_oferta}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
+                            <td><a href="/eliminarOferta/{{of.id_oferta}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+
+                         {%endfor%}
                         </tbody>
                     </table>
                 </div>

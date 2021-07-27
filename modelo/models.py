@@ -1,19 +1,19 @@
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Integer, String, Column, ForeignKey, Date, Float
+from sqlalchemy import Integer, String, Column, ForeignKey, Date, Float,DateTime
 from sqlalchemy.orm import relationship
 from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
+#------- Apartado de Ale---------#
 
 class Carreras(db.Model):
     __tablename__='Carreras'
     id_carrera=Column(Integer,primary_key=True)
     clave=Column(String,nullable=False)
-    nombre=Column(String,unique=True)
+    nombreC=Column(String,unique=True)
     estatus= Column(String,nullable=False)
-
 
     def insertar(self):                                                                                                                                                                          
         db.session.add(self)                                                                                                                                                                     
@@ -59,8 +59,89 @@ class Empresas(db.Model):
         db.session.delete(em)
         db.session.commit()
 
-#-------VIGO--------#
 
+class Ofertas(db.Model):
+    __tablename__='Ofertas'
+    id_oferta=Column(Integer,primary_key=True)
+    id_contrato=Column(Integer,ForeignKey('Contratos.id_contrato'))
+    id_empresa=Column(Integer, ForeignKey('Empresas.id_empresa'))
+    id_reclutor=Column(Integer, ForeignKey('Reclutadores.id_reclutor'))
+    idofcat=Column(Integer, ForeignKey('OfertaCategoria.idofcat'))
+    nombre=Column(String,nullable=False)
+    descripcion=Column(String,nullable=False)
+    fecha_publicacion=Column(Date, nullable=False)
+    salario=Column(Float, nullable=False)
+    num_vacante= Column(String,nullable=False)
+    estatus= Column(String,nullable=False)
+    contrato=relationship('Contratos', backref='ofertas')
+    empresas=relationship('Empresas', backref='ofertas')
+    reclutor=relationship('Reclutadores', backref='ofertas')
+    categoria=relationship('OfertaCategoria', backref='ofertas')
+
+    def insertar(self):                                                                                                                                                                          
+        db.session.add(self)                                                                                                                                                                     
+        db.session.commit() 
+
+    def consultaGeneral(self):                                                                                                                                                                   
+        of=self.query.all()                                                                                                                                                                   
+        return of
+
+    def consultaIndividual(self):
+        of=self.query.get(self.id_oferta)
+        return of
+        
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        of=self.consultaIndividual()
+        db.session.delete(of)
+        db.session.commit()
+
+
+class Entrevista(db.Model):
+    __tablename__='Entrevista'
+    id_entrevista=Column(Integer,primary_key=True)
+    id_reclutor=Column(Integer, ForeignKey('Reclutadores.id_reclutor'))
+    id_alumno=Column(Integer, ForeignKey('Alumnos.id_alumno'))
+    id_oferta=Column(Integer, ForeignKey('Ofertas.id_oferta'))
+    fecha_registro =Column(Date, nullable=False)
+    fecha_entrevista=Column(Date, nullable=False)
+    hora_inicio=Column(String, nullable=False)
+    hora_fin=Column(String, nullable=False)
+    resultado= Column(String,nullable=False)
+    estatus= Column(String,nullable=False)
+    reclutor=relationship('Reclutadores', backref='entrevista')
+    alumnos=relationship('Alumnos',backref='entrevista')
+    ofertas=relationship('Ofertas', backref='entrevista')
+
+    def insertar(self):                                                                                                                                                                          
+        db.session.add(self)                                                                                                                                                                     
+        db.session.commit()
+
+    def consultaGeneral(self):                                                                                                                                                                   
+        en=self.query.all()                                                                                                                                                                   
+        return en
+
+    def consultaIndividual(self):
+        en=self.query.get(self.id_entrevista)
+        return en
+        
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        en=self.consultaIndividual()
+        db.session.delete(en)
+        db.session.commit()
+
+
+#------------------------------------------------------Fin de Ale ---------------------#
+    
+
+#-------VIGO--------#
 class Usuarios(db.Model):
     __tablename__ = 'Usuarios'
     id_usuario = Column(Integer, primary_key=True)

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request,redirect,url_for,flash,abort
-from modelo.models import db, Carreras, Empresas, Usuarios, Alumnos, Reclutadores, PersonalVinculacion, vVinculacion, vAlumnos, vReclutador, OfertaCategoria, Contratos, OfertasAlum
+from modelo.models import db, Carreras, Empresas, Usuarios, Alumnos, Reclutadores, PersonalVinculacion, vVinculacion, vAlumnos, vReclutador, OfertaCategoria, Contratos, OfertasAlum,Ofertas,Entrevista
 from flask_login import login_user, LoginManager, current_user, logout_user
 
 app = Flask(__name__)
@@ -271,7 +271,6 @@ def insertPersonalBD():
 
 #-------CRUD-CARRERAS----------#
 
-
 @app.route('/registrarCarrera')
 def registrarCarreras():
     return render_template('Carreras/registrarCarreras.html')
@@ -299,7 +298,7 @@ def ventanaEliminarCarrera(id):
 def insertCarrerasBD():
     try:
         ca=Carreras()
-        ca.nombre=request.form['nombre']
+        ca.nombreC=request.form['nombre']
         ca.clave=request.form['clave']
         ca.estatus='Activo'
         ca.insertar()
@@ -312,7 +311,7 @@ def insertCarrerasBD():
 def actualzarTurnosBD():
     ca=Carreras()
     ca.id_carrera=request.form['idcarrera']
-    ca.nombre=request.form['nombre']
+    ca.nombreC=request.form['nombre']
     ca.clave=request.form['clave']
     ca.estatus=request.form['estatus']
     ca.actualizar()
@@ -363,7 +362,7 @@ def insertEmpresasBD():
 def actualzarEmpresaBD():
     em=Empresas()
     em.id_empresa=request.form['idempresa']
-    em.nombre=request.form['nombre']
+    em.nombreE=request.form['nombre']
     em.rfc=request.form['rfc']
     em.direccion=request.form['direccion']
     em.giro=request.form['giro']
@@ -374,25 +373,167 @@ def actualzarEmpresaBD():
 
 
 #------CRUD de Ofertas---------#
+
 @app.route('/registrarOferta')
 def registrarOfertas():
-    return render_template('Ofertas/registrarOfertas.html')
+
+    emp = Empresas()
+    con=Contratos()
+    re=vReclutador()
+    cat=OfertaCategoria()
+
+    empresa=emp.consultaGeneral()
+    contrato=con.consultaGeneral()
+    reclutor=re.consultaGeneral()
+    categoria=cat.consultaGeneral()
+
+    return render_template('Ofertas/registrarOfertas.html',empresa=empresa,contrato=contrato, reclutor=reclutor, categoria=categoria)
 
 @app.route('/opcionesOfertas')
 def opcionesOfertas():
-    return render_template('Ofertas/opcionesOfertas.html')
+    of= Ofertas()
+    emp = Empresas()
+    con=Contratos()
+    re=vReclutador()
+    cat=OfertaCategoria()
+
+    empresa=emp.consultaGeneral()
+    contrato=con.consultaGeneral()
+    reclutor=re.consultaGeneral()
+    categoria=cat.consultaGeneral()
+    ofertas=of.consultaGeneral()
+    return render_template('Ofertas/opcionesOfertas.html',empresa=empresa, contrato=contrato, reclutor=reclutor, categoria=categoria, ofertas=ofertas )
+
+@app.route('/insertarOfertasBD', methods=['POST'])
+def insertOfertasBD():
+    of=Ofertas()
+
+    of.id_empresa=request.form['empresa']
+    of.idofcat=request.form['categoria']
+    of.id_contrato=request.form['contrato']
+    of.id_reclutor=request.form['reclutor']
+    of.nombre=request.form['nombre']
+    of.descripcion=request.form['descr']
+    of.fecha_publicacion=request.form['fecha']
+    of.salario=request.form['salario']
+    of.num_vacante=request.form['vacantes']
+    of.estatus='Activo'
+
+    of.insertar()
+    return redirect (url_for('opcionesOfertas')) 
+
+@app.route('/editarOferta/<int:id>')
+def ventanaEditarOferta(id):
+    of=Ofertas()
+    of.id_oferta=id
+    return render_template('Ofertas/modificarOfertas.html', of=of.consultaIndividual())
+
+
+@app.route('/eliminarOferta/<int:id>')
+def ventanaEliminarOferta(id):
+    of=Ofertas()
+    of.id_oferta=id
+    of.estatus="Inactivo"
+    of.actualizar()
+
+    return redirect(url_for('opcionesOfertas'))
+
+    
+@app.route('/actualizarOfertasBD', methods=['POST'])
+def actualzarOfertaBD():
+    of=Ofertas()
+
+    of.id_oferta=request.form['idoferta']
+    of.id_empresa=request.form['empresa']
+    of.idofcat=request.form['categoria']
+    of.id_contrato=request.form['contrato']
+    of.nombre=request.form['nombre']
+    of.descripcion=request.form['descr']
+    of.fecha_publicacion=request.form['fecha']
+    of.salario=request.form['salario']
+    of.num_vacante=request.form['vacantes']
+    of.estatus=request.form['estatus']
+
+    of.actualizar()
+    return redirect(url_for('opcionesOfertas'))
+
+
+
 
 #-----CRUD ENTREVISTAS-------#
 
-
 @app.route('/registrarEntrevista')
 def registrarEntrevista():
-    return render_template('Entrevistas/registrarEntrevista.html')
+
+    re=vReclutador()
+    alu=vAlumnos()
+    of=Ofertas()
+
+    reclutor=re.consultaGeneral()
+    alumno=alu.consultaGeneral()
+    oferta=of.consultaGeneral()
+    return render_template('Entrevistas/registrarEntrevista.html' ,reclutor=reclutor, alumno=alumno,oferta=oferta)
 
 
 @app.route('/opcionesEntrevista')
 def opcionesEntrevista():
-    return render_template('Entrevistas/opcionesEntrevista.html')
+    en=Entrevista()
+    
+    re=vReclutador()
+    alu=vAlumnos()
+    of=Ofertas()
+
+    reclutor=re.consultaGeneral()
+    alumno=alu.consultaGeneral()
+    oferta=of.consultaGeneral()
+    return render_template('Entrevistas/opcionesEntrevista.html',reclutor=reclutor, alumno=alumno,oferta=oferta)
+
+
+
+@app.route('/insertarEntrevistaBD', methods=['POST'])
+def insertOEntrevistaBD():
+    en=Entrevista()
+
+  
+    en.id_reclutor=request.form['reclutor']
+    en.id_alumno=request.form['alumno']
+    en.id_oferta=request.form['oferta']
+    en.fecha_registro=request.form['registro']
+    en.fecha_entrevista=request.form['entrevista']
+    en.hora_inicio=request.form['hinicio']
+    en.hora_fin=request.form['hfin']
+    en.resultado=request.form['resultado']
+    en.estatus='Activo'
+
+    en.insertar()
+    return redirect (url_for('opcionesEntrevista')) 
+
+@app.route('/editarEntrevista/<int:id>')
+def ventanaEditarEntrevista(id):
+    en=Entrevista()
+    en.id_entrevista=id
+    return render_template('Entrevistas/modificarEntevistas.html', en=en.consultaIndividual())
+
+
+@app.route('/eliminarEntrevista/<int:id>')
+def ventanaEliminarEntrevista(id):
+    en=Entrevista()
+    en.id_entrevista=id
+    en.estatus="Inactivo"
+    en.actualizar()
+
+    return redirect(url_for('opcionesEntrevista'))
+
+    
+@app.route('/actualizarEntrevistaBD', methods=['POST'])
+def actualzarEntrevistaBD():
+    en=Entrevista()
+
+    en.id_entrevista=request.form['identrevista']
+    en.estatus=request.form['estatus']
+
+    en.actualizar()
+    return redirect(url_for('opcionesEntrevista'))
 
 #######################################################-- Fin de Ale--###################################################   
 

@@ -178,29 +178,35 @@
                     </div>
                 </nav>
 
-                <form>
+                <form action="/insertarEntrevistaBD" method="post">
                     <h2>Registrar Entrevistas </h2>
                     <div class="form-row">
                         <div class="col-md-3 mb-3">
-                            <label for="validationServer01"> Alumno: </label>
-                            <select class="form-control" id="alumno"
-                                name="alumno">
+                            <label for="pwd">Alumno</label>
+                            <select class="form-control" name="alumno">
+                                <option value="" disabled selected>Seleccionar un opcion</option>
+                                {% for a in alumno%}
+                                <option value="{{a.id_alumno}}">{{a.nombre}}</option>
+                                {%endfor%}
                             </select>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="validationServer02">Oferta: </label>
-                            <select class="form-control" id="oferta"
-                                name="oferta">
+                            <label for="pwd">Oferta: </label>
+                            <select class="form-control" name="oferta">
+                                <option value="" disabled selected>Seleccionar un opcion</option>
+                                {% for o in oferta%}
+                                <option value="{{o.id_oferta}}">{{o.nombre}}</option>
+                                {%endfor%}
                             </select>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="validationServer03">Fecha de Registro </label>
-                            <input type="date" class="form-control"
-                                id="registro" name="registro">
+                            <label for="pwd">Fecha de Registro </label>
+                            <input type="date" class="form-control" name="registro">
+                                
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="validationServer03">Fecha de Entrevista </label>
-                            <input type="date" class="form-control" id="entrevista" name="entrevista" >
+                            <label for="pwd">Fecha de Entrevista </label>
+                            <input type="date" class="form-control"  name="entrevista" >
                             <div class="valid-feedback">
                                 <br>
                             </div><div class="valid-feedback">
@@ -214,19 +220,28 @@
 
                         <div class="form-row">
 
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-3 mb-3">
                                 <label for="validationServer03">Hora Inicio </label>
-                                <input type="time" class="form-control" id="hinicio" name="hinicio" >
+                                <input type="text" class="form-control"  name="hinicio" >
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-3 mb-3">
                                 <label for="validationServer03">Hora Fin </label>
-                                <input type="time" class="form-control" id="hfin" name="hfin" >
+                                <input type="text" class="form-control"  name="hfin" >
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label for="pwd">Reclutador</label>
+                            <select class="form-control" name="reclutor">
+                                <option value="" disabled selected>Seleccionar un opcion</option>
+                                {% for re in reclutor%}
+                                <option value="{{re.id_reclutor}}">{{re.nombre}}</option>
+                                {%endfor%}
+                            </select>
                             </div>
                             
-                            <div class="col-md-4 mb-3">
-                                <label for="validationServer05">Resultado:</label>
-                                <select class="form-control" id="resultado"name="resultado">
-                                </select>
+                            <div class="col-md-3 mb-3">
+                                <label>Resultado:</label>
+                            <input type="text" class="form-control" name="resultado">
                                     <br>
                                 </div>
                                 <div class="valid-feedback">
@@ -234,18 +249,15 @@
                                 </div>
                                 <div class="valid-feedback">
                                 <br>
-                            
+                    
                             </div>
 
                         </div>
-                        
+                        <button class="btn btn-primary" type="submit">Registrar</button>
                     </div>
                     
                 </form>
-                <button class="btn btn-primary" type="submit">Registrar</button>
-
-
-
+                
             </div>
         </div>
     </body>
