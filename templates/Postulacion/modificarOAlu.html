@@ -188,46 +188,35 @@
 
             
                     <form action="/actualizarOAluBD" method="post">
-                        <h2>Modificar Contratos</h2>
-                        <div class="form-row">
-                            <div class="col-md-4 mb-3">
-                                <label >Id </label>
-                                <input value="{{oa.id_of_alum}}" type="text" class="form-control" id="id_of_alum" name="id_of_alum" readonly>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                             <label for="id_alumno">Alumno: </label>
-                              <select class="form-control" id="id_alumno" name="id_alumno">
-                                <option value="" disabled selected>Seleccionar un opcion</option>
-                                  {% for al in alumnos %}
-                                     <option value="{{al.id_alumno}}">{{al.nombre}}</option>
-                                         {% endfor %}
-                              </select>
-                               <div class="valid-feedback">
-                                   <br>
-                                </div>
-                                     <div class="valid-feedback">
-                                       <br>
-                                     </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                             <label for="carrera">Ofertas: </label>
-      <select class="form-control" id="oferta" name="oferta">             
-       <option value="" disabled selected>Seleccionar un opcion</option>
-          {% for of in oferta %}
-          <option value="{{of.id_oferta}}">{{of.nombre}}</option>
-           {% endfor %}
-      </select>
-        <div class="valid-feedback">
-          <br>
-        </div>
-                <div class="valid-feedback">
-                    <br>
-                    </div>
-                            </div>
-                                <div class="col-md-4 mb-3">
+                        <h2>Modificar Postulaciones</h2>
+                      <div class="form-row">
+    <div class="col-md-4 mb-3">
       <label for="fecha_postulacion">Fecha de Postulacion: </label>
       <input type="date" class="form-control is-valid" id="fecha_postulacion" placeholder="fecha_postulacion" required>
     </div>
+     <div class="col-md-4 mb-3">
+      <label for="id_alumno">Id Usuario: </label>
+      <input type="text" value="{{current_user.id_usuario}}" class="form-control is-valid" id="id_alumno" placeholder='id_alumno' readonly></input>
+    </div>
+     <div class="col-md-4 mb-3">
+      <label for="id_alumno">Nombre Alumnos: </label>
+      <input type="text" value="{{current_user.nombre}}" class="form-control is-valid" id="id_alumno" placeholder='Nombre' required></input>
+    </div>
+    <div class="col-md-3 mb-3">
+        <label for="oferta"> Ofertas: </label>
+        <select class="form-control" id="oferta" name="oferta">
+          <option value="" disabled selected>Seleccionar un opcion</option>
+          {% for oa in oferta%}
+          <option value="{{oa.id_oferta}}">{{oa.nombre}}</option>
+          {% endfor %}
+        </select>
+        <div class="valid-feedback">
+         <br>
+        </div>
+        <div class="valid-feedback">
+         <br>
+        </div>
+     </div>
                             <div class="col-md-4 mb-3">
                                 <label >Estatus </label>
                                 <select class="form-control"  id="estatus" name="estatus">

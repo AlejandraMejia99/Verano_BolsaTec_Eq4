@@ -379,6 +379,30 @@ class Contratos(db.Model):
     nombre=Column(String,nullable=False)
     estatus=Column(String,nullable=False)
 
+    def is_admin(self):
+        if self.tipo=='Administrador':
+            return True
+        else:
+            return False
+
+    def is_alumno(self):
+        if self.tipo=='Alumno':
+            return True
+        else:
+            return False
+
+    def is_reclutador(self):
+        if self.tipo=='Reclutador':
+            return True
+        else:
+            return False
+
+    def is_probicion(self):
+        if self.tipo=='Alumno':
+            return False
+        else:
+            return True
+
     def insertar(self):
         db.session.add(self)
         db.session.commit()
@@ -406,6 +430,24 @@ class OfertaCategoria(db.Model):
     nombre=Column(String,nullable=False)
     estatus=Column(String,nullable=False)
 
+    def is_admin(self):
+        if self.tipo=='Administrador':
+            return True
+        else:
+            return False
+
+    def is_alumno(self):
+        if self.tipo=='Alumno':
+            return True
+        else:
+            return False
+
+    def is_reclutador(self):
+        if self.tipo=='Reclutador':
+            return True
+        else:
+            return False
+        
     def insertar(self):
         db.session.add(self)
         db.session.commit()
@@ -435,7 +477,7 @@ class OfertasAlum(db.Model):
     fecha_postulacion = Column(Date, nullable=False)
     estatus = Column(String, nullable=False)
 
-    alumno = relationship('Alumnos', backref='OfertasAlum')
+    alumno = relationship('Alumnos', backref='ofertasalum')
     oferta = relationship('Ofertas', backref='OfertasAlum')
 
     def insertar(self):
@@ -443,8 +485,7 @@ class OfertasAlum(db.Model):
         db.session.commit()
 
     def consultaGeneral(self):
-        of=self.query.all()
-        return of
+        return self.query.all()
 
     def consultaIndividual(self):
         of=self.query.get(self.id_of_alum)

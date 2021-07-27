@@ -1,3 +1,4 @@
+import re
 from flask import Flask, render_template, request,redirect,url_for,flash,abort
 from modelo.models import db, Carreras, Empresas, Usuarios, Alumnos, Reclutadores, PersonalVinculacion, vVinculacion, vAlumnos, vReclutador, OfertaCategoria, Contratos, OfertasAlum,Ofertas,Entrevista
 from flask_login import login_user, LoginManager, current_user, logout_user
@@ -602,7 +603,11 @@ def actualzarEntrevistaBD():
 
 @app.route('/registrarContrato')
 def registrarContrato():
-    return render_template('Contratos/registrarContrato.html')
+    if current_user.is_admin():
+        return render_template('Contratos/registrarContrato.html')
+    else:
+        return "No tienes permiso para registra un contrato" 
+        
 
 @app.route('/Contratos/registrarContratoBD',methods=['post'])
 def insertContrato():
@@ -619,17 +624,23 @@ def opcionesContratos():
 
 @app.route('/editarContrato/<int:id>')
 def ventanaEditarContratos(id):
-    co=Contratos()
-    co.id_contrato=id
-    return render_template('/Contratos/modificarContratos.html',co=co.consultaIndividual())
+    if current_user.is_admin():
+        co=Contratos()
+        co.id_contrato=id
+        return render_template('/Contratos/modificarContratos.html',co=co.consultaIndividual())
+    else:
+        return "No puedes editar un contracto no tienes permisos expeciales"
 
 @app.route('/eliminarContrato/<int:id>')
 def ventanaElimiarContratos(id):
-    co=Contratos()
-    co.id_contrato=id
-    co.estatus="Inactivo"
-    co.actualizar()
-    return redirect(url_for('opcionesContratos'))
+    if current_user.is_admin():
+        co=Contratos()
+        co.id_contrato=id
+        co.estatus="Inactivo"
+        co.actualizar()
+        return redirect(url_for('opcionesContratos'))
+    else:
+        return "No puedes eliminar un contrato ocupas permisos expeciales"
 
 @app.route('/actualizarContratosBD', methods=['POST'])
 def actualizarContratoBD():
@@ -644,7 +655,10 @@ def actualizarContratoBD():
 
 @app.route('/registrarCategoria')
 def registrarCategoria():
-    return render_template('Categoria/registrarCategoria.html')
+    if current_user.is_admin():
+        return render_template('Categoria/registrarCategoria.html')
+    else:
+        return "No tienes permisos registra una categoria"
 
 @app.route('/Categoria/registrarCategoriaBD',methods=['post'])
 def insertCategoria():
@@ -661,75 +675,58 @@ def opcionesCategoria():
 
 @app.route('/editarCategoria/<int:id>')
 def ventanaEditarCategoria(id):
-    ca=OfertaCategoria()
-    ca.idofcat=id
-    return render_template('/Categoria/modificarCategoria.html',ca=ca.consultaIndividual())
+    if current_user.is_admin():
+        ca=OfertaCategoria()
+        ca.idofcat=id
+        return render_template('/Categoria/modificarCategoria.html',ca=ca.consultaIndividual())
+    else:
+        return "No puedes editar una categoria"
 
 @app.route('/eliminarCategoria/<int:id>')
 def ventanaElimiarCategoria(id):
-    ca=OfertaCategoria()
-    ca.idofcat=id
-    ca.estatus="Inactivo"
-    ca.actualizar()
-    return redirect(url_for('opcionesCategoria'))
+    if current_user.is_admin():
+        ca=OfertaCategoria()
+        ca.idofcat=id
+        ca.estatus="Inactivo"
+        ca.actualizar()
+        return redirect(url_for('opcionesCategoria'))
+    else:
+        return "No tienes permisos para elimiar la categoria"
 
 @app.route('/actualizarCategoriaBD', methods=['POST'])
 def actualizarCategoriaBD():
-    ca=OfertaCategoria()
-    ca.idofcat=request.form['idofcat']
-    ca.nombre=request.form['nombre']
-    ca.estatus=request.form['estatus']
-    ca.actualizar()
-    return redirect(url_for('opcionesCategoria'))
+        ca=OfertaCategoria()
+        ca.idofcat=request.form['idofcat']
+        ca.nombre=request.form['nombre']
+        ca.estatus=request.form['estatus']
+        ca.actualizar()
+        return redirect(url_for('opcionesCategoria'))
 
 #####-----CRUD Postulacion-----#####
 
 @app.route('/registrarOAlu')
 def registrarOAlu():
-    alumno=Alumnos();
-    oferta=Ofertas();
-    return render_template('Postulacion/registrarOAlu.html',alumnos=alumno.consultaGeneral(),ofertas=oferta.consultaGeneral())
+    if current_user.is_admin():
+        alumno=vAlumnos();
+        ofertas=Ofertas();
+        return render_template('Postulacion/registrarOAlu.html',alumnos=alumno.consultaGeneral(), oferta=ofertas.consultaGeneral())
+    else:
+        return "No puedes restra una oferta alumno sin permiso expeciales"
 
 @app.route('/opcionesOAlu')
 def opcionesOAlu():
-    of=OfertasAlum()
-    return render_template('Postulacion/opcionesOAlu.html', ofertasalum=of.consultaGeneral())
+    oa=OfertasAlum()
+    return render_template('Postulacion/opcionesOAlu.html', ofertasalum=oa.consultaGeneral())
 
 @app.route('/editarOAlu/<int:id>')
-def ventanaEditarOAlu(id):
-    of=OfertasAlum()
-    of.id_of_alum=id
-    return render_template('/Postulacion/modificarOAlu.html',of=of.consultaIndividual())
+def ventanaEditarCAlu(id):
+    ##if current_user.is_admin():
+        oa=OfertasAlum()
+        oa.id_of_alum=id
+        return render_template('/Postulacion/modificarOAlu.html',oa=oa.consultaIndividual())
+    ##else:
+        ##return "No puedes editar un contracto no tienes permisos expeciales"
 
-@app.route('/eliminarOAlu/<int:id>')
-def ventanaElimiarOAlu(id):
-    of=OfertasAlum()
-    of.id_of_alum=id
-    of.estatus="Inactivo"
-    of.actualizar()
-    return redirect(url_for('opcionesOAlu'))
-
-@app.route('/actualizarOAluBD', methods=['POST'])
-def actualizarOAluBD():
-    of=OfertasAlum()
-    of.id_of_alum=request.form['id_of_alum']
-    of.id_alumno=request.form['id_alumno']
-    of.id_oferta=request.form['id_oferta']
-    of.fecha_postulacion=request.form['fecha_postulacion']
-    of.estatus=request.form['estatus']
-    of.actualizar()
-    return redirect(url_for('opcionesOAlu'))
-
-@app.route('/insertarOAluBD', methods=['POST'])
-def insertarOAluBD():
-    of=OfertasAlum()
-    of.id_of_alum=request.form['id_of_alum']
-    of.id_alumno=request.form['id_alumno']
-    of.id_oferta=request.form['id_oferta']
-    of.fecha_postulacion=request.form['fecha_postulacion']
-    of.estatus=request.form['estatus']
-    of.insertar()
-    return redirect(url_for('opcionesOAlu'))
 ##############################################################################
 
 @app.errorhandler(404)
