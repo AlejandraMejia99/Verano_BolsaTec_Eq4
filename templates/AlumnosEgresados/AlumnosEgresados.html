@@ -106,7 +106,7 @@
         </div>
     </nav>
 
-    <form action="/insertarAlumnosBD" method="post">
+    <form action="/insertarAlumnosBD" method="post" onsubmit="return validar(this)">
         <h2>REGISTRAR ALUMNOS</h2>
         <div class="form-row">
             <div class="col-md-3 mb-3">
@@ -181,7 +181,7 @@
                 <select class="form-control" id="carrera" name="carrera">
                     <option value="" disabled selected>Seleccionar un opcion</option>
                     {% for ca in carrera %}
-                    <option value="{{ca.id_carrera}}">{{ca.nombre}}</option>
+                    <option value="{{ca.id_carrera}}">{{ca.nombreC}}</option>
                     {% endfor %}
                 </select>
                 <div class="valid-feedback">
@@ -210,7 +210,7 @@
         </div>
         <button class="btn btn-primary" type="submit">Registrar</button>
     </form>
-
+    <script src="{{url_for('static',filename='JS/Alumnos/alumnos.js')}}"></script>
 </body>
 
 </html>

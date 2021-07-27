@@ -216,6 +216,10 @@ class Usuarios(db.Model):
 
     def consultaGeneral(self):
         return self.query.all()
+
+    def consultaIndividual(self):
+        us = self.query.get(self.id_usuario)
+        return us
         
     def actualizar(self):
         db.session.merge(self)

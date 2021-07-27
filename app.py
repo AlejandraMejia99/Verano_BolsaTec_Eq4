@@ -27,10 +27,6 @@ def cargar_usuario(id):
 def inicio():
     return render_template('index.html')
 
-@app.route('/Perfil')
-def perfil():
-    return render_template('Usuarios/EditarPerfil.html')
-
 @app.route("/validarSesion",methods=['POST'])
 def iniciarSesion():
     Us=Usuarios()
@@ -49,46 +45,56 @@ def cerrarSes():
     else:
         abort(404)
 
-@app.route("/actualizarPerfil")
-def actualizarPerfil():
-    usuario=Usuarios()
+@app.route('/pagPrincipal')
+def pagPrincipal():
+    return render_template('Principal.html')
 
-    usuario.nombre = request.form['nombre']
-    usuario.telefono = request.form['telefono']
-    usuario.usuario = request.form['usuario']
-    usuario.passwd = request.form['contraseña']
-    usuario.actualizar()
-
-    return redirect(url_for("principal"))
+@app.route('/Perfil/<int:id>')
+def perfil(id):
+    usuarios=Usuarios()
+    usuarios.id_usuario=id
+    return render_template('Usuarios/EditarPerfil.html',usuario=usuarios.consultaIndividual())
 
 #-------CRUD-ALUMNOS----------#
 
 @app.route('/registrarAlumno')
 def registrarAlumno():
-    carreras = Carreras()
-    return render_template('AlumnosEgresados/AlumnosEgresados.html',carrera=carreras.consultaGeneral())
-
+    if current_user.is_admin():
+        carreras = Carreras()
+        return render_template('AlumnosEgresados/AlumnosEgresados.html',carrera=carreras.consultaGeneral())
+    else:
+        return "No tienes permitido acceder a esta sección"
+    
 @app.route('/opcionesAlumno')
 def opcionesAlumno():
-    alumno=vAlumnos()
-    return render_template('AlumnosEgresados/opcionesAlumnos.html',alumnos=alumno.consultaGeneral())
+    if current_user.is_admin():
+        alumno=vAlumnos()
+        return render_template('AlumnosEgresados/opcionesAlumnos.html',alumnos=alumno.consultaGeneral())
+    else:
+        return "No tienes permitido acceder a esta sección"
 
 @app.route('/eliminarAlumno/<int:id>')
 def eliminarAlumno(id):
-    us=Usuarios()
-    us.id_usuario=id
-    us.estatus="Inactivo"
-    us.actualizar()
-    return redirect(url_for('opcionesAlumno'))
+    if current_user.is_admin():
+        us=Usuarios()
+        us.id_usuario=id
+        us.estatus="Inactivo"
+        us.actualizar()
+        return redirect(url_for('opcionesAlumno'))
+    else:
+        return "No tienes permitido acceder a esta sección"
 
 @app.route('/editarAlumnos/<int:id>')
 def editarAlumnos(id):
-    alumno=vAlumnos()
-    alumno.id_alumno=id
-    return render_template('AlumnosEgresados/editarAlumnos.html',alumnos=alumno.consultaIndividual())
+    if current_user.is_admin():
+        alumno=vAlumnos()
+        alumno.id_alumno=id
+        return render_template('AlumnosEgresados/editarAlumnos.html',alumnos=alumno.consultaIndividual())
+    else:
+        return "No tienes permitido acceder a esta sección"
 
-@app.route('/actualizarAlumno', methods=['POST'])
-def actualzarAlumno():
+@app.route('/actualizarAlumno2', methods=['POST']) #Esto es algo que se creo para poder editar un perfil ya que con otro nombre daba un problema raro
+def actualzarAlumno2():
     us=Usuarios()
     us.id_usuario = request.form['id']
     us.nombre = request.form['nombre']
@@ -100,170 +106,223 @@ def actualzarAlumno():
     us.estatus = request.form['estatus']
     us.usuario = request.form['usuario']
     us.passwd = request.form['contraseña']
-    us.tipo = 'Alumno'
+    us.tipo = request.form['tipo']
     us.actualizar()
-    return redirect(url_for('opcionesAlumno'))
+    return redirect(url_for('pagPrincipal'))
+
+@app.route('/actualizarAlumno', methods=['POST'])
+def actualzarAlumno():
+    if current_user.is_admin():
+        us=Usuarios()
+        us.id_usuario = request.form['id']
+        us.nombre = request.form['nombre']
+        us.apellido_paterno = request.form['paterno']
+        us.apellido_materno = request.form['materno']
+        us.genero = request.form['genero']
+        us.telefono = request.form['telefono']
+        us.correo = request.form['correo']
+        us.estatus = request.form['estatus']
+        us.usuario = request.form['usuario']
+        us.passwd = request.form['contraseña']
+        us.tipo = 'Alumno'
+        us.actualizar()
+        return redirect(url_for('opcionesAlumno'))
+    else:
+        return "No tienes permitido acceder a esta sección"
 
 @app.route('/insertarAlumnosBD', methods=['POST'])
 def insertAlumnosBD():
-    alumnos = Alumnos()
-    usuarios = Usuarios()
-
-    usuarios.nombre = request.form['nombre']
-    usuarios.apellido_paterno = request.form['paterno']
-    usuarios.apellido_materno = request.form['materno']
-    usuarios.genero = request.form['genero']
-    usuarios.telefono = request.form['telefono']
-    usuarios.correo = request.form['correo']
-    alumnos.id_carrera = request.form['carrera']
-    alumnos.no_control = request.form['control']
-    alumnos.fecha_nacimiento = request.form['nacimiento']
-    alumnos.promedio = request.form['promedio']
-    alumnos.anioEgreso = request.form['egreso']
-    alumnos.cv = request.form['cv']
-    usuarios.usuario = request.form['usuario']
-    usuarios.passwd = request.form['contraseña']
-    usuarios.tipo = 'Alumno'
-    usuarios.estatus = 'Activo'
-    usuarios.insertar()
-    alumnos.id_usuario = usuarios.id_usuario
-    alumnos.insertar()
-    
-    return redirect (url_for('opcionesAlumno'))
+    if current_user.is_admin():
+        alumnos = Alumnos()
+        usuarios = Usuarios()
+        usuarios.nombre = request.form['nombre']
+        usuarios.apellido_paterno = request.form['paterno']
+        usuarios.apellido_materno = request.form['materno']
+        usuarios.genero = request.form['genero']
+        usuarios.telefono = request.form['telefono']
+        usuarios.correo = request.form['correo']
+        alumnos.id_carrera = request.form['carrera']
+        alumnos.no_control = request.form['control']
+        alumnos.fecha_nacimiento = request.form['nacimiento']
+        alumnos.promedio = request.form['promedio']
+        alumnos.anioEgreso = request.form['egreso']
+        alumnos.cv = request.form['cv']
+        usuarios.usuario = request.form['usuario']
+        usuarios.passwd = request.form['contraseña']
+        usuarios.tipo = 'Alumno'
+        usuarios.estatus = 'Activo'
+        usuarios.insertar()
+        alumnos.id_usuario = usuarios.id_usuario
+        alumnos.insertar()
+        return redirect (url_for('opcionesAlumno'))
+    else:
+        return "No tienes permitido acceder a esta sección"
 
 
 #-------CRUD-RECLUTADORES----------#
 
 @app.route('/registrarReclutador')
 def registrarReclutador():
-    empresas = Empresas()
-    return render_template('Reclutadores/Reclutadores.html',empresa=empresas.consultaGeneral())
+    if current_user.is_admin():
+        empresas = Empresas()
+        return render_template('Reclutadores/Reclutadores.html',empresa=empresas.consultaGeneral())
+    else:
+        return "No tienes permitido acceder a esta sección"
 
 @app.route('/opcionesReclutador')
 def opcionesReclutador():
-    reclutor=vReclutador()
-    return render_template('Reclutadores/opcionesReclutadores.html',reclutador=reclutor.consultaGeneral())
+    if current_user.is_admin():
+        reclutor=vReclutador()
+        return render_template('Reclutadores/opcionesReclutadores.html',reclutador=reclutor.consultaGeneral())
+    else:
+        return "No tienes permitido acceder a esta sección"
 
 @app.route('/eliminarReclutador/<int:id>')
 def eliminarReclutador(id):
-    us=Usuarios()
-    us.id_usuario=id
-    us.estatus="Inactivo"
-    us.actualizar()
-    return redirect(url_for('opcionesReclutador'))
+    if current_user.is_admin():
+        us=Usuarios()
+        us.id_usuario=id
+        us.estatus="Inactivo"
+        us.actualizar()
+        return redirect(url_for('opcionesReclutador'))
+    else:
+        return "No tienes permitido acceder a esta sección"
 
 @app.route('/editarReclutador/<int:id>')
 def editarReclutador(id):
-    reclutador=vReclutador()
-    reclutador.id_reclutor=id
-    return render_template('Reclutadores/editarReclutadores.html',reclutor=reclutador.consultaIndividual())
+    if current_user.is_admin():
+        reclutador=vReclutador()
+        reclutador.id_reclutor=id
+        return render_template('Reclutadores/editarReclutadores.html',reclutor=reclutador.consultaIndividual())
+    else:
+        return "No tienes permitido acceder a esta sección"
 
 @app.route('/actualizarReclutador', methods=['POST'])
 def actualzarReclutador():
-    us=Usuarios()
-    us.id_usuario = request.form['id']
-    us.nombre = request.form['nombre']
-    us.apellido_paterno = request.form['paterno']
-    us.apellido_materno = request.form['materno']
-    us.genero = request.form['genero']
-    us.telefono = request.form['telefono']
-    us.correo = request.form['correo']
-    us.estatus = request.form['estatus']
-    us.usuario = request.form['usuario']
-    us.passwd = request.form['contraseña']
-    us.tipo = 'Reclutador'
-    us.actualizar()
-    return redirect(url_for('opcionesReclutador'))
+    if current_user.is_admin():
+        us=Usuarios()
+        us.id_usuario = request.form['id']
+        us.nombre = request.form['nombre']
+        us.apellido_paterno = request.form['paterno']
+        us.apellido_materno = request.form['materno']
+        us.genero = request.form['genero']
+        us.telefono = request.form['telefono']
+        us.correo = request.form['correo']
+        us.estatus = request.form['estatus']
+        us.usuario = request.form['usuario']
+        us.passwd = request.form['contraseña']
+        us.tipo = 'Reclutador'
+        us.actualizar()
+        return redirect(url_for('opcionesReclutador'))
+    else:
+        return "No tienes permitido acceder a esta sección"
 
 @app.route('/insertarReclutadorBD', methods=['POST'])
 def insertReclutadorBD():
-    reclutador = Reclutadores()
-    usuarios = Usuarios()
-
-    usuarios.nombre = request.form['nombre']
-    usuarios.apellido_paterno = request.form['paterno']
-    usuarios.apellido_materno = request.form['materno']
-    usuarios.genero = request.form['genero']
-    usuarios.telefono = request.form['telefono']
-    usuarios.correo = request.form['correo']
-    reclutador.id_empresa = request.form['empresa']
-    reclutador.clave = request.form['clave']
-    reclutador.cargo = request.form['cargo']
-    usuarios.usuario = request.form['usuario']
-    usuarios.passwd = request.form['contraseña']
-    usuarios.tipo = 'Reclutador'
-    usuarios.estatus = 'Activo'
-    usuarios.insertar()
-    reclutador.id_usuario = usuarios.id_usuario
-    reclutador.insertar()
-    
-    return redirect (url_for('opcionesReclutador'))
+    if current_user.is_admin():
+        reclutador = Reclutadores()
+        usuarios = Usuarios()
+        usuarios.nombre = request.form['nombre']
+        usuarios.apellido_paterno = request.form['paterno']
+        usuarios.apellido_materno = request.form['materno']
+        usuarios.genero = request.form['genero']
+        usuarios.telefono = request.form['telefono']
+        usuarios.correo = request.form['correo']
+        reclutador.id_empresa = request.form['empresa']
+        reclutador.clave = request.form['clave']
+        reclutador.cargo = request.form['cargo']
+        usuarios.usuario = request.form['usuario']
+        usuarios.passwd = request.form['contraseña']
+        usuarios.tipo = 'Reclutador'
+        usuarios.estatus = 'Activo'
+        usuarios.insertar()
+        reclutador.id_usuario = usuarios.id_usuario
+        reclutador.insertar()
+        return redirect (url_for('opcionesReclutador'))
+    else:
+        return "No tienes permitido acceder a esta sección"
 
 
 #-------CRUD-PERSONAL-VINCULACION----------#
 
 @app.route('/registrarPersonal')
 def registrarPersonal():
-    return render_template('PersonalVinculacion/PersonalVinculacion.html')
+    if current_user.is_admin():
+        return render_template('PersonalVinculacion/PersonalVinculacion.html')
+    else:
+        return "No tienes permitido acceder a esta sección"
 
 @app.route('/opcionesPersonal')
 def opcionesPersonal():
-    personal=vVinculacion()
-    return render_template('PersonalVinculacion/opcionesPersonal.html',vinculacion=personal.consultaGeneral())
+    if current_user.is_admin():
+        personal=vVinculacion()
+        return render_template('PersonalVinculacion/opcionesPersonal.html',vinculacion=personal.consultaGeneral())
+    else:
+        return "No tienes permitido acceder a esta sección"
 
 @app.route('/eliminarPersonal/<int:id>')
 def eliminarPersonal(id):
-    us=Usuarios()
-    us.id_usuario=id
-    us.estatus="Inactivo"
-    us.actualizar()
-    return redirect(url_for('opcionesPersonal'))
+    if current_user.is_admin():
+        us=Usuarios()
+        us.id_usuario=id
+        us.estatus="Inactivo"
+        us.actualizar()
+        return redirect(url_for('opcionesPersonal'))
+    else:
+        return "No tienes permitido acceder a esta sección"
 
 @app.route('/editarPersonal/<int:id>')
 def editarPersonal(id):
-    vinculacion=vVinculacion()
-    vinculacion.id_vinculacion=id
-    return render_template('PersonalVinculacion/editarPersonal.html',personal=vinculacion.consultaIndividual())
+    if current_user.is_admin():
+        vinculacion=vVinculacion()
+        vinculacion.id_vinculacion=id
+        return render_template('PersonalVinculacion/editarPersonal.html',personal=vinculacion.consultaIndividual())
+    else:
+        return "No tienes permitido acceder a esta sección"
 
 @app.route('/actualizarPersonal', methods=['POST'])
 def actualzarPersonal():
-    us=Usuarios()
-    us.id_usuario = request.form['id']
-    us.nombre = request.form['nombre']
-    us.apellido_paterno = request.form['paterno']
-    us.apellido_materno = request.form['materno']
-    us.genero = request.form['genero']
-    us.telefono = request.form['telefono']
-    us.correo = request.form['correo']
-    us.estatus = request.form['estatus']
-    us.usuario = request.form['usuario']
-    us.passwd = request.form['contraseña']
-    us.tipo = 'Reclutador'
-    us.actualizar()
-    return redirect(url_for('opcionesPersonal'))
+    if current_user.is_admin():
+        us=Usuarios()
+        us.id_usuario = request.form['id']
+        us.nombre = request.form['nombre']
+        us.apellido_paterno = request.form['paterno']
+        us.apellido_materno = request.form['materno']
+        us.genero = request.form['genero']
+        us.telefono = request.form['telefono']
+        us.correo = request.form['correo']
+        us.estatus = request.form['estatus']
+        us.usuario = request.form['usuario']
+        us.passwd = request.form['contraseña']
+        us.tipo = 'Reclutador'
+        us.actualizar()
+        return redirect(url_for('opcionesPersonal'))
+    else:
+        return "No tienes permitido acceder a esta sección"
 
 @app.route('/insertarPersonalBD', methods=['POST'])
 def insertPersonalBD():
-    personal = PersonalVinculacion() 
-    usuarios = Usuarios()
-
-    usuarios.nombre = request.form['nombre']
-    usuarios.apellido_paterno = request.form['paterno']
-    usuarios.apellido_materno = request.form['materno']
-    usuarios.genero = request.form['genero']
-    usuarios.telefono = request.form['telefono']
-    usuarios.correo = request.form['correo']
-    personal.clave = request.form['clave']
-    personal.cargo = request.form['cargo']
-    usuarios.usuario = request.form['usuario']
-    usuarios.passwd = request.form['contraseña']
-    usuarios.tipo = 'Administrador'
-    usuarios.estatus = 'Activo'
-    usuarios.insertar()
-    personal.id_usuario = usuarios.id_usuario
-    personal.insertar()
-    
-    return redirect (url_for('opcionesPersonal'))
+    if current_user.is_admin():
+        personal = PersonalVinculacion() 
+        usuarios = Usuarios()
+        usuarios.nombre = request.form['nombre']
+        usuarios.apellido_paterno = request.form['paterno']
+        usuarios.apellido_materno = request.form['materno']
+        usuarios.genero = request.form['genero']
+        usuarios.telefono = request.form['telefono']
+        usuarios.correo = request.form['correo']
+        personal.clave = request.form['clave']
+        personal.cargo = request.form['cargo']
+        usuarios.usuario = request.form['usuario']
+        usuarios.passwd = request.form['contraseña']
+        usuarios.tipo = 'Administrador'
+        usuarios.estatus = 'Activo'
+        usuarios.insertar()
+        personal.id_usuario = usuarios.id_usuario
+        personal.insertar()
+        return redirect (url_for('opcionesPersonal'))
+    else:
+        return "No tienes permitido acceder a esta sección"
 
 #######################################################-- Fin de Vigo--###################################################
 
