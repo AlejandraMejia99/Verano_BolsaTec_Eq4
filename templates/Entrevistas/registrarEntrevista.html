@@ -185,7 +185,7 @@
                             <label for="pwd">Alumno</label>
                             <select class="form-control" name="alumno">
                                 <option value="" disabled selected>Seleccionar un opcion</option>
-                                {% for a in alumno%}
+                                {% for a in alumnos%}
                                 <option value="{{a.id_alumno}}">{{a.nombre}}</option>
                                 {%endfor%}
                             </select>

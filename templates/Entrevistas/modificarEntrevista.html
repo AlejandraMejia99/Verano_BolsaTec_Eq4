@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>BolsaTEC</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="shortcut icon" href="../static/Imagenes/tec.png">
+        <link rel="stylesheet" href="/static/CSS/Estilo-Principal.css">
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="https://kit.fontawesome.com/23d5b02039.js"
+            crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle"
+                        data-toggle="collapse" data-target="#myNavbar">
+                        <a class="navbar-brand" href="#">Logo</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item dropdown">
+
+                                <a href="#" class="nav-link dropdown-toggle"
+                                    id="navbardrop"
+                                    data-toggle="dropdown"><i class="fas
+                                        fa-users"></i> Usuarios</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item"
+                                        href="/registrarAlumno"><i class="fas
+                                            fa-user-graduate"></i> Registrar
+                                        Alumno</a>
+                                    <a class="dropdown-item"
+                                        href="/opcionesAlumno">Opciones
+                                        Alumnos</a><br>
+                                    <a class="dropdown-item"
+                                        href="/registrarReclutador"><i
+                                            class="fas fa-user"></i> Registrar
+                                        Reclutador</a>
+                                    <a class="dropdown-item"
+                                        href="/opcionesReclutador">Opciones
+                                        Reclutadores</a>
+                                    <a class="dropdown-item"
+                                        href="/registrarPersonal"><i
+                                            class="fas fa-users-cog"></i>
+                                        Registrar Prs. Vin <a><br>
+                                            <a class="dropdown-item"
+                                                href="/opcionesPersonal">Opciones
+                                                Personal</a>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle"
+                                            href="#" id="navbardrop"
+                                            data-toggle="dropdown"><i class="far
+                                                fa-building"></i></i>
+                                        Empresas </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item"
+                                            href="/registrarEmpresa">Registrar
+                                            Empresa</a>
+                                        <a class="dropdown-item"
+                                            href="/opcionesEmpresa">Opciones
+                                            Empresas</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#"
+                                        id="navbardrop"
+                                        data-toggle="dropdown"><i class="fas
+                                            fa-file-signature"></i>
+                                        Contratos </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item"
+                                            href="/registrarContrato">Registrar
+                                            Contrato</a>
+                                        <a class="dropdown-item"
+                                            href="/opcionesContratos">Opciones
+                                            Contratos</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#"
+                                        id="navbardrop"
+                                        data-toggle="dropdown"><i class="fas
+                                            fa-id-card"></i>
+                                        Categorias </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item"
+                                            href="/registrarCategoria">Registrar
+                                            Categoria</a>
+                                        <a class="dropdown-item"
+                                            href="/opcionesCategoria">Opciones
+                                            Categorias</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#"
+                                        id="navbardrop"
+                                        data-toggle="dropdown"> <i class="fas
+                                            fa-chalkboard-teacher"></i> Carreras
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item"
+                                            href="/registrarCarrera">Registrar
+                                            Carrera</a>
+                                        <a class="dropdown-item"
+                                            href="/opcionesCarreras">Opciones
+                                            Carreras</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#"
+                                        id="navbardrop"
+                                        data-toggle="dropdown"><i class="fas
+                                            fa-archive"></i>
+                                        Ofertas </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item"
+                                            href="/registrarOferta">Registrar
+                                            Oferta</a>
+                                        <a class="dropdown-item"
+                                            href="/opcionesOfertas">Opciones
+                                            Ofertas</a>
+                                        
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#"
+                                        id="navbardrop"
+                                        data-toggle="dropdown"><i class="fas
+                                            fa-calendar-check"></i>
+                                        Entrevistas </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item"
+                                            href="/registrarEntrevista">Registrar
+                                            Entrevista</a>
+                                        <a class="dropdown-item"
+                                            href="/opcionesEntrevista">Opciones
+                                            Entrevistas</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#"
+                                        id="navbardrop"
+                                        data-toggle="dropdown">Postulaciones
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item"
+                                            href="/registrarOAlu">Registrar
+                                            Oferta Alumno</a>
+                                        <a class="dropdown-item"
+                                            href="/opcionesOAlu">Opciones
+                                            Oferta Alumno</a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="nav-item dropdown">
+                                  <a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
+                                    <span class="user-name">{{current_user.nombre}}</span>
+                                    
+                                  </a>
+                                  <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="/Perfil">Perfil</a>
+                                    <br>
+                                    <a class="dropdown-item" href="/CloseSesion">Cerrar sesion</a>
+                                  </div>
+                                </li>
+                              </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <form action="/actualizarEntrevistaBD" method="post">
+
+                    <h2>Actualizar  Entrevistas </h2>
+                    <div class="form-row">
+
+                        <div class="col-md-1 mb-3">
+                            <label >Id </label>
+                            <input value="{{en.id_entrevista}}" type="text" class="form-control"  name="identrevista" readonly>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="pwd">Alumno</label>
+                            <select class="form-control" name="alumno">
+                                <option value="{{en.id_alumno}}" >{{en.alumnos.nombre}}</option>
+                                
+                            </select>
+
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="pwd">Oferta: </label>
+                            <select class="form-control" name="oferta">
+                                <option value="{{en.id_oferta}}" >{{en.ofertas.nombre}}</option>
+                                
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="pwd">Fecha de Registro </label>
+                            <input  value="{{en.fecha_registro}}"   type="date" class="form-control" name="registro">
+                                
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="pwd">Fecha de Entrevista </label>
+                            <input  value="{{en.fecha_entrevista}}" type="date" class="form-control"  name="entrevista" >
+                            <div class="valid-feedback">
+                                <br>
+                            </div><div class="valid-feedback">
+                                <br>
+                            </div>
+                            <div class="valid-feedback">
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="form-row">
+
+                            <div class="col-md-2 mb-3">
+                                <label for="pwd">Hora Inicio </label>
+                                <input value="{{en.hora_inicio}}" type="text" class="form-control"  name="hinicio" >
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <label for="pwd">Hora Fin </label>
+                                <input value="{{en.hora_fin}}" type="text" class="form-control"  name="hfin" >
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label for="pwd">Reclutador</label>
+                                <select class="form-control" name="reclutor">
+                                    <option value="{{en.id_reclutor}}" >{{en.reclutor.nombre}}</option>
+                                    
+                                </select>
+                            </div>
+                            
+                            <div class="col-md-3 mb-3">
+                                <label>Resultado:</label>
+                            <input  value="{{en.resultado}}" type="text" class="form-control" name="resultado">
+
+                            </div>
+
+                            <div class="col-md-2 mb-3">
+                                <label>Estatus </label>
+                                <select class="form-control"  name="estatus">
+                                    <option>{{en.estatus}}</option>
+                                    <option value="Inactivo">Inactivo</option>
+                                    <option value="Activo">Activo</option>
+                                </select>
+
+                            </div>
+                            <div class="valid-feedback">
+                                <br>
+                            </div><div class="valid-feedback">
+                                <br>
+                            </div>
+                            <div class="valid-feedback">
+                                <br>
+                            </div>
+
+                        </div>
+                        <button class="btn btn-primary" type="submit">Registrar</button>
+                    </div>
+                    
+                </form>
+                
+            </div>
+        </div>
+    </body>
+</html>

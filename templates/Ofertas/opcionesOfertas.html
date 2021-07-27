@@ -194,14 +194,15 @@
                                 <th>Fecha de Publicacion</th>
                                 <th>Salario</th>
                                 <th>Vacantes</th>
-                                
                                 <th>Estatus</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                             </tr>
+                        
                         </thead>
 
                         <tbody>
+                            <tr>
                             {% for of in ofertas%}
 
                             <th scope="row">{{of.id_oferta}}</th>
@@ -219,7 +220,7 @@
                             
                             <td><a href="/editarOferta/{{of.id_oferta}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
                             <td><a href="/eliminarOferta/{{of.id_oferta}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
-
+                                </tr>
                          {%endfor%}
                         </tbody>
                     </table>

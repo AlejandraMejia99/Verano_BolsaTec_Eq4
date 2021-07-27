@@ -178,7 +178,7 @@
                     </div>
                 </nav>
 
-                <h2>Opciones Ofertas</h2>
+                <h2>Opciones Entrevistas</h2>
 
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -186,9 +186,12 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Alumno</th>
+                                <th>Reclutador</th>
                                 <th>Oferta</th>
-                                <th>Fecha Entrevista</th>
-                                <th>Hora inicio</th>
+                                <th>Fecha registro</th>
+                                <th>Fecha entrevista</th>
+                                <th>Hora Inicio</th>
+                                <th>Hora Fin</th>
                                 <th>Resultado</th>
                                 <th>Estatus</th>
                                 <th>Editar</th>
@@ -197,18 +200,25 @@
                         </thead>
 
                         <tbody>
+                            <tr>
 
-                            <th scope="row">1</th>
-                            <td>Jesus</td>
-                            <td>Desarrollador Web</td>
-                            <td>12-07-2021</td>
-                            <td>10:50</td>
-                            <td>En proceso</td>
-                            <td>Activo</td>
-                            <td><a href=""><button type="button" class="btn
-                                        btn-warning">Modificar</button></a></td>
-                            <td><a href=""><button type="button" class="btn
-                                        btn-danger">Eliminar</button></a></td>
+                                {% for en in entrevista%}
+    
+                                    <th scope="row">{{en.id_entrevista}}</th>
+                                    <td>{{en.alumnos.nombre}}</td>
+                                    <td>{{en.reclutor.nombre}}</td>
+                                    <td>{{en.ofertas.nombre}}</td>
+                                    <td>{{en.fecha_registro}}</td>
+                                    <td>{{en.fecha_entrevista}}</td>
+                                    <td>{{en.hora_inicio}}</td>
+                                    <td>{{en.hora_fin}}</td>
+                                    <td>{{en.resultado}}</td>
+                                    <td>{{en.estatus}}</td>
+                                    <td><a href="/editarEntrevista/{{en.id_entrevista}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
+                                    <td><a href="/eliminarEntrevista/{{en.id_entrevista}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                                </tr>         
+                                {%endfor%}
+                                
                         </tbody>
                     </table>
                 </div>

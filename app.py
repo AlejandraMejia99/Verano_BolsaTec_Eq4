@@ -530,9 +530,9 @@ def registrarEntrevista():
     of=Ofertas()
 
     reclutor=re.consultaGeneral()
-    alumno=alu.consultaGeneral()
+    alumnos=alu.consultaGeneral()
     oferta=of.consultaGeneral()
-    return render_template('Entrevistas/registrarEntrevista.html' ,reclutor=reclutor, alumno=alumno,oferta=oferta)
+    return render_template('Entrevistas/registrarEntrevista.html' ,reclutor=reclutor, alumnos=alumnos,oferta=oferta)
 
 
 @app.route('/opcionesEntrevista')
@@ -544,9 +544,10 @@ def opcionesEntrevista():
     of=Ofertas()
 
     reclutor=re.consultaGeneral()
-    alumno=alu.consultaGeneral()
+    alumnos=alu.consultaGeneral()
     oferta=of.consultaGeneral()
-    return render_template('Entrevistas/opcionesEntrevista.html',reclutor=reclutor, alumno=alumno,oferta=oferta)
+    entrevista=en.consultaGeneral()
+    return render_template('Entrevistas/opcionesEntrevista.html',reclutor=reclutor, alumnos=alumnos,oferta=oferta, entrevista=entrevista)
 
 
 
@@ -572,7 +573,8 @@ def insertOEntrevistaBD():
 def ventanaEditarEntrevista(id):
     en=Entrevista()
     en.id_entrevista=id
-    return render_template('Entrevistas/modificarEntevistas.html', en=en.consultaIndividual())
+    return render_template('Entrevistas/modificarEntrevista.html', en=en.consultaIndividual())
+
 
 
 @app.route('/eliminarEntrevista/<int:id>')
@@ -588,8 +590,19 @@ def ventanaEliminarEntrevista(id):
 @app.route('/actualizarEntrevistaBD', methods=['POST'])
 def actualzarEntrevistaBD():
     en=Entrevista()
+    re=vReclutador()
+    alu=vAlumnos()
+    of=Ofertas()
 
     en.id_entrevista=request.form['identrevista']
+    en.id_reclutor=request.form['reclutor']
+    en.id_alumno=request.form['alumno']
+    en.id_oferta=request.form['oferta']
+    en.fecha_registro=request.form['registro']
+    en.fecha_entrevista=request.form['entrevista']
+    en.hora_inicio=request.form['hinicio']
+    en.hora_fin=request.form['hfin']
+    en.resultado=request.form['resultado']
     en.estatus=request.form['estatus']
 
     en.actualizar()
